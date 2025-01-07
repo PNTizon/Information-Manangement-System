@@ -162,5 +162,10 @@ namespace InfoRegSystem.Forms
         {
             PhoneNumberList.comboBox_autoModifier(cmbCountryCode_SelectedIndexChanged, cmbCountryCode, countyCode);
         }
+
+        private void txtNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
     }
 }

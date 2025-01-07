@@ -34,6 +34,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminMemdersInfo));
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.countyCode = new System.Windows.Forms.TextBox();
             this.cmbCountryCode = new Guna.UI2.WinForms.Guna2ComboBox();
             this.genderbox = new Guna.UI2.WinForms.Guna2ComboBox();
             this.Gender = new System.Windows.Forms.Label();
@@ -57,7 +58,6 @@
             this.membergrid = new System.Windows.Forms.DataGridView();
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnBack = new System.Windows.Forms.Button();
-            this.countyCode = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.membergrid)).BeginInit();
             this.SuspendLayout();
@@ -102,6 +102,15 @@
             this.groupBox1.Size = new System.Drawing.Size(1034, 263);
             this.groupBox1.TabIndex = 26;
             this.groupBox1.TabStop = false;
+            // 
+            // countyCode
+            // 
+            this.countyCode.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.countyCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.countyCode.Location = new System.Drawing.Point(679, 99);
+            this.countyCode.Name = "countyCode";
+            this.countyCode.Size = new System.Drawing.Size(122, 24);
+            this.countyCode.TabIndex = 46;
             // 
             // cmbCountryCode
             // 
@@ -265,6 +274,7 @@
             this.txtNumber.Name = "txtNumber";
             this.txtNumber.Size = new System.Drawing.Size(120, 31);
             this.txtNumber.TabIndex = 8;
+            this.txtNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumber_KeyPress);
             // 
             // txtAge
             // 
@@ -414,15 +424,6 @@
             this.btnBack.TabIndex = 37;
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
-            // countyCode
-            // 
-            this.countyCode.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.countyCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.countyCode.Location = new System.Drawing.Point(679, 99);
-            this.countyCode.Name = "countyCode";
-            this.countyCode.Size = new System.Drawing.Size(122, 24);
-            this.countyCode.TabIndex = 46;
             // 
             // AdminMemdersInfo
             // 

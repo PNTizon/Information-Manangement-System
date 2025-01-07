@@ -7,7 +7,6 @@ using System.Windows.Forms;
 
 namespace InfoRegSystem.Classes
 {
-
     public class ButtonHandler
     {
         private frmRegistration registration;
@@ -145,7 +144,8 @@ namespace InfoRegSystem.Classes
         #endregion
         #region Members Info Buttons
         //ON PROCESS
-        public void SaveMemberInfo(string name, string lastname, int age, string gender, string countryCode, string phoneNumber, string address, string email, Action displayMethod, Action clearMethod, Action displayMemMethod = null)
+        public void SaveMemberInfo(string name, string lastname, int age, string gender, string countryCode, string phoneNumber, 
+            string address, string email, Action displayMethod, Action clearMethod, Action displayMemMethod = null)
         {
             try
             {
@@ -154,10 +154,7 @@ namespace InfoRegSystem.Classes
                     MessageBox.Show("Invalid Gmail address.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                if (IsValidPhoneNumber(phoneNumber))
-                {
-                    MessageBox.Show("Invalid Phone number.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+               
                 using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
                 {
                     sqlConnection.Open();
@@ -195,10 +192,7 @@ namespace InfoRegSystem.Classes
         {
             return email.EndsWith("@gmail.com", StringComparison.OrdinalIgnoreCase);
         }
-        private bool IsValidPhoneNumber(string phoneNumber)
-        {
-            return phoneNumber.Length >= 10 && phoneNumber.All(char.IsDigit);
-        }
+        
         public void DeleteMemberInfo(DataGridView membergrid, Action displayMethod, Action clearMethod, Action displayMemMethod = null)
         {
             try

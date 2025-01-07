@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InfoRegSystem.Classes
 {
-    internal class Helpers
+    public class Helpers
     {
 
     }
