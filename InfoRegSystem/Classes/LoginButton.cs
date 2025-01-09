@@ -16,6 +16,7 @@ namespace InfoRegSystem.Classes
         private TextBox searchbox;
         private DataGridView dataGridViewBookInfo;
         private AdminBorrowRecords borrowrecs;
+        private AdminDashboard dashboard;
 
         public ButtonHandler()
         {
@@ -180,7 +181,7 @@ namespace InfoRegSystem.Classes
 
                     displayMemMethod?.Invoke();
                 }
-                displayMemMethod();
+                displayMethod();
                 clearMethod();
             }
             catch (Exception ex)
@@ -346,24 +347,11 @@ namespace InfoRegSystem.Classes
             }
         }
         #endregion
+        #region Book Info
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        #endregion
         #region User Dashboard Buttons
         public void UserLogout(Button logoutbtn, Form currentForm)
         {

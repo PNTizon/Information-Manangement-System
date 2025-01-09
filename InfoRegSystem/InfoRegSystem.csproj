@@ -106,7 +106,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\ButtonHandler.cs" />
+    <Compile Include="Classes\LoginButton.cs" />
     <Compile Include="Classes\CountryCode.cs" />
     <Compile Include="Classes\FormManager.cs" />
     <Compile Include="Classes\GlobalUserInfo.cs" />
@@ -117,23 +117,23 @@
     <Compile Include="Forms\AccountCreation.Designer.cs">
       <DependentUpon>AccountCreation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\AdminBookInfo.cs">
+    <Compile Include="User Controls\AdminBookInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\AdminBookInfo.Designer.cs">
+    <Compile Include="User Controls\AdminBookInfo.Designer.cs">
       <DependentUpon>AdminBookInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\DataBase .cs" />
-    <Compile Include="Forms\AdminBorrowRecords.cs">
+    <Compile Include="User Controls\AdminBorrowRecords.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\AdminBorrowRecords.Designer.cs">
+    <Compile Include="User Controls\AdminBorrowRecords.Designer.cs">
       <DependentUpon>AdminBorrowRecords.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\AdminDashboard.cs">
+    <Compile Include="User Controls\AdminDashboard.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\AdminDashboard.Designer.cs">
+    <Compile Include="User Controls\AdminDashboard.Designer.cs">
       <DependentUpon>AdminDashboard.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\LoginForm.cs">
@@ -142,22 +142,22 @@
     <Compile Include="Forms\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\AdminMemdersInfo.cs">
+    <Compile Include="User Controls\AdminMemdersInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\AdminMemdersInfo.Designer.cs">
+    <Compile Include="User Controls\AdminMemdersInfo.Designer.cs">
       <DependentUpon>AdminMemdersInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserBook.cs">
+    <Compile Include="User Controls\UserBook.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\UserBook.Designer.cs">
+    <Compile Include="User Controls\UserBook.Designer.cs">
       <DependentUpon>UserBook.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserDashboard.cs">
+    <Compile Include="User Controls\UserDashboard.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\UserDashboard.Designer.cs">
+    <Compile Include="User Controls\UserDashboard.Designer.cs">
       <DependentUpon>UserDashboard.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\UserMainForm.cs">
@@ -166,10 +166,10 @@
     <Compile Include="Forms\UserMainForm.Designer.cs">
       <DependentUpon>UserMainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserTransaction.cs">
+    <Compile Include="User Controls\UserTransaction.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\UserTransaction.Designer.cs">
+    <Compile Include="User Controls\UserTransaction.Designer.cs">
       <DependentUpon>UserTransaction.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -183,31 +183,31 @@
     <EmbeddedResource Include="Forms\AccountCreation.resx">
       <DependentUpon>AccountCreation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AdminBookInfo.resx">
+    <EmbeddedResource Include="User Controls\AdminBookInfo.resx">
       <DependentUpon>AdminBookInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AdminBorrowRecords.resx">
+    <EmbeddedResource Include="User Controls\AdminBorrowRecords.resx">
       <DependentUpon>AdminBorrowRecords.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AdminDashboard.resx">
+    <EmbeddedResource Include="User Controls\AdminDashboard.resx">
       <DependentUpon>AdminDashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AdminMemdersInfo.resx">
+    <EmbeddedResource Include="User Controls\AdminMemdersInfo.resx">
       <DependentUpon>AdminMemdersInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UserBook.resx">
+    <EmbeddedResource Include="User Controls\UserBook.resx">
       <DependentUpon>UserBook.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UserDashboard.resx">
+    <EmbeddedResource Include="User Controls\UserDashboard.resx">
       <DependentUpon>UserDashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserMainForm.resx">
       <DependentUpon>UserMainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UserTransaction.resx">
+    <EmbeddedResource Include="User Controls\UserTransaction.resx">
       <DependentUpon>UserTransaction.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

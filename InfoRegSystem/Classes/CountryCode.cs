@@ -1,9 +1,5 @@
-﻿using Guna.UI2.WinForms;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace InfoRegSystem.Classes
@@ -15,7 +11,7 @@ namespace InfoRegSystem.Classes
     }
     public class PhoneNumberList
     {
-        public static void ListPhneNumber(EventHandler eventHandler, Guna2ComboBox comboBox)
+        public static void ListPhneNumber(EventHandler eventHandler, ComboBox comboBox)
         {
             var countryCodes = new List<CountryCode>
         {
@@ -66,6 +62,8 @@ namespace InfoRegSystem.Classes
             new CountryCode { Country = "YEM", Code = "+967" }
         };
 
+            comboBox.DataSource = null;
+
             foreach (var countryCode in countryCodes)
             {
                 comboBox.Items.Add($"{countryCode.Country} | {countryCode.Code}");
@@ -74,7 +72,7 @@ namespace InfoRegSystem.Classes
             comboBox.SelectedIndexChanged += eventHandler;
         }
 
-        public static void comboBox_autoModifier(EventHandler eventHandler, Guna2ComboBox comboBox, TextBox textBox)
+        public static void comboBox_autoModifier(EventHandler eventHandler, ComboBox comboBox, TextBox textBox)
         {
             if (comboBox.SelectedIndex >= 0)
             {
@@ -94,7 +92,7 @@ namespace InfoRegSystem.Classes
                 textBox.Text = string.Empty;
             }
         }
-        
+
     }
 }
 

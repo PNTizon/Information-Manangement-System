@@ -4,6 +4,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Web.UI.WebControls;
 using System.Windows.Forms;
 
 
@@ -11,19 +12,20 @@ namespace InfoRegSystem
 {
     public partial class frmRegistration : Form
     {
-        private ButtonHandler buttonHandler;
+        private ButtonHandler login;
+
         public frmRegistration()
         {
             InitializeComponent();
-            buttonHandler = new ButtonHandler();
+            login = new ButtonHandler();
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            buttonHandler.HandleLogin(login_username, login_password, txtError, this);
+            login.HandleLogin(login_username, login_password, txtError, this);
         }
         private void registerbtn_Click(object sender, EventArgs e)
         {
-            buttonHandler.HandleRegister(registerbtn, this);
+            login.HandleRegister(registerbtn, this);
         }
 
         private void Clear()

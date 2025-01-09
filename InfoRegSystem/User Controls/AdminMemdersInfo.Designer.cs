@@ -28,15 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminMemdersInfo));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.genderbox = new System.Windows.Forms.ComboBox();
             this.countyCode = new System.Windows.Forms.TextBox();
-            this.cmbCountryCode = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.genderbox = new Guna.UI2.WinForms.Guna2ComboBox();
             this.Gender = new System.Windows.Forms.Label();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -53,11 +51,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.CountryCodecmb = new System.Windows.Forms.ComboBox();
             this.btnSearch = new Guna.UI2.WinForms.Guna2Button();
             this.searchbox = new Guna.UI2.WinForms.Guna2TextBox();
             this.membergrid = new System.Windows.Forms.DataGridView();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.btnBack = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.membergrid)).BeginInit();
             this.SuspendLayout();
@@ -77,9 +75,8 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.White;
-            this.groupBox1.Controls.Add(this.countyCode);
-            this.groupBox1.Controls.Add(this.cmbCountryCode);
             this.groupBox1.Controls.Add(this.genderbox);
+            this.groupBox1.Controls.Add(this.countyCode);
             this.groupBox1.Controls.Add(this.Gender);
             this.groupBox1.Controls.Add(this.txtAddress);
             this.groupBox1.Controls.Add(this.label4);
@@ -96,61 +93,40 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.CountryCodecmb);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(58, 455);
+            this.groupBox1.Location = new System.Drawing.Point(58, 434);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1034, 263);
             this.groupBox1.TabIndex = 26;
             this.groupBox1.TabStop = false;
             // 
-            // countyCode
-            // 
-            this.countyCode.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.countyCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.countyCode.Location = new System.Drawing.Point(679, 99);
-            this.countyCode.Name = "countyCode";
-            this.countyCode.Size = new System.Drawing.Size(122, 24);
-            this.countyCode.TabIndex = 46;
-            // 
-            // cmbCountryCode
-            // 
-            this.cmbCountryCode.BackColor = System.Drawing.Color.Transparent;
-            this.cmbCountryCode.BorderRadius = 10;
-            this.cmbCountryCode.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cmbCountryCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCountryCode.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cmbCountryCode.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cmbCountryCode.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.cmbCountryCode.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
-            this.cmbCountryCode.ItemHeight = 30;
-            this.cmbCountryCode.Location = new System.Drawing.Point(669, 93);
-            this.cmbCountryCode.Name = "cmbCountryCode";
-            this.cmbCountryCode.Size = new System.Drawing.Size(158, 36);
-            this.cmbCountryCode.TabIndex = 45;
-            this.cmbCountryCode.SelectedIndexChanged += new System.EventHandler(this.cmbCountryCode_SelectedIndexChanged);
-            // 
             // genderbox
             // 
-            this.genderbox.BackColor = System.Drawing.Color.Transparent;
-            this.genderbox.BorderRadius = 10;
-            this.genderbox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.genderbox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.genderbox.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.genderbox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.genderbox.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.genderbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
-            this.genderbox.ItemHeight = 30;
-            this.genderbox.Location = new System.Drawing.Point(147, 160);
+            this.genderbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.genderbox.FormattingEnabled = true;
+            this.genderbox.Location = new System.Drawing.Point(181, 143);
             this.genderbox.Name = "genderbox";
-            this.genderbox.Size = new System.Drawing.Size(158, 36);
-            this.genderbox.TabIndex = 44;
+            this.genderbox.Size = new System.Drawing.Size(201, 28);
+            this.genderbox.TabIndex = 48;
+            this.genderbox.SelectedIndexChanged += new System.EventHandler(this.genderbox_SelectedIndexChanged);
+            // 
+            // countyCode
+            // 
+            this.countyCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.countyCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.countyCode.Location = new System.Drawing.Point(706, 81);
+            this.countyCode.Name = "countyCode";
+            this.countyCode.Size = new System.Drawing.Size(99, 26);
+            this.countyCode.TabIndex = 46;
+            this.countyCode.TextChanged += new System.EventHandler(this.countyCode_TextChanged);
             // 
             // Gender
             // 
             this.Gender.AutoSize = true;
             this.Gender.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Gender.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.Gender.Location = new System.Drawing.Point(71, 170);
+            this.Gender.Location = new System.Drawing.Point(105, 149);
             this.Gender.Name = "Gender";
             this.Gender.Size = new System.Drawing.Size(63, 20);
             this.Gender.TabIndex = 43;
@@ -159,9 +135,9 @@
             // txtAddress
             // 
             this.txtAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAddress.Location = new System.Drawing.Point(669, 45);
+            this.txtAddress.Location = new System.Drawing.Point(703, 32);
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(201, 26);
+            this.txtAddress.Size = new System.Drawing.Size(241, 26);
             this.txtAddress.TabIndex = 42;
             // 
             // label4
@@ -169,7 +145,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(593, 48);
+            this.label4.Location = new System.Drawing.Point(627, 35);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(68, 20);
             this.label4.TabIndex = 41;
@@ -186,7 +162,7 @@
             this.btnAdd.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(153)))), ((int)(((byte)(78)))));
             this.btnAdd.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnAdd.ForeColor = System.Drawing.Color.White;
-            this.btnAdd.Location = new System.Drawing.Point(265, 208);
+            this.btnAdd.Location = new System.Drawing.Point(335, 204);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(115, 37);
             this.btnAdd.TabIndex = 39;
@@ -204,7 +180,7 @@
             this.btnEdit.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(153)))), ((int)(((byte)(78)))));
             this.btnEdit.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnEdit.ForeColor = System.Drawing.Color.White;
-            this.btnEdit.Location = new System.Drawing.Point(409, 208);
+            this.btnEdit.Location = new System.Drawing.Point(479, 204);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(115, 37);
             this.btnEdit.TabIndex = 38;
@@ -214,7 +190,7 @@
             // txtLastname
             // 
             this.txtLastname.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLastname.Location = new System.Drawing.Point(147, 78);
+            this.txtLastname.Location = new System.Drawing.Point(181, 65);
             this.txtLastname.Name = "txtLastname";
             this.txtLastname.Size = new System.Drawing.Size(201, 26);
             this.txtLastname.TabIndex = 19;
@@ -230,7 +206,7 @@
             this.btnDetele.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(153)))), ((int)(((byte)(78)))));
             this.btnDetele.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnDetele.ForeColor = System.Drawing.Color.White;
-            this.btnDetele.Location = new System.Drawing.Point(548, 208);
+            this.btnDetele.Location = new System.Drawing.Point(618, 204);
             this.btnDetele.Name = "btnDetele";
             this.btnDetele.Size = new System.Drawing.Size(115, 37);
             this.btnDetele.TabIndex = 37;
@@ -242,7 +218,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(54, 77);
+            this.label1.Location = new System.Drawing.Point(88, 64);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(80, 20);
             this.label1.TabIndex = 17;
@@ -251,9 +227,9 @@
             // txtEmail
             // 
             this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmail.Location = new System.Drawing.Point(669, 144);
+            this.txtEmail.Location = new System.Drawing.Point(703, 131);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(201, 26);
+            this.txtEmail.Size = new System.Drawing.Size(247, 26);
             this.txtEmail.TabIndex = 14;
             // 
             // label6
@@ -261,7 +237,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(593, 144);
+            this.label6.Location = new System.Drawing.Point(627, 131);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(48, 20);
             this.label6.TabIndex = 13;
@@ -269,26 +245,28 @@
             // 
             // txtNumber
             // 
-            this.txtNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNumber.Location = new System.Drawing.Point(833, 96);
+            this.txtNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNumber.Location = new System.Drawing.Point(824, 81);
             this.txtNumber.Name = "txtNumber";
-            this.txtNumber.Size = new System.Drawing.Size(120, 31);
+            this.txtNumber.Size = new System.Drawing.Size(120, 27);
             this.txtNumber.TabIndex = 8;
+            this.txtNumber.TextChanged += new System.EventHandler(this.txtNumber_TextChanged);
             this.txtNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumber_KeyPress);
             // 
             // txtAge
             // 
             this.txtAge.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAge.Location = new System.Drawing.Point(147, 118);
+            this.txtAge.Location = new System.Drawing.Point(181, 105);
             this.txtAge.Name = "txtAge";
             this.txtAge.Size = new System.Drawing.Size(201, 26);
             this.txtAge.TabIndex = 7;
+            this.txtAge.TextChanged += new System.EventHandler(this.txtAge_TextChanged);
             this.txtAge.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAge_KeyPress);
             // 
             // txtName
             // 
             this.txtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtName.Location = new System.Drawing.Point(147, 46);
+            this.txtName.Location = new System.Drawing.Point(181, 33);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(201, 26);
             this.txtName.TabIndex = 6;
@@ -298,7 +276,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label5.Location = new System.Drawing.Point(580, 93);
+            this.label5.Location = new System.Drawing.Point(614, 80);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(83, 20);
             this.label5.TabIndex = 4;
@@ -309,7 +287,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label3.Location = new System.Drawing.Point(84, 121);
+            this.label3.Location = new System.Drawing.Point(118, 108);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(38, 20);
             this.label3.TabIndex = 2;
@@ -320,11 +298,21 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label2.Location = new System.Drawing.Point(71, 49);
+            this.label2.Location = new System.Drawing.Point(105, 36);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(51, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "Name";
+            // 
+            // CountryCodecmb
+            // 
+            this.CountryCodecmb.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CountryCodecmb.FormattingEnabled = true;
+            this.CountryCodecmb.Location = new System.Drawing.Point(705, 80);
+            this.CountryCodecmb.Name = "CountryCodecmb";
+            this.CountryCodecmb.Size = new System.Drawing.Size(119, 28);
+            this.CountryCodecmb.TabIndex = 47;
+            this.CountryCodecmb.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // btnSearch
             // 
@@ -370,33 +358,33 @@
             this.membergrid.AllowUserToDeleteRows = false;
             this.membergrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.membergrid.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(245)))), ((int)(((byte)(153)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Info;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.Desktop;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.membergrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(245)))), ((int)(((byte)(153)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Desktop;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.membergrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.membergrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Info;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.membergrid.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.membergrid.DefaultCellStyle = dataGridViewCellStyle2;
             this.membergrid.EnableHeadersVisualStyles = false;
             this.membergrid.GridColor = System.Drawing.Color.Black;
             this.membergrid.Location = new System.Drawing.Point(37, 115);
             this.membergrid.Name = "membergrid";
             this.membergrid.ReadOnly = true;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Info;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-            this.membergrid.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            this.membergrid.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.membergrid.Size = new System.Drawing.Size(1086, 319);
             this.membergrid.TabIndex = 31;
             this.membergrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.membergrid_CellClick);
@@ -410,27 +398,11 @@
             this.panel5.Size = new System.Drawing.Size(2000, 2);
             this.panel5.TabIndex = 36;
             // 
-            // btnBack
-            // 
-            this.btnBack.BackColor = System.Drawing.Color.White;
-            this.btnBack.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBack.BackgroundImage")));
-            this.btnBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnBack.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnBack.FlatAppearance.BorderSize = 0;
-            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBack.Location = new System.Drawing.Point(9, 2);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(34, 39);
-            this.btnBack.TabIndex = 37;
-            this.btnBack.UseVisualStyleBackColor = false;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
             // AdminMemdersInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.membergrid);
             this.Controls.Add(this.textBox1);
@@ -471,10 +443,9 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.Label label4;
-        private Guna.UI2.WinForms.Guna2ComboBox genderbox;
         private System.Windows.Forms.Label Gender;
-        private System.Windows.Forms.Button btnBack;
-        private Guna.UI2.WinForms.Guna2ComboBox cmbCountryCode;
         private System.Windows.Forms.TextBox countyCode;
+        private System.Windows.Forms.ComboBox genderbox;
+        private System.Windows.Forms.ComboBox CountryCodecmb;
     }
 }

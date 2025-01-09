@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Web.UI.WebControls;
 using System.Windows.Forms;
 
 namespace InfoRegSystem
@@ -9,14 +10,15 @@ namespace InfoRegSystem
     public partial class MainForm : Form
     {
         private frmRegistration frmRegistration;
-        private ButtonHandler handler;
         private FormManager formManager;
+        private MainformFunctions mainFuction;
+        
 
         public MainForm()
         {
             InitializeComponent();
             formManager = new FormManager();
-            handler = new ButtonHandler();
+            mainFuction = new MainformFunctions();
         }
         public MainForm(frmRegistration frmRegistration) : this()
         {
@@ -24,23 +26,28 @@ namespace InfoRegSystem
         }
         private void btnBookInfo_Click(object sender, EventArgs e)
         {
-            handler.HandleBookInfoForm(btnBookInfo, this, panel2);
+            mainFuction.HandleBookInfoForm(btnBookInfo, this, panel2);
         }
         private void btnReturnBook_Click(object sender, EventArgs e)
         {
-            handler.HandleReturnBook(btnReturnBook, panel2);
+            mainFuction.HandleReturnBook(btnReturnBook, panel2);
         }
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            handler.HandleLogout(btnLogout, this);
+            mainFuction.HandleLogout(btnLogout, this);
         }
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            handler.HandleMembership(btnRegister, panel2, this);
+            mainFuction.HandleMembership(btnRegister, panel2, this);
         }
         private void btnDashboard_Click(object sender, EventArgs e)
         {
-            handler.HandleDashboard(btnDashboard, panel2, this);
+            mainFuction.HandleDashboard(btnDashboard, panel2, this);
+        }
+
+        private void adminDashboard1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

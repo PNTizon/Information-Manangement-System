@@ -1,37 +1,34 @@
 ﻿using InfoRegSystem.Classes;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace InfoRegSystem.Forms
 {
     public partial class AdminMemdersInfo : UserControl
     {
-        private AdminDashboard dashboard;
+        private AdminDashboard dashboard ;
         private ButtonHandler handler;
+        private Helpers helpers = new Helpers();
         public AdminMemdersInfo()
         {
             InitializeComponent();
-        }
 
+        }
+        //ON PROCESS
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            AdminDashboard dashboard = new AdminDashboard();
             if (dashboard != null)
             {
                 handler.DeleteMemberInfo(membergrid, Display, Clear, dashboard.displayMem);
             }
-            else
+            else 
             {
-                handler.DeleteMemberInfo(membergrid, Display, Clear, null);
+                MessageBox.Show("Dashboard is not initialized.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
             }
+
         }
         //ON PROCESS
         private void btnSave_Click(object sender, EventArgs e)
@@ -39,8 +36,8 @@ namespace InfoRegSystem.Forms
             if (dashboard != null)
             {
                 handler.SaveMemberInfo(txtName.Text, txtLastname.Text, int.Parse(txtAge.Text),
-                    genderbox.Text,
-                    cmbCountryCode.Text,
+                    CountryCodecmb.Text,
+                    CountryCodecmb.Text,
                     txtNumber.Text,
                     txtAddress.Text,
                     txtEmail.Text,
@@ -51,8 +48,8 @@ namespace InfoRegSystem.Forms
             else
             {
                 handler.SaveMemberInfo(txtName.Text, txtLastname.Text, int.Parse(txtAge.Text)
-                    , genderbox.Text,
-                    cmbCountryCode.Text,
+                    , CountryCodecmb.Text,
+                    CountryCodecmb.Text,
                     txtNumber.Text,
                     txtAddress.Text,
                     txtEmail.Text,
@@ -64,7 +61,7 @@ namespace InfoRegSystem.Forms
         private void btnUpdate(object sender, EventArgs e)
         {
             handler.UpdateMemberInfo(txtName.Text, txtLastname.Text, txtAge.Text,
-                genderbox.Text, cmbCountryCode.Text, txtNumber.Text, txtAddress.Text,
+                CountryCodecmb.Text, CountryCodecmb.Text, txtNumber.Text, txtAddress.Text,
                 txtEmail.Text, membergrid, Display, Clear, dashboard.displayMem);
         }
         private void Display()
@@ -104,8 +101,8 @@ namespace InfoRegSystem.Forms
         {
             Display();
             LoadGenders();
+            PhoneNumberList.ListPhneNumber(comboBox1_SelectedIndexChanged, CountryCodecmb);
 
-            PhoneNumberList.ListPhneNumber(RegistarionFormcs_Load, cmbCountryCode);
         }
         private void btnSearch_Click(object sender, EventArgs e)
         {
@@ -122,7 +119,7 @@ namespace InfoRegSystem.Forms
                     txtName.Text = row.Cells["Name"].Value?.ToString() ?? string.Empty;
                     txtLastname.Text = row.Cells["LastName"].Value?.ToString() ?? string.Empty;
                     txtAge.Text = row.Cells["Age"].Value?.ToString() ?? string.Empty;
-                    cmbCountryCode.Text = row.Cells["CountryCode"].Value?.ToString() ?? string.Empty;
+                    CountryCodecmb.Text = row.Cells["CountryCode"].Value?.ToString() ?? string.Empty;
                     txtNumber.Text = row.Cells["PhoneNumber"].Value?.ToString() ?? string.Empty;
                     txtAddress.Text = row.Cells["Address"].Value?.ToString() ?? string.Empty;
                     txtEmail.Text = row.Cells["Email"].Value?.ToString() ?? string.Empty;
@@ -140,10 +137,9 @@ namespace InfoRegSystem.Forms
         }
         private void LoadGenders()
         {
-            List<string> genders = new List<string> { "Male", "Female", "Other" };
-            genderbox.DataSource = genders;
-            genderbox.SelectedIndex = -1;
+            helpers.HelperGender(genderbox);
         }
+        #region Helpers
         public void Clear()
         {
             txtName.Clear();
@@ -153,19 +149,35 @@ namespace InfoRegSystem.Forms
             txtAddress.Clear();
             txtNumber.Clear();
         }
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
-
-        private void cmbCountryCode_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            PhoneNumberList.comboBox_autoModifier(cmbCountryCode_SelectedIndexChanged, cmbCountryCode, countyCode);
-        }
 
         private void txtNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
+            helpers.HelperKeypress(e);
+        }
 
+        private void txtNumber_TextChanged(object sender, EventArgs e)
+        {
+            helpers.HelperNumberRestriction(txtNumber);
+        }
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PhoneNumberList.comboBox_autoModifier(comboBox1_SelectedIndexChanged, CountryCodecmb, countyCode);
+        }
+        #endregion
+
+        private void countyCode_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void genderbox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtAge_TextChanged(object sender, EventArgs e)
+        {
+            helpers.HelperAge(txtAge);
         }
     }
 }

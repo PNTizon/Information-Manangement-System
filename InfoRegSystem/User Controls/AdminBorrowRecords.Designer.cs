@@ -365,6 +365,7 @@
             this.dataGridViewBorrow.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.dataGridViewBorrow.Size = new System.Drawing.Size(1086, 319);
             this.dataGridViewBorrow.TabIndex = 38;
+            this.dataGridViewBorrow.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
             // 
             // AdminBorrowRecords
             // 

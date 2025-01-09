@@ -1,7 +1,9 @@
-﻿using System;
+﻿using InfoRegSystem.Classes;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -10,9 +12,11 @@ namespace InfoRegSystem.Forms
 {
     public partial class AccountCreation : Form
     {
+        private Helpers helpers;
         public AccountCreation()
         {
             InitializeComponent();
+            helpers = new Helpers();
         }
 
         private void AccCreation_Load(object sender, EventArgs e)
@@ -26,8 +30,11 @@ namespace InfoRegSystem.Forms
             errorbox6.ReadOnly = true;
             errorbox7.ReadOnly = true;
             errorbox8.ReadOnly = true;
+            countryNumbers.ReadOnly = true;
             #endregion
             LoadGender();
+
+            PhoneNumberList.ListPhneNumber(cmbCountryCode_SelectedIndexChanged, cmbCountryCode);
         }
 
         #region Validations
@@ -41,8 +48,10 @@ namespace InfoRegSystem.Forms
                 && num > 13 && num <= 50;
         }
         private bool isValidGender(string gender)
-        { return gender == "Male" || gender == "Female" || gender == "Other"; }
-        private bool isValidStreet(string street)
+        {
+            return gender == "Male" || gender == "Female" || gender == "Other"; 
+        }
+        private bool isValidAddress(string street)
         {
             return !string.IsNullOrEmpty(street);
         }
@@ -54,6 +63,21 @@ namespace InfoRegSystem.Forms
         {
             return Regex.IsMatch(username, @"^[a-zA-Z0-9]{5,15}$");
         }
+        //ON PROCESS
+        private bool isValidPhoneNumber(string countryCode, string phoneNumber)
+        {
+            if (string.IsNullOrWhiteSpace(countryCode) || string.IsNullOrWhiteSpace(phoneNumber))
+            {
+                return false; // One of the inputs is empty
+            }
+
+            string fullNumber = countryCode  + phoneNumber;
+
+            // Ensure it starts with "+" followed by 1-3 digits (country code), and exactly 10 digits for the phone number
+            return Regex.IsMatch(fullNumber, @"^\+\d{1,3}\d{10}$");
+        }
+
+
         private bool isValidPassword(string password)
         {
             return password.Length >= 8;
@@ -86,9 +110,7 @@ namespace InfoRegSystem.Forms
         #endregion
         private void LoadGender()
         {
-            List<string> gender = new List<string> { "Male", "Female", "Others" };
-            cmbGender.DataSource = gender;
-            cmbGender.SelectedIndex = -1;
+            helpers.HelperGender(cmbGender);
         }
 
         private void createbtn_Click(object sender, EventArgs e)
@@ -107,12 +129,12 @@ namespace InfoRegSystem.Forms
             }
             if (!int.TryParse(registration_ages.Text.Trim(), out int age))
             {
-                errorbox2.Text = "Age must be a valid number between 13 and 50.";
+                errorbox2.Text = "Age must be 13 to 50.";
                 hasErrors = true;
             }
             else if (age < 13 || age > 50)
             {
-                errorbox2.Text = "Age must be between 13 and 50.";
+                errorbox2.Text = "";
                 hasErrors = true;
             }
             else
@@ -128,7 +150,7 @@ namespace InfoRegSystem.Forms
             {
                 errorbox3.Text = "";
             }
-            if (!isValidStreet(registration_house.Text))
+            if (!isValidAddress(registration_house.Text))
             {
                 errorbox5.Text = "Address is required.";
                 hasErrors = true;
@@ -164,6 +186,16 @@ namespace InfoRegSystem.Forms
             {
                 errorbox8.Text = "";
             }
+            //ON PROCESS
+            if(!isValidPhoneNumber(cmbCountryCode.Text,registration_number.Text))
+            {
+                errorbox4.Text = "Enter a 10-digit phone number with a valid country code.";
+                hasErrors = true;
+            }
+            else
+            {
+                errorbox4.Text = "";
+            }
             #endregion
 
             if (hasErrors)
@@ -174,7 +206,6 @@ namespace InfoRegSystem.Forms
             SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database);
             sqlConnection.Open();
 
-            // Check if username already exists
             using (SqlCommand checkUsernameCmd = new SqlCommand( "CheckUsernameExists", sqlConnection))
             {
                 checkUsernameCmd.Parameters.AddWithValue("@username", registration_username.Text.Trim());
@@ -187,7 +218,6 @@ namespace InfoRegSystem.Forms
                     return;
                 }
             }
-            //TO GET THE DATE TODAY
             DateTime day = DateTime.Today;
 
             using (SqlCommand cnn = new SqlCommand ( "InsertStudent",  sqlConnection))
@@ -220,6 +250,43 @@ namespace InfoRegSystem.Forms
             frmRegistration reg = new frmRegistration();
             reg.Show();
             this.Hide();
+        }
+        private void cmbCountryCode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PhoneNumberList.comboBox_autoModifier(cmbCountryCode_SelectedIndexChanged, cmbCountryCode, countryNumbers);
+        }
+        private void registration_number_TextChanged(object sender, EventArgs e)
+        {
+            helpers.HelperNumberRestriction(registration_number);
+        }
+        private void registration_number_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            helpers.HelperKeypress(e);
+        }
+
+        private void registration_ages_TextChanged(object sender, EventArgs e)
+        {
+            helpers.HelperAge(registration_ages);
+        }
+
+        private void registration_ages_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            helpers.HelperKeypress(e);
+        }
+
+        private void cmbGender_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void countryNumbers_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void registration_pass_TextChanged(object sender, EventArgs e)
+        {
+            helpers.PasswordHelper(registration_pass);
         }
     }
 }

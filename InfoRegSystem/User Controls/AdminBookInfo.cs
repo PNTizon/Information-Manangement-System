@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InfoRegSystem.Classes;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -9,6 +10,7 @@ namespace InfoRegSystem.Forms
     public partial class AdminBookInfo : UserControl
     {
         private AdminDashboard _dashboard;
+        private Helpers helper;
         public AdminBookInfo(AdminDashboard dashboard)
         {
             InitializeComponent();
@@ -44,15 +46,11 @@ namespace InfoRegSystem.Forms
         }
         private void LoadGenres()
         {
-            List<string> genres = new List<string> { "Fiction", "Non-Fiction", "Mystery", "Fantasy", "Sci-Fi", "Biography", "History", "Romance" };
-            cmbGenres.DataSource = genres;
-            cmbGenres.SelectedIndex = -1;
+            helper.GenresHelper(cmbGenres);
         }
         private void LoadGenresForSearch()
         {
-            List<string> genres = new List<string> { "Fiction", "Non-Fiction", "Mystery", "Fantasy", "Sci-Fi", "Biography", "History", "Romance" };
-            cmbGenre.DataSource = genres;
-            cmbGenre.SelectedIndex = -1;
+            helper.GenresHelper(cmbGenre);
         }
         private void btnSearch_Click(object sender, EventArgs e)
         {

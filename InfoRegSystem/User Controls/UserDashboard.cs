@@ -45,7 +45,7 @@ namespace InfoRegSystem.Forms
                 using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
                 {
                     sqlConnection.Open();
-
+                    //ON PROCESS
                     string query = @"
                             SELECT 
                                 (SELECT COUNT(b.Id) 

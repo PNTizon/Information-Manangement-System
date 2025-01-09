@@ -30,15 +30,17 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserMainForm));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnDasboard = new System.Windows.Forms.Button();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.logoutbtn = new System.Windows.Forms.Button();
             this.bookinfobtn = new System.Windows.Forms.Button();
             this.returnbtn = new System.Windows.Forms.Button();
             this.guna2ContextMenuStrip1 = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
             this.userpnlDash = new System.Windows.Forms.Panel();
-            this.btnDasboard = new System.Windows.Forms.Button();
+            this.userDashboard1 = new InfoRegSystem.Forms.UserDashboard();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            this.userpnlDash.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -54,6 +56,27 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(187, 729);
             this.panel1.TabIndex = 5;
+            // 
+            // btnDasboard
+            // 
+            this.btnDasboard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(100)))), ((int)(((byte)(54)))));
+            this.btnDasboard.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDasboard.FlatAppearance.BorderSize = 0;
+            this.btnDasboard.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(173)))), ((int)(((byte)(104)))));
+            this.btnDasboard.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(173)))), ((int)(((byte)(104)))));
+            this.btnDasboard.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(173)))), ((int)(((byte)(104)))));
+            this.btnDasboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDasboard.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDasboard.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnDasboard.Location = new System.Drawing.Point(0, 166);
+            this.btnDasboard.Name = "btnDasboard";
+            this.btnDasboard.Padding = new System.Windows.Forms.Padding(35, 0, 35, 0);
+            this.btnDasboard.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.btnDasboard.Size = new System.Drawing.Size(187, 29);
+            this.btnDasboard.TabIndex = 9;
+            this.btnDasboard.Text = "Dashboard";
+            this.btnDasboard.UseVisualStyleBackColor = false;
+            this.btnDasboard.Click += new System.EventHandler(this.btnDasboard_Click);
             // 
             // pictureBox4
             // 
@@ -144,32 +167,19 @@
             // userpnlDash
             // 
             this.userpnlDash.BackColor = System.Drawing.Color.White;
+            this.userpnlDash.Controls.Add(this.userDashboard1);
             this.userpnlDash.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.userpnlDash.Location = new System.Drawing.Point(188, 1);
             this.userpnlDash.Name = "userpnlDash";
             this.userpnlDash.Size = new System.Drawing.Size(1157, 729);
             this.userpnlDash.TabIndex = 4;
             // 
-            // btnDasboard
+            // userDashboard1
             // 
-            this.btnDasboard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(100)))), ((int)(((byte)(54)))));
-            this.btnDasboard.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDasboard.FlatAppearance.BorderSize = 0;
-            this.btnDasboard.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(173)))), ((int)(((byte)(104)))));
-            this.btnDasboard.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(173)))), ((int)(((byte)(104)))));
-            this.btnDasboard.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(173)))), ((int)(((byte)(104)))));
-            this.btnDasboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDasboard.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDasboard.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnDasboard.Location = new System.Drawing.Point(0, 166);
-            this.btnDasboard.Name = "btnDasboard";
-            this.btnDasboard.Padding = new System.Windows.Forms.Padding(35, 0, 35, 0);
-            this.btnDasboard.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.btnDasboard.Size = new System.Drawing.Size(187, 29);
-            this.btnDasboard.TabIndex = 9;
-            this.btnDasboard.Text = "Dashboard";
-            this.btnDasboard.UseVisualStyleBackColor = false;
-            this.btnDasboard.Click += new System.EventHandler(this.btnDasboard_Click);
+            this.userDashboard1.Location = new System.Drawing.Point(0, 0);
+            this.userDashboard1.Name = "userDashboard1";
+            this.userDashboard1.Size = new System.Drawing.Size(1157, 729);
+            this.userDashboard1.TabIndex = 0;
             // 
             // UserMainForm
             // 
@@ -181,6 +191,7 @@
             this.Name = "UserMainForm";
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            this.userpnlDash.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -194,5 +205,6 @@
         private Guna.UI2.WinForms.Guna2ContextMenuStrip guna2ContextMenuStrip1;
         private System.Windows.Forms.Panel userpnlDash;
         private System.Windows.Forms.Button btnDasboard;
+        private UserDashboard userDashboard1;
     }
 }
