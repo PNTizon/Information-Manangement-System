@@ -15,15 +15,16 @@ namespace InfoRegSystem.Forms
 {
     public partial class AdminDashboard : UserControl
     {
-        private ButtonHandler handler;
         private FormManager formManager;
+        private AdminDashboardFunctions function;
+
         public AdminDashboard()
         {
             InitializeComponent();
             displayBorrow();
             displayMem();
             formManager = new FormManager();
-            handler = new ButtonHandler();
+            function = new AdminDashboardFunctions();
         }
 
         private void Dashboard_Load(object sender, EventArgs e)
@@ -46,6 +47,8 @@ namespace InfoRegSystem.Forms
                         int count = Convert.ToInt32(reader[0]);
                         lblTotalMem.Text = count.ToString();
                     }
+
+                  
                     reader.Close();
                 }
                 sqlConnection.Close();
@@ -104,17 +107,18 @@ namespace InfoRegSystem.Forms
             DataTable table = new DataTable();
             da.Fill(table);
 
+            dataGridViewBookInfo.DataSource = table;
+
             if (dataGridViewBookInfo.Columns.Contains("BookID"))
             {
                 dataGridViewBookInfo.Columns["BookID"].Visible = false;
             }
-            dataGridViewBookInfo.DataSource = table;
 
             sqlConnection.Close();
         }
         private void btnSearchStudent_Click(object sender, EventArgs e)
         {
-            handler.HandleSearch(dataGridViewBookInfo, searchbox);
+            function.HandleSearch(dataGridViewBookInfo, searchbox);
         }
     }
 }

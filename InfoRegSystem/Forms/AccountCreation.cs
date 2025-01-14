@@ -13,10 +13,12 @@ namespace InfoRegSystem.Forms
     public partial class AccountCreation : Form
     {
         private Helpers helpers;
+
         public AccountCreation()
         {
             InitializeComponent();
             helpers = new Helpers();
+
         }
 
         private void AccCreation_Load(object sender, EventArgs e)
@@ -32,93 +34,29 @@ namespace InfoRegSystem.Forms
             errorbox8.ReadOnly = true;
             countryNumbers.ReadOnly = true;
             #endregion
-            LoadGender();
+            helpers.HelperGender(cmbGender);
 
             PhoneNumberList.ListPhneNumber(cmbCountryCode_SelectedIndexChanged, cmbCountryCode);
         }
 
-        #region Validations
-        private bool isValidName(string name)
-        {
-            return Regex.IsMatch(name, @"^[a-zA-Z]+$");
-        }
-        private bool isValidAge(string age)
-        {
-            return int.TryParse(age, out int num)
-                && num > 13 && num <= 50;
-        }
-        private bool isValidGender(string gender)
-        {
-            return gender == "Male" || gender == "Female" || gender == "Other"; 
-        }
-        private bool isValidAddress(string street)
-        {
-            return !string.IsNullOrEmpty(street);
-        }
-        private bool isValidEmail(string email)
-        {
-            return email.EndsWith("@gmail.com") && email.Contains("@");
-        }
-        private bool isValidUsername(string username)
-        {
-            return Regex.IsMatch(username, @"^[a-zA-Z0-9]{5,15}$");
-        }
-        //ON PROCESS
-        private bool isValidPhoneNumber(string countryCode, string phoneNumber)
-        {
-            if (string.IsNullOrWhiteSpace(countryCode) || string.IsNullOrWhiteSpace(phoneNumber))
-            {
-                return false; // One of the inputs is empty
-            }
-
-            string fullNumber = countryCode  + phoneNumber;
-
-            // Ensure it starts with "+" followed by 1-3 digits (country code), and exactly 10 digits for the phone number
-            return Regex.IsMatch(fullNumber, @"^\+\d{1,3}\d{10}$");
-        }
-
-
-        private bool isValidPassword(string password)
-        {
-            return password.Length >= 8;
-        }
-
-        private void registration_age_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        #endregion
+      
         #region Helpers
         private void hidepass_Click(object sender, EventArgs e)
         {
-            showpass.Show();
-            hidepass.Hide();
-
-            registration_pass.PasswordChar = '\0';
+            helpers.HidePassword(showpass, hidepass, registration_pass);
         }
         private void showpass_Click(object sender, EventArgs e)
         {
-            showpass.Hide();
-            hidepass.Show();
-
-            registration_pass.PasswordChar = '●';
+            helpers.ShowPassord(showpass, hidepass, registration_pass);
         }
         #endregion
-        private void LoadGender()
-        {
-            helpers.HelperGender(cmbGender);
-        }
-
+      
         private void createbtn_Click(object sender, EventArgs e)
         {
             bool hasErrors = false; 
 
             #region ErrorMessages
-            if (!isValidName(registration_firstname.Text) || !isValidName(registration_lastname.Text))
+            if (!helpers.isValidName(registration_firstname.Text) || !helpers.isValidName(registration_lastname.Text))
             {
                 errorbox1.Text = "First name and last name are required and must contain only letters.";
                 hasErrors = true;
@@ -141,7 +79,7 @@ namespace InfoRegSystem.Forms
             {
                 errorbox2.Text = "";
             }
-            if (!isValidGender(cmbGender.Text))
+            if (!helpers.isValidGender(cmbGender.Text))
             {
                 errorbox3.Text = "Gender must be 'Male', 'Female', or 'Other'.";
                 hasErrors = true;
@@ -150,7 +88,7 @@ namespace InfoRegSystem.Forms
             {
                 errorbox3.Text = "";
             }
-            if (!isValidAddress(registration_house.Text))
+            if (!helpers.isValidAddress(registration_house.Text))
             {
                 errorbox5.Text = "Address is required.";
                 hasErrors = true;
@@ -159,7 +97,7 @@ namespace InfoRegSystem.Forms
             {
                 errorbox5.Text = "";
             }
-            if (!isValidEmail(registration_emails.Text))
+            if (!helpers.isValidEmail(registration_emails.Text))
             {
                 errorbox6.Text = "Email must contain @gmail.com.";
                 hasErrors = true;
@@ -168,7 +106,7 @@ namespace InfoRegSystem.Forms
             {
                 errorbox6.Text = "";
             }
-            if (!isValidUsername(registration_username.Text))
+            if (!helpers.isValidUsername(registration_username.Text))
             {
                 errorbox7.Text = "Username must contain letters (a-z) and numbers.";
                 hasErrors = true;
@@ -177,7 +115,7 @@ namespace InfoRegSystem.Forms
             {
                 errorbox7.Text = "";
             }
-            if (!isValidPassword(registration_pass.Text))
+            if (!helpers.isValidPassword(registration_pass.Text))
             {
                 errorbox8.Text = "Password must be at least 8 characters long.";
                 hasErrors = true;
@@ -187,7 +125,7 @@ namespace InfoRegSystem.Forms
                 errorbox8.Text = "";
             }
             //ON PROCESS
-            if(!isValidPhoneNumber(cmbCountryCode.Text,registration_number.Text))
+            if(!helpers.isValidPhoneNumber(countryNumbers,registration_number))
             {
                 errorbox4.Text = "Enter a 10-digit phone number with a valid country code.";
                 hasErrors = true;
@@ -206,9 +144,10 @@ namespace InfoRegSystem.Forms
             SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database);
             sqlConnection.Open();
 
-            using (SqlCommand checkUsernameCmd = new SqlCommand( "CheckUsernameExists", sqlConnection))
+            using (SqlCommand checkUsernameCmd = new SqlCommand("CheckUsernameExists", sqlConnection))
             {
-                checkUsernameCmd.Parameters.AddWithValue("@username", registration_username.Text.Trim());
+                checkUsernameCmd.CommandType = CommandType.StoredProcedure;
+                checkUsernameCmd.Parameters.AddWithValue("@Username", registration_username.Text.Trim());
                 int userCount = (int)checkUsernameCmd.ExecuteScalar();
 
                 if (userCount > 0)
@@ -227,8 +166,8 @@ namespace InfoRegSystem.Forms
                 cnn.Parameters.AddWithValue("@lastname", registration_lastname.Text.Trim());
                 cnn.Parameters.AddWithValue("@age", age);
                 cnn.Parameters.AddWithValue("@gender", cmbGender.Text.Trim());
-                cnn.Parameters.AddWithValue("@countrycode", cmbCountryCode.Text.Trim());
-                cnn.Parameters.AddWithValue("@phonenum", registration_number.Text.Trim());
+                cnn.Parameters.AddWithValue("@countrycode", countryNumbers.Text.Trim());
+                cnn.Parameters.AddWithValue("@phonenumber", registration_number.Text.Trim());
                 cnn.Parameters.AddWithValue("@address", registration_house.Text.Trim());
                 cnn.Parameters.AddWithValue("@email", registration_emails.Text.Trim());
                 cnn.Parameters.AddWithValue("@username", registration_username.Text.Trim());

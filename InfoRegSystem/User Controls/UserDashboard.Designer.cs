@@ -203,10 +203,11 @@
             // greetingslbl
             // 
             this.greetingslbl.AutoSize = true;
+            this.greetingslbl.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.greetingslbl.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.greetingslbl.Location = new System.Drawing.Point(472, 61);
             this.greetingslbl.Name = "greetingslbl";
-            this.greetingslbl.Size = new System.Drawing.Size(0, 45);
+            this.greetingslbl.Size = new System.Drawing.Size(2, 47);
             this.greetingslbl.TabIndex = 42;
             // 
             // UserDashboard

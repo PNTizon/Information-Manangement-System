@@ -109,7 +109,6 @@
             this.genderbox.Name = "genderbox";
             this.genderbox.Size = new System.Drawing.Size(201, 28);
             this.genderbox.TabIndex = 48;
-            this.genderbox.SelectedIndexChanged += new System.EventHandler(this.genderbox_SelectedIndexChanged);
             // 
             // countyCode
             // 
@@ -117,9 +116,8 @@
             this.countyCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.countyCode.Location = new System.Drawing.Point(706, 81);
             this.countyCode.Name = "countyCode";
-            this.countyCode.Size = new System.Drawing.Size(99, 26);
+            this.countyCode.Size = new System.Drawing.Size(103, 26);
             this.countyCode.TabIndex = 46;
-            this.countyCode.TextChanged += new System.EventHandler(this.countyCode_TextChanged);
             // 
             // Gender
             // 
@@ -231,6 +229,7 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(247, 26);
             this.txtEmail.TabIndex = 14;
+            this.txtEmail.TextChanged += new System.EventHandler(this.txtAge_TextChanged);
             // 
             // label6
             // 

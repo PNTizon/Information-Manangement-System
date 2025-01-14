@@ -9,13 +9,13 @@ namespace InfoRegSystem.Forms
     public partial class UserMainForm : Form
     {
         private frmRegistration frmRegistration;
-        private ButtonHandler handler;
+        private UserDashboardFunctions functions;
         private FormManager formManager;
         public UserMainForm()
         {
             InitializeComponent();
             formManager = new FormManager();
-            handler = new ButtonHandler();
+            functions = new UserDashboardFunctions();
         }
         public UserMainForm(frmRegistration frmRegistration) : this()
         {
@@ -23,22 +23,22 @@ namespace InfoRegSystem.Forms
         }
         private void bookinfobtn_Click(object sender, EventArgs e)
         {
-            handler.UserBookInfo(bookinfobtn, this, userpnlDash);
+            functions.UserBookInfo(bookinfobtn, this, userpnlDash);
         }
 
         private void returnbtn_Click(object sender, EventArgs e)
         {
-            handler.UserTransaction(returnbtn, this, userpnlDash);
+            functions.UserTransaction(returnbtn, this, userpnlDash);
         }
 
         private void logoutbtn_Click(object sender, EventArgs e)
         {
-            handler.UserLogout(logoutbtn, this);
+            functions.UserLogout(logoutbtn, this);
         }
 
         private void btnDasboard_Click(object sender, EventArgs e)
         {
-            handler.UserDashboard(btnDasboard, userpnlDash,this);
+            functions.UserDashboard(btnDasboard, userpnlDash,this);
         }
     }
 }

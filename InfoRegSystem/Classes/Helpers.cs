@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace InfoRegSystem.Classes
 {
@@ -66,5 +68,83 @@ namespace InfoRegSystem.Classes
             combo.DataSource = genres;
             combo.SelectedIndex = -1;
         }
+        public bool GmailHelper(TextBox email)
+        {
+            return email.Text.EndsWith("@gmail.com") && email.Text.Contains("@"); 
+        }
+        public void DurationHelper(ComboBox durationBox)
+        {
+            List<string> genres = new List<string> { "7", "14", "21", "30"};
+            durationBox.DataSource = genres;
+            durationBox.SelectedIndex = -1;
+        }
+        public bool isValidName(string name)
+        {
+            return Regex.IsMatch(name, @"^[a-zA-Z]+$");
+        }
+        public bool isValidAge(string age)
+        {
+            return int.TryParse(age, out int num)
+                && num > 13 && num <= 50;
+        }
+        public bool isValidGender(string gender)
+        {
+            return gender == "Male" || gender == "Female" || gender == "Other";
+        }
+        public bool isValidAddress(string street)
+        {
+            return !string.IsNullOrEmpty(street);
+        }
+        public bool isValidEmail(string email)
+        {
+            return email.EndsWith("@gmail.com") && email.Contains("@");
+        }
+        public bool isValidUsername(string username)
+        {
+            return Regex.IsMatch(username, @"^[a-zA-Z0-9]{5,15}$");
+        }
+        //ON PROCESS
+        public bool isValidPhoneNumber(TextBox countryCode, TextBox phoneNumber)
+        {
+            if (string.IsNullOrWhiteSpace(countryCode.Text) || string.IsNullOrWhiteSpace(phoneNumber.Text))
+            {
+                return false; // One of the inputs is empty
+            }
+
+            string fullNumber = countryCode.Text + phoneNumber.Text;
+
+            // Ensure it starts with "+" followed by 1-3 digits (country code), and exactly 10 digits for the phone number
+            return Regex.IsMatch(fullNumber, @"^\+\d{1,3}\d{10}$");
+        }
+
+
+        public bool isValidPassword(string password)
+        {
+            return password.Length >= 8;
+        }
+
+        public void registration_age_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        public void HidePassword(PictureBox show,PictureBox hide,TextBox password)
+        {
+            show.Show();
+            hide.Hide();
+
+            password.PasswordChar = '\0';
+        }
+        public void ShowPassord(PictureBox show, PictureBox hide, TextBox password)
+        {
+            show.Hide();
+            hide.Show();
+
+            password.PasswordChar = '●';
+        }
+
+
     }
 }

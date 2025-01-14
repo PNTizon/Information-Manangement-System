@@ -16,6 +16,7 @@ namespace InfoRegSystem.Forms
     {
         private frmRegistration frmRegistration;
         private UserMainForm frmMain;
+        private UserDashboardFunctions function;
 
         int userId = GlobalUserInfo.UserId;
         string username = GlobalUserInfo.Username;
@@ -24,13 +25,9 @@ namespace InfoRegSystem.Forms
         {
             InitializeComponent();
             DisplayBorrow();
+            function = new UserDashboardFunctions();
 
             greetingslbl.Text = $"Welcome, {GlobalUserInfo.FirstName}!";
-        }
-        public UserDashboard(string username, int userId) : this()
-        {
-            this.username = username;
-            this.userId = userId;
         }
 
         public UserDashboard(frmRegistration frmRegistration) : this()
@@ -54,22 +51,23 @@ namespace InfoRegSystem.Forms
                                  WHERE b.BorrowedDate IS NOT NULL 
                                    AND b.ReturnDate IS NULL 
                                    AND s.Id = @UserId) AS BorrowedCount,
+
                                 (SELECT COUNT(b.Id) 
                                  FROM borrowtable b 
                                  INNER JOIN studentable s ON b.Id = s.Id 
                                  WHERE b.ReturnDate IS NOT NULL 
                                    AND s.Id = @UserId) AS ReturnedCount,
+
                                 (SELECT COUNT(b.Id) 
                                  FROM borrowtable b 
                                  INNER JOIN studentable s ON b.Id = s.Id 
                                  WHERE b.ReturnDate IS NULL 
-                                   AND b.ExpectedReturnDate < @CurrentDate 
+                                   AND b.ExpectedReturnDate < GETDATE()
                                    AND s.Id = @UserId) AS OverdueCount";
 
                     using (SqlCommand cmd = new SqlCommand(query, sqlConnection))
                     {
                         cmd.Parameters.AddWithValue("@UserId", userId);
-                        cmd.Parameters.AddWithValue("@CurrentDate", DateTime.Now);
 
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {

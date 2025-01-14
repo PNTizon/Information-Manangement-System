@@ -174,7 +174,6 @@
             this.btnBack.Size = new System.Drawing.Size(34, 39);
             this.btnBack.TabIndex = 60;
             this.btnBack.UseVisualStyleBackColor = false;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // textBox2
             // 

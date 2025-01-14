@@ -11,6 +11,7 @@ namespace InfoRegSystem.Classes
     }
     public class PhoneNumberList
     {
+        string cmBox;
         public static void ListPhneNumber(EventHandler eventHandler, ComboBox comboBox)
         {
             var countryCodes = new List<CountryCode>

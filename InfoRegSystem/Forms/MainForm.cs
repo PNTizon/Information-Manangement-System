@@ -11,14 +11,14 @@ namespace InfoRegSystem
     {
         private frmRegistration frmRegistration;
         private FormManager formManager;
-        private MainformFunctions mainFuction;
+        private MainformFunctions mainfuntion;
         
 
         public MainForm()
         {
             InitializeComponent();
             formManager = new FormManager();
-            mainFuction = new MainformFunctions();
+            mainfuntion = new MainformFunctions();
         }
         public MainForm(frmRegistration frmRegistration) : this()
         {
@@ -26,23 +26,23 @@ namespace InfoRegSystem
         }
         private void btnBookInfo_Click(object sender, EventArgs e)
         {
-            mainFuction.HandleBookInfoForm(btnBookInfo, this, panel2);
+            mainfuntion.HandleBookInfoForm(btnBookInfo, panel2);
         }
         private void btnReturnBook_Click(object sender, EventArgs e)
         {
-            mainFuction.HandleReturnBook(btnReturnBook, panel2);
+            mainfuntion.HandleBorrowRecords(btnReturnBook, panel2);
         }
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            mainFuction.HandleLogout(btnLogout, this);
+            mainfuntion.HandleLogout(btnLogout, this);
         }
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            mainFuction.HandleMembership(btnRegister, panel2, this);
+            mainfuntion.HandleMembers(btnRegister,  panel2);
         }
         private void btnDashboard_Click(object sender, EventArgs e)
         {
-            mainFuction.HandleDashboard(btnDashboard, panel2, this);
+            mainfuntion.HandleDashboard(btnDashboard,  panel2);
         }
 
         private void adminDashboard1_Load(object sender, EventArgs e)

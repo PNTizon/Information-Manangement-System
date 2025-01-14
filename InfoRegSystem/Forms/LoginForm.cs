@@ -12,12 +12,12 @@ namespace InfoRegSystem
 {
     public partial class frmRegistration : Form
     {
-        private ButtonHandler login;
+        private LoginButton login;
 
         public frmRegistration()
         {
             InitializeComponent();
-            login = new ButtonHandler();
+            login = new LoginButton();
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
