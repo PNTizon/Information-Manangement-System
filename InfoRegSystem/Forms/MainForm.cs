@@ -1,8 +1,8 @@
 ﻿using InfoRegSystem.Classes;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Web.UI.WebControls;
 using System.Windows.Forms;
 
 namespace InfoRegSystem
@@ -10,17 +10,16 @@ namespace InfoRegSystem
     public partial class MainForm : Form
     {
         private frmRegistration frmRegistration;
-        private FormManager formManager;
         private MainformFunctions mainfuntion;
-        
+        private ButtonShadow shadow;
 
         public MainForm()
         {
             InitializeComponent();
-            formManager = new FormManager();
             mainfuntion = new MainformFunctions();
+            SystemButton();
         }
-        public MainForm(frmRegistration frmRegistration) : this()
+        public MainForm(frmRegistration frmRegistration) : this() 
         {
             this.frmRegistration = frmRegistration;
         }
@@ -44,7 +43,19 @@ namespace InfoRegSystem
         {
             mainfuntion.HandleDashboard(btnDashboard,  panel2);
         }
-
+        public void SystemButton()
+        {
+            List<Button> buttons = new List<Button>
+            {
+                btnBookInfo,
+                btnDashboard,
+                btnLogout,
+                btnRegister,
+                btnReturnBook
+            };
+            shadow = new ButtonShadow(buttons);
+            shadow.NormalButton();
+        }
         private void adminDashboard1_Load(object sender, EventArgs e)
         {
 

@@ -1,5 +1,7 @@
-﻿using InfoRegSystem.Classes;
+﻿using Guna.UI2.WinForms;
+using InfoRegSystem.Classes;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace InfoRegSystem.Forms
@@ -11,6 +13,7 @@ namespace InfoRegSystem.Forms
         private Helpers helpers;
         private Display display;
         private DataGridSelection selection;
+        private ButtonShadow shadow;
 
         public AdminMemdersInfo()
         {
@@ -20,6 +23,7 @@ namespace InfoRegSystem.Forms
             helpers = new Helpers();
             display = new Display();
             selection = new DataGridSelection();
+            GunaButton();
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -38,10 +42,11 @@ namespace InfoRegSystem.Forms
         }
         private void btnUpdate(object sender, EventArgs e)
         {
-            DateTime currentDate = DateTime.Now;
+            //DateTime currentDate = DateTime.Now;
+            //currentDate
             functions.UpdateMemberInfo(txtName.Text, txtLastname.Text, txtAge.Text,
                 genderbox.Text, countyCode, txtNumber.Text, txtAddress.Text,
-                txtEmail.Text, currentDate, membergrid, Display, Clear, dashboard.displayMem);
+                txtEmail.Text, membergrid, Display, Clear, dashboard.displayMem);
         }
         private void Display()
         {
@@ -59,7 +64,8 @@ namespace InfoRegSystem.Forms
         }
         private void membergrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            selection.MembersSelection(e.RowIndex, txtName, txtLastname, txtAge, CountryCodecmb, txtNumber, txtAddress, txtEmail, genderbox, membergrid);
+            selection.MembersSelection(e.RowIndex, txtName, txtLastname, txtAge, countyCode, txtNumber, 
+                txtAddress, txtEmail, genderbox, membergrid);
         }
         private void LoadGenders()
         {
@@ -89,6 +95,18 @@ namespace InfoRegSystem.Forms
         private void txtAge_TextChanged(object sender, EventArgs e)
         {
             helpers.HelperAge(txtAge);
+        }
+        private void GunaButton()
+        {
+            List<Guna2Button> gunabtn = new List<Guna2Button>
+            {
+                btnAdd,
+                btnDetele,
+                btnSearch,
+                btnEdit
+            };
+            shadow = new ButtonShadow(gunabtn);
+            shadow.CustomizeGunaButtons();
         }
         #endregion
     }

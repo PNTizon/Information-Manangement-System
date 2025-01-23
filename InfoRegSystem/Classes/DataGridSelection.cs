@@ -1,12 +1,5 @@
-﻿using Guna.UI2.WinForms;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using static Guna.UI2.Native.WinApi;
 
 namespace InfoRegSystem.Classes
 {
@@ -15,7 +8,8 @@ namespace InfoRegSystem.Classes
         private string book { get; set; }
 
 
-        public void MembersSelection(int rowIndex,TextBox name , TextBox lastname, TextBox age, ComboBox countrybox, TextBox phone, TextBox address, TextBox email,ComboBox genderbox, DataGridView membergrid)
+        public void MembersSelection(int rowIndex, TextBox name, TextBox lastname, TextBox age, TextBox countrybox,
+            TextBox phone, TextBox address, TextBox email, ComboBox genderbox, DataGridView membergrid)
         {
             try
             {
@@ -23,24 +17,20 @@ namespace InfoRegSystem.Classes
                 {
                     DataGridViewRow row = membergrid.Rows[rowIndex];
 
-                    name.Text = row.Cells["Name"].Value?.ToString() ?? string.Empty;
-                    lastname.Text = row.Cells["LastName"].Value?.ToString() ?? string.Empty;
-                    age.Text = row.Cells["Age"].Value?.ToString() ?? string.Empty;
-                    countrybox.Text = row.Cells["CountryCode"].Value?.ToString() ?? string.Empty;
-                    phone.Text = row.Cells["PhoneNumber"].Value?.ToString() ?? string.Empty;
-                    address.Text = row.Cells["Address"].Value?.ToString() ?? string.Empty;
-                    email.Text = row.Cells["Email"].Value?.ToString() ?? string.Empty;
+                    string GetValue(string columnName) => row.Cells[columnName].Value?.ToString() ?? string.Empty;
+
+                    name.Text = GetValue("Name");
+                    lastname.Text = GetValue("LastName");
+                    age.Text = GetValue("Age");
+                    countrybox.Text = GetValue("CountryCode");
+                    phone.Text = GetValue("PhoneNumber");
+                    address.Text = GetValue("Address");
+                    email.Text = GetValue("Email");
 
                     int selectedID = Convert.ToInt32(row.Cells["ID"].Value);
-                    string gender = row.Cells["Gender"].Value?.ToString() ?? string.Empty;
-                    if (!string.IsNullOrEmpty(gender) && genderbox.Items.Contains(gender))
-                    {
-                        genderbox.SelectedItem = gender;
-                    }
-                    else
-                    {
-                        genderbox.SelectedIndex = -1;
-                    }
+
+                    string gender = GetValue("Gender");
+                    genderbox.SelectedItem = genderbox.Items.Contains(gender) ? gender : null;
                 }
             }
             catch (Exception ex)
@@ -49,7 +39,8 @@ namespace InfoRegSystem.Classes
             }
         }
 
-        public void BorrowRecordsSelection(int rowIndex, DataGridView recordsgrid, TextBox txtName, TextBox txtBook, TextBox txtLastname,ComboBox duration, DateTimePicker borrowDate, DateTimePicker returnDate)
+        public void BorrowRecordsSelection(int rowIndex, DataGridView recordsgrid, TextBox txtName, TextBox txtBook,
+            TextBox txtLastname, ComboBox duration, DateTimePicker borrowDate, DateTimePicker returnDate)
         {
             try
             {
@@ -57,15 +48,17 @@ namespace InfoRegSystem.Classes
                 {
                     DataGridViewRow row = recordsgrid.Rows[rowIndex];
 
-                    txtName.Text = row.Cells["name"].Value.ToString();
-                    txtBook.Text = row.Cells["book"].Value.ToString();
-                    txtLastname.Text = row.Cells["lastname"].Value.ToString();
-                    if (row.Cells["duration"].Value != DBNull.Value)
-                    {
-                        duration.SelectedItem = row.Cells["duration"].Value.ToString(); 
-                    }
-                    borrowDate.Value = row.Cells["borroweddate"].Value != DBNull.Value ? Convert.ToDateTime(row.Cells["borroweddate"].Value) : DateTime.Now;
-                    returnDate.Value = row.Cells["returndate"].Value != DBNull.Value ? Convert.ToDateTime(row.Cells["returndate"].Value) : DateTime.Now;
+                    string GetValue(string columnName) => row.Cells[columnName].Value?.ToString() ?? string.Empty;
+
+                    txtName.Text = GetValue("name");
+                    txtBook.Text = GetValue("book");
+                    txtLastname.Text = GetValue("lastname");
+
+                    string durationValue = GetValue("duration");
+                    duration.SelectedItem = !string.IsNullOrEmpty(durationValue) ? durationValue : null;
+
+                    borrowDate.Value = DateTime.TryParse(GetValue("borroweddate"), out DateTime borrow) ? borrow : DateTime.Now;
+                    returnDate.Value = DateTime.TryParse(GetValue("returndate"), out DateTime returnDt) ? returnDt : DateTime.Now;
                 }
             }
             catch (Exception ex)
@@ -73,7 +66,7 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show("Some error occurred: " + ex.Message + " - " + ex.Source);
             }
         }
-        public void BookSelection(int rowIndex,TextBox title,TextBox author,TextBox copies,ComboBox genrebox,DataGridView bookgrid)
+        public void BookSelection(int rowIndex, TextBox title, TextBox author, TextBox copies, ComboBox genrebox, DataGridView bookgrid)
         {
             try
             {
@@ -97,7 +90,7 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show("Some error occured: " + ex.Message + " - " + ex.Source);
             }
         }
-        public void TransactionSelection(DataGridView transacgrid,int rowIndex)
+        public void TransactionSelection(DataGridView transacgrid, int rowIndex)
         {
             try
             {
@@ -113,7 +106,5 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show("Some error occurred: " + ex.Message + " - " + ex.Source);
             }
         }
-
-
     }
 }

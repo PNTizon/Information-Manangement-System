@@ -1,4 +1,5 @@
-﻿using InfoRegSystem.Classes;
+﻿using Guna.UI2.WinForms;
+using InfoRegSystem.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,38 +21,47 @@ namespace InfoRegSystem.Forms
         private Display display;
         private DataGridSelection selection;
         private UserBorrowTransactions transaction;
-      
-        public UserTransaction()
+        private UserFormManager formManager;
+        private ButtonShadow shadow;
+        private UserMainForm userMainForm;
+
+        public UserTransaction(UserMainForm exisitngPanel)
         {
             InitializeComponent();
             function = new UserTransactionFunction();
             display = new Display();
             selection = new DataGridSelection();
+            userMainForm = exisitngPanel;
             transaction = new UserBorrowTransactions();
-        }
-        public UserTransaction( UserDashboard formdash)
-        {
-            this.formdash = formdash;
+            formdash =  new UserDashboard();
+            formManager = new UserFormManager();
+            GunaButton();
         }
         private void returnbtn_Click(object sender, EventArgs e)
         {
             function.RetunTransaction(transactiongrid,formdash.DisplayBorrow);
         }
-        //ON PROCESS
         private void borrowedbtn_Click(object sender, EventArgs e)
         {
-           UserBorrowTransactions transactions = new UserBorrowTransactions();
-            transaction.Show();
-            transactions.Location = this.Location;
+            function.BorrowTransaction(borrowedbtn, userpanel);
         }
         private void transactiongrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             selection.TransactionSelection(transactiongrid,e.RowIndex);
         }
-
         private void UserTransac_Load(object sender, EventArgs e)
         {
             display.DisplayUserTransaction(transactiongrid);
+        }
+        private void GunaButton()
+        {
+            List<Guna2Button> gunabtn = new List<Guna2Button>
+            {
+                borrowedbtn,
+                returnbtn
+            };
+            shadow = new ButtonShadow(gunabtn);
+            shadow.CustomizeGunaButtons();
         }
     }
 }

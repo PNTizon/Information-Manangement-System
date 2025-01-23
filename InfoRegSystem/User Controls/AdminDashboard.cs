@@ -1,4 +1,5 @@
-﻿using InfoRegSystem.Classes;
+﻿using Guna.UI2.WinForms;
+using InfoRegSystem.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,7 +18,7 @@ namespace InfoRegSystem.Forms
     {
         private FormManager formManager;
         private AdminDashboardFunctions function;
-
+        private ButtonShadow shadow;
         public AdminDashboard()
         {
             InitializeComponent();
@@ -25,6 +26,7 @@ namespace InfoRegSystem.Forms
             displayMem();
             formManager = new FormManager();
             function = new AdminDashboardFunctions();
+            GunaButton();
         }
 
         private void Dashboard_Load(object sender, EventArgs e)
@@ -47,8 +49,6 @@ namespace InfoRegSystem.Forms
                         int count = Convert.ToInt32(reader[0]);
                         lblTotalMem.Text = count.ToString();
                     }
-
-                  
                     reader.Close();
                 }
                 sqlConnection.Close();
@@ -119,6 +119,15 @@ namespace InfoRegSystem.Forms
         private void btnSearchStudent_Click(object sender, EventArgs e)
         {
             function.HandleSearch(dataGridViewBookInfo, searchbox);
+        }
+        private void GunaButton()
+        {
+            List<Guna2Button> gunabtn = new List<Guna2Button>
+            {
+                btnSearch
+            };
+            shadow = new ButtonShadow(gunabtn);
+            shadow.CustomizeGunaButtons();
         }
     }
 }

@@ -1,23 +1,31 @@
-﻿using System;
-using Guna.UI2.WinForms;
+﻿using Guna.UI2.WinForms;
+using MySql.Data.MySqlClient;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using System.Collections.Generic;
+using static Guna.UI2.Native.WinApi;
 
 namespace InfoRegSystem.Classes
 {
     public class AdminBorrowFunctions
     {
         private Display display;
+        string firstName, lastName;
+
         public AdminBorrowFunctions()
         {
             display = new Display();
         }
-        //ON PROCESS
-        public void BorrowHandler(TextBox name, TextBox lastname, TextBox book, ComboBox duration, Action displayBorrow, Action displayBookList, DataGridView borrowRecords)
+        public void BorrowHandler(string name, string lastname, string book, ComboBox duration,
+            Action displayBorrow, Action displayBookList, DataGridView borrowRecords)
         {
-            if (string.IsNullOrWhiteSpace(name.Text) || string.IsNullOrWhiteSpace(lastname.Text) || string.IsNullOrWhiteSpace(book.Text))
+            if (GlobalUserInfo.FirstName == null || GlobalUserInfo.Lastname == null)
+            {
+                firstName = name;
+                lastName = lastname;
+            }
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(lastname) || string.IsNullOrWhiteSpace(book))
             {
                 MessageBox.Show("All fields are required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -35,27 +43,26 @@ namespace InfoRegSystem.Classes
                 {
                     sqlConnection.Open();
 
-                    // Check if the student exists
+                    int studentId = GlobalUserInfo.UserId;
                     using (SqlCommand checkStudentCmd = new SqlCommand("CheckStudentExist", sqlConnection))
                     {
                         checkStudentCmd.CommandType = CommandType.StoredProcedure;
-                        checkStudentCmd.Parameters.AddWithValue("@Name", name.Text);
-                        checkStudentCmd.Parameters.AddWithValue("@Lastname", lastname.Text);
+                        checkStudentCmd.Parameters.AddWithValue("@Name", firstName);
+                        checkStudentCmd.Parameters.AddWithValue("@Lastname", lastName);
 
-                        object studentIdResult = checkStudentCmd.ExecuteScalar();
-                        if (studentIdResult == null)
+                        var result = checkStudentCmd.ExecuteScalar();
+                        if (result == null)
                         {
                             MessageBox.Show("The entered student is not registered in the system.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
-                        int studentId = Convert.ToInt32(studentIdResult);
+                        studentId = Convert.ToInt32(result);
                     }
 
-                    // Check if the book exists and has available copies
                     using (SqlCommand checkBookCmd = new SqlCommand("CheckBookExistsAvailability", sqlConnection))
                     {
                         checkBookCmd.CommandType = CommandType.StoredProcedure;
-                        checkBookCmd.Parameters.AddWithValue("@Book", book.Text);
+                        checkBookCmd.Parameters.AddWithValue("@Book", book);
                         object bookCopiesResult = checkBookCmd.ExecuteScalar();
 
                         if (bookCopiesResult == null)
@@ -63,6 +70,7 @@ namespace InfoRegSystem.Classes
                             MessageBox.Show("The entered book is not registered in the system.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
+
                         int availableCopies = Convert.ToInt32(bookCopiesResult);
                         if (availableCopies <= 0)
                         {
@@ -70,65 +78,55 @@ namespace InfoRegSystem.Classes
                             return;
                         }
                     }
-
-                    // Prevent duplicate borrow entries for the same student and book
                     using (SqlCommand checkDuplicateCmd = new SqlCommand("CheckDuplication", sqlConnection))
                     {
                         checkDuplicateCmd.CommandType = CommandType.StoredProcedure;
-                        checkDuplicateCmd.Parameters.AddWithValue("@Name", name.Text);
-                        checkDuplicateCmd.Parameters.AddWithValue("@Lastname", lastname.Text);
-                        checkDuplicateCmd.Parameters.AddWithValue("@Book", book.Text);
-                        int duplicateCount = (int)checkDuplicateCmd.ExecuteScalar();
+                        checkDuplicateCmd.Parameters.AddWithValue("@StudentId", studentId);
+                        checkDuplicateCmd.Parameters.AddWithValue("@Book", book);
 
+                        int duplicateCount = (int)checkDuplicateCmd.ExecuteScalar();
                         if (duplicateCount > 0)
                         {
                             MessageBox.Show("This book is already borrowed by the student and not yet returned.", "Duplicate Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
                     }
-
-                    // Current date and time for BorrowedDate
                     DateTime borrowedDate = DateTime.Now;
-
-                    // Get the borrowing duration from the ComboBox
-                    if (!int.TryParse(duration.SelectedItem?.ToString(), out int borrowDurationDays))
+                    if (!int.TryParse(duration.SelectedItem.ToString(), out int borrowDurationDays))
                     {
                         MessageBox.Show("Please select a valid borrowing duration.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
+
                     DateTime expectedReturnDate = borrowedDate.AddDays(borrowDurationDays);
-
-                    // Insert into the borrowtable
-                    using (SqlCommand insertCmd = new SqlCommand("AddBorrowRecord", sqlConnection))
+                    string status = "Pending"; 
+                    using (SqlCommand insertBorrowCmd = new SqlCommand("AddBorrowRecord", sqlConnection))
                     {
-                        insertCmd.CommandType = CommandType.StoredProcedure;
-                        insertCmd.Parameters.AddWithValue("@Name", name.Text);
-                        insertCmd.Parameters.AddWithValue("@Lastname", lastname.Text);
-                        insertCmd.Parameters.AddWithValue("@Book", book.Text);
+                        insertBorrowCmd.CommandType = CommandType.StoredProcedure; 
+                        insertBorrowCmd.Parameters.AddWithValue("@StudentId", studentId);
+                        insertBorrowCmd.Parameters.AddWithValue("@Name", firstName.Trim()); 
+                        insertBorrowCmd.Parameters.AddWithValue("@Lastname", lastName.Trim());
+                        insertBorrowCmd.Parameters.AddWithValue("@Book", book.Trim());
+                        insertBorrowCmd.Parameters.AddWithValue("@BorrowedDate", borrowedDate);
+                        insertBorrowCmd.Parameters.AddWithValue("@ExpectedReturnDate", expectedReturnDate);
+                        insertBorrowCmd.Parameters.AddWithValue("@Duration", borrowDurationDays);
+                        insertBorrowCmd.Parameters.AddWithValue("@Status", status);
 
-                        insertCmd.Parameters.AddWithValue("@BorrowedDate", borrowedDate); // Use DateTime.Now
-                        insertCmd.Parameters.AddWithValue("@ExpectedReturnDate", expectedReturnDate); // Use selected duration
-
-                        insertCmd.ExecuteNonQuery();
+                        insertBorrowCmd.ExecuteNonQuery();
                     }
 
-                    // Decrement the book copies in the Books table
-                    using (SqlCommand updateCopiesCmd = new SqlCommand("DecrementBookCopies", sqlConnection))
+                    using (SqlCommand decrementCopiesCmd = new SqlCommand("DecrementBookCopies", sqlConnection))
                     {
-                        updateCopiesCmd.CommandType = CommandType.StoredProcedure;
-                        updateCopiesCmd.Parameters.AddWithValue("@Book", book.Text);
-                        updateCopiesCmd.ExecuteNonQuery();
+                        decrementCopiesCmd.CommandType = CommandType.StoredProcedure;
+                        decrementCopiesCmd.Parameters.AddWithValue("@BorrowBook", book);
+                        decrementCopiesCmd.ExecuteNonQuery();
                     }
 
                     MessageBox.Show("Book borrowed successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Refresh dashboard and data
-                    displayBorrow();
-                    displayBookList();
-                    display.DisplayBorrowRecords(borrowRecords);
-
-                    sqlConnection.Close();
                 }
+                displayBorrow();
+                displayBookList();
+                display.DisplayBorrowRecords(borrowRecords);
             }
             catch (SqlException ex)
             {
@@ -139,148 +137,163 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        //ON PROCESS
-        public void UpdateHandler(TextBox name, TextBox lastname, TextBox book, DateTime datenow, ComboBox duration, DataGridView viewBorrow, Action displayBorrow, Action displayBookList)
+
+        public void UpdateHandler( TextBox name, TextBox lastname,TextBox book, ComboBox duration,
+            Action displayBorrow,Action displayBookList, DataGridView borrowRecords)
         {
+            if (string.IsNullOrWhiteSpace(name.Text) || string.IsNullOrWhiteSpace(lastname.Text) || string.IsNullOrWhiteSpace(book.Text))
+            {
+                MessageBox.Show("All fields are required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (duration.SelectedItem == null)
+            {
+                MessageBox.Show("Please select the borrowing duration.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             try
             {
-                if (viewBorrow.CurrentRow == null)
+                using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
                 {
-                    MessageBox.Show("Please select a record to update.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
+                    sqlConnection.Open();
 
-                // Get the record ID
-                object idValue = viewBorrow.CurrentRow.Cells["Id"].Value;
-                if (idValue == DBNull.Value || idValue == null)
-                {
-                    MessageBox.Show("Invalid record selected. No ID found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                // Get the original book title before updating
-                string originalBookTitle = viewBorrow.CurrentRow.Cells["Book"].Value.ToString();
-                // Get the updated book title from the user input
-                string updatedBookTitle = book.Text.Trim();
-
-
-                int recordId = Convert.ToInt32(idValue);
-
-                // Retrieve the values for update
-                string updatedName = name.Text.Trim();
-                string updatedLastName = lastname.Text.Trim();
-                string updatedBook = book.Text.Trim();
-                DateTime updatedBorrowedDate = datenow;
-
-                // Validate fields
-                if (string.IsNullOrEmpty(updatedName) || string.IsNullOrEmpty(updatedLastName) || string.IsNullOrEmpty(updatedBook))
-                {
-                    MessageBox.Show("Please ensure all fields are filled in.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                if (duration.SelectedItem == null)
-                {
-                    MessageBox.Show("Please select a duration.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                int selectedDuration = int.Parse(duration.SelectedItem.ToString());
-                DateTime updatedExpectedReturnDate = updatedBorrowedDate.AddDays(selectedDuration);
-
-                SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database);
-
-
-                sqlConnection.Open();
-
-                // Update query for borrowtable excluding ReturnDate and Penalty
-
-                SqlCommand cmd = new SqlCommand("UpdateBorrowTable", sqlConnection);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Name", updatedName);
-                cmd.Parameters.AddWithValue("@LastName", updatedLastName);
-                cmd.Parameters.AddWithValue("@Book", updatedBook);
-                cmd.Parameters.AddWithValue("@BorrowedDate", updatedBorrowedDate);
-                cmd.Parameters.AddWithValue("@ExpectedReturnDate", updatedExpectedReturnDate);
-                cmd.Parameters.AddWithValue("@Id", recordId);
-
-                int rowsAffected = cmd.ExecuteNonQuery();
-
-                if (rowsAffected > 0)
-                {
-                    using (SqlCommand sqlcom = new SqlCommand("UpdateBookCopiesForBorrow", sqlConnection))
+                    if (borrowRecords.CurrentRow == null)
                     {
-                        sqlcom.CommandType = CommandType.StoredProcedure;
-                        sqlcom.Parameters.AddWithValue("@OriginalBook", originalBookTitle);
-                        sqlcom.Parameters.AddWithValue("@UpdatedBook", updatedBookTitle);
-                        sqlcom.ExecuteNonQuery();
+                        MessageBox.Show("Please select a record to update.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
                     }
 
-                    MessageBox.Show("Record updated successfully.");
-                    display.DisplayBorrowRecords(viewBorrow);
-                    displayBorrow();
-                    displayBookList();
+                    // Retrieve record ID
+                    object idValue = borrowRecords.CurrentRow.Cells["Id"].Value;
+                    if (idValue == DBNull.Value || idValue == null)
+                    {
+                        MessageBox.Show("Invalid record selected. No ID found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    int recordId = Convert.ToInt32(idValue);
+
+                    // Get original book title to manage stock
+                    string originalBookTitle = borrowRecords.CurrentRow.Cells["Book"].Value.ToString();
+                    string updatedBookTitle = book.Text.Trim();
+
+                    // Parse duration and calculate new Expected Return Date
+                    DateTime updatedBorrowedDate = DateTime.Now;
+                    if (!int.TryParse(duration.SelectedItem.ToString(), out int borrowDurationDays))
+                    {
+                        MessageBox.Show("Please select a valid borrowing duration.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    DateTime updatedExpectedReturnDate = updatedBorrowedDate.AddDays(borrowDurationDays);
+
+                    // Update the borrowtable record
+                    using (SqlCommand updateBorrowCmd = new SqlCommand("UpdateAdminBorrowRecords", sqlConnection))
+                    {
+                        updateBorrowCmd.CommandType = CommandType.StoredProcedure;
+                        updateBorrowCmd.Parameters.AddWithValue("@Id", recordId);
+                        updateBorrowCmd.Parameters.AddWithValue("@Name", name.Text.Trim());
+                        updateBorrowCmd.Parameters.AddWithValue("@Lastname", lastname.Text.Trim());
+                        updateBorrowCmd.Parameters.AddWithValue("@Book", updatedBookTitle);
+                        updateBorrowCmd.Parameters.AddWithValue("@BorrowedDate", updatedBorrowedDate);
+                        updateBorrowCmd.Parameters.AddWithValue("@ExpectedReturnDate", updatedExpectedReturnDate);
+
+                        int rowsAffected = updateBorrowCmd.ExecuteNonQuery();
+                        if (rowsAffected == 0)
+                        {
+                            MessageBox.Show("No record found for the specified ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                    }
+
+                    // Update book copies if the book title has changed
+                    if (!string.Equals(originalBookTitle, updatedBookTitle, StringComparison.OrdinalIgnoreCase))
+                    {
+                        using (SqlCommand updateCopiesCmd = new SqlCommand("UpdateBookCopiesForBorrow", sqlConnection))
+                        {
+                            updateCopiesCmd.CommandType = CommandType.StoredProcedure;
+                            updateCopiesCmd.Parameters.AddWithValue("@OriginalBook", originalBookTitle);
+                            updateCopiesCmd.Parameters.AddWithValue("@UpdatedBook", updatedBookTitle);
+                            updateCopiesCmd.ExecuteNonQuery();
+                        }
+                    }
+
+                    MessageBox.Show("Record updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                else
-                {
-                    MessageBox.Show("Error: No record found for the specified ID.");
-                }
-                sqlConnection.Close();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"SQL Error: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            displayBorrow();
+            displayBookList();
+            display.DisplayBorrowRecords(borrowRecords);
         }
-        //ON PROCESS
         public void DeleteHandler(DataGridView records, Action displayBorrow, Action displayBookList)
         {
             try
             {
                 if (records.CurrentRow == null)
                 {
-                    MessageBox.Show("Please select a record to delete.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Please select a valid record to delete.");
                     return;
                 }
 
                 int recordId = Convert.ToInt32(records.CurrentRow.Cells["Id"].Value);
                 string bookTitle = Convert.ToString(records.CurrentRow.Cells["Book"].Value);
 
-                SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database);
+                var result = MessageBox.Show("Are you sure you want to delete this record?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-                sqlConnection.Open();
-
-                // Delete the borrow record from the borrowtable
-                SqlCommand cmd = new SqlCommand("DeleteBorrowMember", sqlConnection);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Id", recordId);
-
-                int rowsAffected = cmd.ExecuteNonQuery();
-
-                if (rowsAffected > 0)
+                if (result == DialogResult.Yes)
                 {
-                    // Increase book copies in Books table
-                    SqlCommand updateCopiesCmd = new SqlCommand("", sqlConnection);
-                    updateCopiesCmd.Parameters.AddWithValue("@OriginalBook", bookTitle);
-                    updateCopiesCmd.ExecuteNonQuery();
+                    using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                    {
+                        sqlConnection.Open();
 
-                    MessageBox.Show("Record deleted successfully.");
-                    display.DisplayBorrowRecords(records);
-                    displayBorrow();
-                    displayBookList();
+                        // Delete the borrow record from the borrowtable
+                        using (SqlCommand cmd = new SqlCommand("DeleteBorrowMember", sqlConnection))
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@Id", recordId);
+
+                            int rowsAffected = cmd.ExecuteNonQuery();
+                            if (rowsAffected > 0)
+                            {
+                                // Increase book copies in Books table
+                                SqlCommand updateCopiesCmd = new SqlCommand("IncrementBookCopies", sqlConnection);
+
+                                updateCopiesCmd.CommandType = CommandType.StoredProcedure;
+                                updateCopiesCmd.Parameters.AddWithValue("@OriginalBook", bookTitle);
+                                updateCopiesCmd.ExecuteNonQuery();
+
+                                MessageBox.Show("Record deleted successfully.");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Error: No record found for the specified ID.");
+                            }
+                            sqlConnection.Close();
+                        }
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("Error: No record found for the specified ID.");
-                }
-                sqlConnection.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            displayBorrow();
+            displayBookList();
+            display.DisplayBorrowRecords(records);
         }
-        //ON PROCESS
-        public void HandleReturn(DataGridView dataGridViewBorrow, DateTimePicker returnDatePicker, string bookTitle, Action refreshDashboard, Action refreshBookList)
+
+        public void HandleReturn(DataGridView dataGridViewBorrow, DateTimePicker returnDatePicker,
+            string bookTitle, Action refreshDashboard, Action refreshBookList)
         {
             try
             {
@@ -291,11 +304,22 @@ namespace InfoRegSystem.Classes
                 }
 
                 int recordId = Convert.ToInt32(dataGridViewBorrow.CurrentRow.Cells["Id"].Value);
+                string approvalStatus = dataGridViewBorrow.CurrentRow.Cells["Status"].Value.ToString();
+
+                // Restrict return if the admin hasn't approved or the status is "Rejected"
+                if (approvalStatus != "Approved")
+                {
+                    string message = approvalStatus == "Rejected"
+                        ? "The return cannot be processed because the request was rejected by the admin."
+                        : "The return cannot be processed because the request has not been approved by the admin.";
+                    MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 DateTime borrowedDate = Convert.ToDateTime(dataGridViewBorrow.CurrentRow.Cells["BorrowedDate"].Value);
 
                 // Check if the ExpectedReturnDate is DBNull before casting
-                DateTime expectedReturnDate = DateTime.MinValue; // Default value
-                if (dataGridViewBorrow.CurrentRow.Cells["ExpectedReturnDate"].Value != DBNull.Value)
+                DateTime expectedReturnDate = DateTime.MinValue; // Default value para dili mag error ug DBNull or walay minVal
+                if (dataGridViewBorrow.CurrentRow.Cells["ExpectedReturnDate"].Value != DBNull.Value)//check if ang value sa expectDate kay DBNull
                 {
                     expectedReturnDate = Convert.ToDateTime(dataGridViewBorrow.CurrentRow.Cells["ExpectedReturnDate"].Value);
                 }
@@ -303,13 +327,15 @@ namespace InfoRegSystem.Classes
                 DateTime returnDateValue = returnDatePicker.Checked ? returnDatePicker.Value : DateTime.Now;
 
                 decimal penaltyAmount = 0;
+                string paymentStatus = "Paid";
                 if (returnDateValue > expectedReturnDate) // If the return is late
                 {
                     TimeSpan lateDuration = returnDateValue - expectedReturnDate;
                     penaltyAmount = (decimal)(lateDuration.TotalHours * 10); // Assuming 10 pesos per hour as the penalty
+                    paymentStatus = "Unpaid";
                 }
 
-                using (SqlConnection sqlConnection = new SqlConnection("YourConnectionStringHere"))
+                using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
                 {
                     sqlConnection.Open();
 
@@ -320,13 +346,14 @@ namespace InfoRegSystem.Classes
                         cmd.Parameters.Add("@Id", SqlDbType.Int).Value = recordId;
                         cmd.Parameters.Add("@ReturnDate", SqlDbType.DateTime).Value = returnDateValue;
                         cmd.Parameters.Add("@Penalty", SqlDbType.Decimal).Value = penaltyAmount;
+                        cmd. Parameters.Add("@PaymentStatus", SqlDbType.VarChar).Value = paymentStatus;
 
                         int rowsAffected = cmd.ExecuteNonQuery();
 
                         if (rowsAffected > 0)
                         {
                             // Update book copies in the Books table (assuming decrementing for return)
-                            using (SqlCommand updateCopiesCmd = new SqlCommand("UpdateBookCopiesForBorrow", sqlConnection))
+                            using (SqlCommand updateCopiesCmd = new SqlCommand("IncrementBookCopies", sqlConnection))
                             {
                                 updateCopiesCmd.CommandType = CommandType.StoredProcedure;
                                 updateCopiesCmd.Parameters.AddWithValue("@OriginalBook", bookTitle); // Assuming decrementing copies for return
@@ -355,8 +382,8 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        public void SearchHandler(Guna2TextBox searchbox,DataGridView recordsgrid)
+      
+        public void SearchHandler(Guna2TextBox searchbox, DataGridView recordsgrid)
         {
             string searchInput = searchbox.Text;
 
@@ -396,32 +423,44 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show($"SQL Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public void ApproveRequest(int borrowId)
+        public void ApproveRequest(string Book,int borrowId,DataGridView recordsgrid)
         {
-            string query = "UPDATE borrowtable SET Status = 'Approved' WHERE Id = @BorrowId";
-
+            string book = Book;
             using (SqlConnection con = new SqlConnection(sqlconnection.Database))
-            using (SqlCommand cmd = new SqlCommand(query, con))
             {
-                cmd.Parameters.AddWithValue("@BorrowId", borrowId);
-
                 con.Open();
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Borrow request approved.");
+                using (SqlCommand cmd = new SqlCommand("ApproveRequest", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@BorrowId", borrowId);
+
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Borrow request approved.");
+                }
+                using (SqlCommand decrementCopiesCmd = new SqlCommand("DecrementBookCopies", con))
+                {
+                    decrementCopiesCmd.CommandType = CommandType.StoredProcedure;
+                    decrementCopiesCmd.Parameters.AddWithValue("@BorrowBook", book);
+
+                    decrementCopiesCmd.ExecuteNonQuery();
+                }
+                display.DisplayBorrowRecords(recordsgrid);
             }
         }
-        public void RejectRequest(int borrowId)
+        public void RejectRequest(int borrowId,string bookTitle,DataGridView recordsgrid)
         {
-            string query = "UPDATE borrowtable SET Status = 'Rejected' WHERE Id = @BorrowId";
-
             using (SqlConnection con = new SqlConnection(sqlconnection.Database))
-            using (SqlCommand cmd = new SqlCommand(query, con))
             {
-                cmd.Parameters.AddWithValue("@BorrowId", borrowId);
+                using (SqlCommand cmd = new SqlCommand("RejectRequest", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@BorrowId", borrowId);
+                    con.Open();
 
-                con.Open();
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Borrow request rejected.");
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Borrow request rejected.");
+                }
+                display.DisplayBorrowRecords(recordsgrid);
             }
         }
     }

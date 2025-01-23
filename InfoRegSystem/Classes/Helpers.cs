@@ -1,20 +1,12 @@
-﻿using InfoRegSystem.Forms;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace InfoRegSystem.Classes
 {
     public class Helpers
     {
-        private AdminMemdersInfo adminMemdersInfo;
-        private Helpers helper;
-
         public void HelperGender(ComboBox comboBox)
         {
             List<string> genders = new List<string> { "Male", "Female", "Other" };
@@ -70,11 +62,12 @@ namespace InfoRegSystem.Classes
         }
         public bool GmailHelper(TextBox email)
         {
-            return email.Text.EndsWith("@gmail.com") && email.Text.Contains("@"); 
+            MessageBox.Show("Invalid Gmail address.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return email.Text.EndsWith("@gmail.com") && email.Text.Contains("@");
         }
         public void DurationHelper(ComboBox durationBox)
         {
-            List<string> genres = new List<string> { "7", "14", "21", "30"};
+            List<string> genres = new List<string> { "7", "14", "21", "30" };
             durationBox.DataSource = genres;
             durationBox.SelectedIndex = -1;
         }
@@ -103,20 +96,17 @@ namespace InfoRegSystem.Classes
         {
             return Regex.IsMatch(username, @"^[a-zA-Z0-9]{5,15}$");
         }
-        //ON PROCESS
         public bool isValidPhoneNumber(TextBox countryCode, TextBox phoneNumber)
         {
             if (string.IsNullOrWhiteSpace(countryCode.Text) || string.IsNullOrWhiteSpace(phoneNumber.Text))
             {
-                return false; // One of the inputs is empty
+                return false;
             }
 
             string fullNumber = countryCode.Text + phoneNumber.Text;
 
-            // Ensure it starts with "+" followed by 1-3 digits (country code), and exactly 10 digits for the phone number
             return Regex.IsMatch(fullNumber, @"^\+\d{1,3}\d{10}$");
         }
-
 
         public bool isValidPassword(string password)
         {
@@ -130,7 +120,7 @@ namespace InfoRegSystem.Classes
                 e.Handled = true;
             }
         }
-        public void HidePassword(PictureBox show,PictureBox hide,TextBox password)
+        public void HidePassword(PictureBox show, PictureBox hide, TextBox password)
         {
             show.Show();
             hide.Hide();
@@ -144,7 +134,5 @@ namespace InfoRegSystem.Classes
 
             password.PasswordChar = '●';
         }
-
-
     }
 }

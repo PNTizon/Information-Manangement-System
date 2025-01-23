@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 using System.Windows.Forms;
-using System.Drawing.Text;
 
 namespace InfoRegSystem.Classes
 {
@@ -36,23 +31,25 @@ namespace InfoRegSystem.Classes
         {
             try
             {
-                SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database);
-
-                sqlConnection.Open();
-
-                SqlDataAdapter dataAdapter = new SqlDataAdapter("GetBorrowData", sqlConnection);
-
-                DataTable dataTable = new DataTable();
-                dataAdapter.Fill(dataTable);
-                borrowrecords.DataSource = dataTable;
-
-                // Hide the ID column if it exists
-                if (borrowrecords.Columns.Contains("Id"))
+                using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
                 {
-                    borrowrecords.Columns["Id"].Visible = false;
-                }
+                    sqlConnection.Open();
 
-                sqlConnection.Close();
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter("GetBorrowData", sqlConnection);
+
+                    DataTable dataTable = new DataTable();
+                    dataAdapter.Fill(dataTable);
+                    borrowrecords.DataSource = dataTable;
+
+                    borrowrecords.Columns["Penalty"].DefaultCellStyle.Format = "N2";
+
+                    if (borrowrecords.Columns.Contains("Id"))
+                    {
+                        borrowrecords.Columns["Id"].Visible = false;
+                    }
+
+                    sqlConnection.Close();
+                }
             }
             catch (SqlException ex)
             {
@@ -125,6 +122,8 @@ namespace InfoRegSystem.Classes
                             DataTable dataTable = new DataTable();
                             adapter.Fill(dataTable);
                             transactiongrid.DataSource = dataTable;
+
+                            transactiongrid.Columns["Penalty"].DefaultCellStyle.Format = "N2";
                         }
                     }
                     sqlConnection.Close();

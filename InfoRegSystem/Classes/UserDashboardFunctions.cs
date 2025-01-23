@@ -28,9 +28,9 @@ namespace InfoRegSystem.Classes
             formManager.openDashboard(bookInfo, pnlDash);
             bookInfo.Location = currentForm.Location;
         }
-        public void UserTransaction(Button transacbtn, Form currentForm, Panel pnlDash)
+        public void UserTransaction(Button transacbtn, Form currentForm, Panel pnlDash, UserMainForm Panel = null)
         {
-            UserTransaction transac = new UserTransaction();
+            UserTransaction transac = new UserTransaction(Panel);
             formManager.openDashboard(transac, pnlDash);
             transac.Location = currentForm.Location;
         }

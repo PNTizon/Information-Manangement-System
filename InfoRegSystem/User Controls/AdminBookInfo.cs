@@ -1,4 +1,5 @@
-﻿using InfoRegSystem.Classes;
+﻿using Guna.UI2.WinForms;
+using InfoRegSystem.Classes;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,6 +15,8 @@ namespace InfoRegSystem.Forms
         private AdminBookFunction bookFunction;
         private Display display;
         private DataGridSelection selection;
+        private ButtonShadow shadow;
+
         public AdminBookInfo(AdminDashboard dashboard)
         {
             InitializeComponent();
@@ -26,6 +29,7 @@ namespace InfoRegSystem.Forms
             bookFunction = new AdminBookFunction();
             display = new Display();
             selection = new DataGridSelection();
+            GunaButton();
         }
         private void LoadGenres()
         {
@@ -47,15 +51,19 @@ namespace InfoRegSystem.Forms
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
-            bookFunction.AddBook(txtTitle, txtAuthor, txtCopies, cmbGenres, bookgridView);
+            bookFunction.AddBook(txtTitle.Text, txtAuthor.Text, txtCopies.Text, cmbGenres.Text, bookgridView);
+            bookFunction.Cleaner(txtTitle, txtAuthor, txtCopies,cmbGenres);
         }
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-           bookFunction.UpdateBook(txtTitle,txtAuthor,txtCopies,cmbGenres, bookgridView);
+           bookFunction.UpdateBook(txtTitle.Text, txtAuthor.Text, txtCopies.Text,cmbGenres, bookgridView);
+            bookFunction.Cleaner(txtTitle, txtAuthor, txtCopies, cmbGenres);
+
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            bookFunction.DeleteBook(txtTitle, txtAuthor, txtCopies, bookgridView);
+            bookFunction.DeleteBook(txtTitle.Text, txtAuthor.Text, txtCopies.Text, bookgridView);
+            bookFunction.Cleaner(txtTitle, txtAuthor, txtCopies, cmbGenres);
         }
 
         private void txtCopies_KeyPress(object sender, KeyPressEventArgs e)
@@ -70,6 +78,18 @@ namespace InfoRegSystem.Forms
         private void btnViewAll_Click(object sender, EventArgs e)
         {
             display.DisplayBooks(bookgridView);
+        }
+        public void GunaButton()
+        {
+            List<Guna2Button> gunabtn = new List<Guna2Button>
+            {
+                btnAdd,
+                btnDetele,
+                btnEdit,
+                btnSearch
+            };
+            shadow = new ButtonShadow(gunabtn);
+            shadow.CustomizeGunaButtons();
         }
     }
 }

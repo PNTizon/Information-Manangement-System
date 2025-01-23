@@ -176,7 +176,8 @@
             // 
             // userDashboard1
             // 
-            this.userDashboard1.Location = new System.Drawing.Point(0, 0);
+            this.userDashboard1.BackColor = System.Drawing.Color.White;
+            this.userDashboard1.Location = new System.Drawing.Point(5, 35);
             this.userDashboard1.Name = "userDashboard1";
             this.userDashboard1.Size = new System.Drawing.Size(1157, 729);
             this.userDashboard1.TabIndex = 0;
@@ -189,6 +190,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.userpnlDash);
             this.Name = "UserMainForm";
+            this.Load += new System.EventHandler(this.UserMainForm_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.userpnlDash.ResumeLayout(false);

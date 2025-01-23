@@ -8,11 +8,6 @@ namespace InfoRegSystem.Classes
 {
     public class LoginButton
     {
-        private frmRegistration registration;
-        private MainForm mainform;
-        private FormManager formManager;
-       
-
         public void HandleLogin(TextBox usernameTextBox, TextBox passwordTextBox, TextBox errorLabel, Form currentForm)
         {
             const string adminUsername = "admin";
@@ -48,7 +43,7 @@ namespace InfoRegSystem.Classes
                             {
                                 if (reader.Read())
                                 {
-                                    GlobalUserInfo.UserId = reader.GetInt32(0);
+                                    GlobalUserInfo.UserId = reader.GetInt32(0); 
                                     GlobalUserInfo.Username = reader.GetString(1);
                                     GlobalUserInfo.FirstName = reader.GetString(2);
                                     GlobalUserInfo.Lastname = reader.GetString(3);
@@ -64,7 +59,6 @@ namespace InfoRegSystem.Classes
                                 }
                             }
                         }
-
                     }
                 }
             }

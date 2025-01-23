@@ -1,5 +1,7 @@
-﻿using InfoRegSystem.Classes;
+﻿using Guna.UI2.WinForms;
+using InfoRegSystem.Classes;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace InfoRegSystem.Forms
@@ -12,6 +14,7 @@ namespace InfoRegSystem.Forms
         private Display display;
         private Helpers helper;
         private DataGridSelection select;
+        private ButtonShadow shadow;
 
         public AdminBorrowRecords()
         {
@@ -21,6 +24,7 @@ namespace InfoRegSystem.Forms
             dashboard = new AdminDashboard();
             helper = new Helpers();
             select = new DataGridSelection();
+            GunaButton();
         }
 
         public AdminBorrowRecords(AdminDashboard dashboard)
@@ -35,14 +39,12 @@ namespace InfoRegSystem.Forms
         //ON PROCESS
         private void btnBorrow_Click(object sender, EventArgs e)
         {
-            borrowFunction.BorrowHandler(txtName, txtLastname, txtBook, cmbBorrowDuration, dashboard.displayBorrow, dashboard.loadbookslist, dataGridViewBorrow);
+            borrowFunction.BorrowHandler(txtName.Text, txtLastname.Text, txtBook.Text, cmbBorrowDuration, dashboard.displayBorrow, dashboard.loadbookslist, dataGridViewBorrow);
         }
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            DateTime borrowedDate = DateTime.Now;
-            borrowFunction.UpdateHandler(txtName, txtLastname, txtBook, borrowedDate, cmbBorrowDuration, dataGridViewBorrow, dashboard.displayBorrow, dashboard.loadbookslist);
+            borrowFunction.UpdateHandler(txtName, txtLastname, txtBook, cmbBorrowDuration,  dashboard.displayBorrow, dashboard.loadbookslist, dataGridViewBorrow);
         }
-        //ON PROCESS
         private void btnDelete_Click(object sender, EventArgs e)
         {
             borrowFunction.DeleteHandler(dataGridViewBorrow, dashboard.displayBorrow, dashboard.loadbookslist);
@@ -54,7 +56,6 @@ namespace InfoRegSystem.Forms
             dashboard?.displayBorrow();
             LoadData();
         }
-        //ON PROCESS
         private void UpdateReturnDate()
         {
             borrowFunction.HandleReturn(
@@ -73,7 +74,6 @@ namespace InfoRegSystem.Forms
         private void BorrowForm_Load(object sender, EventArgs e)
         {
             display.DisplayBorrowRecords(dataGridViewBorrow);
-            //borrowFunction.Status(cmbStatus);
             helper.DurationHelper(cmbBorrowDuration);
         }
         private void btnSearch_Click(object sender, EventArgs e)
@@ -89,7 +89,7 @@ namespace InfoRegSystem.Forms
                 int borrowId = Convert.ToInt32(dataGridViewBorrow.SelectedRows[0].Cells["Id"].Value);
 
                 // Call the ApproveRequest method
-                borrowFunction.ApproveRequest(borrowId);
+                borrowFunction.ApproveRequest(txtBook.Text,borrowId,dataGridViewBorrow);
             }
             else
             {
@@ -105,12 +105,27 @@ namespace InfoRegSystem.Forms
                 int borrowId = Convert.ToInt32(dataGridViewBorrow.SelectedRows[0].Cells["Id"].Value);
 
                 // Call the RejectRequest method
-                borrowFunction.RejectRequest(borrowId);
+                borrowFunction.RejectRequest(borrowId,txtBook.Text,dataGridViewBorrow);
             }
             else
             {
                 MessageBox.Show("Please select a request to reject.");
             }
+        }
+        private void GunaButton()
+        {
+            List<Guna2Button> gunabtn = new List<Guna2Button>
+            {
+                btnBorrow,
+                btnReturn,
+                btnDelete,
+                btnUpdate,
+                Approvedbtn,
+                Rejectbtn,
+                btnSearch
+            };
+            shadow = new ButtonShadow(gunabtn);
+            shadow.CustomizeGunaButtons();
         }
     }
 }

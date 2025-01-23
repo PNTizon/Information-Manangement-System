@@ -1,4 +1,5 @@
-﻿using InfoRegSystem.Classes;
+﻿using Guna.UI2.WinForms;
+using InfoRegSystem.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,7 @@ namespace InfoRegSystem.Forms
         private Helpers helper;
         private Display display;
         private UserBookFunction function;
+        private ButtonShadow shadow;
 
         public UserBook()
         {
@@ -24,6 +26,7 @@ namespace InfoRegSystem.Forms
             helper = new Helpers();
             display = new Display();
             function = new UserBookFunction();
+            GunaButton();
         }
 
         private void UserBookInfo_Load(object sender, EventArgs e)
@@ -43,6 +46,16 @@ namespace InfoRegSystem.Forms
         private void btnViewAll_Click(object sender, EventArgs e)
         {
             display.DisplayUserBooks(bookgridView);
+        }
+        public void GunaButton()
+        {
+            List<Guna2Button> gunabtn = new List<Guna2Button>
+            {
+                btnSearch,
+                btnViewAll
+            };
+            shadow = new ButtonShadow(gunabtn);
+            shadow.CustomizeGunaButtons();
         }
     }
 }

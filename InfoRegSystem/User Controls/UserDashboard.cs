@@ -1,22 +1,14 @@
 ﻿using InfoRegSystem.Classes;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace InfoRegSystem.Forms
 {
     public partial class UserDashboard : UserControl
     {
         private frmRegistration frmRegistration;
-        private UserMainForm frmMain;
-        private UserDashboardFunctions function;
 
         int userId = GlobalUserInfo.UserId;
         string username = GlobalUserInfo.Username;
@@ -25,16 +17,15 @@ namespace InfoRegSystem.Forms
         {
             InitializeComponent();
             DisplayBorrow();
-            function = new UserDashboardFunctions();
 
-            greetingslbl.Text = $"Welcome, {GlobalUserInfo.FirstName}!";
+            //greetingslbl.Text = $"Welcome, {GlobalUserInfo.FirstName}!";
         }
 
         public UserDashboard(frmRegistration frmRegistration) : this()
         {
             this.frmRegistration = frmRegistration;
         }
-             
+
         public void DisplayBorrow()
         {
             try
@@ -42,31 +33,10 @@ namespace InfoRegSystem.Forms
                 using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
                 {
                     sqlConnection.Open();
-                    //ON PROCESS
-                    string query = @"
-                            SELECT 
-                                (SELECT COUNT(b.Id) 
-                                 FROM borrowtable b 
-                                 INNER JOIN studentable s ON b.Id = s.Id 
-                                 WHERE b.BorrowedDate IS NOT NULL 
-                                   AND b.ReturnDate IS NULL 
-                                   AND s.Id = @UserId) AS BorrowedCount,
 
-                                (SELECT COUNT(b.Id) 
-                                 FROM borrowtable b 
-                                 INNER JOIN studentable s ON b.Id = s.Id 
-                                 WHERE b.ReturnDate IS NOT NULL 
-                                   AND s.Id = @UserId) AS ReturnedCount,
-
-                                (SELECT COUNT(b.Id) 
-                                 FROM borrowtable b 
-                                 INNER JOIN studentable s ON b.Id = s.Id 
-                                 WHERE b.ReturnDate IS NULL 
-                                   AND b.ExpectedReturnDate < GETDATE()
-                                   AND s.Id = @UserId) AS OverdueCount";
-
-                    using (SqlCommand cmd = new SqlCommand(query, sqlConnection))
+                    using (SqlCommand cmd = new SqlCommand("GetUserBorrowRecords", sqlConnection))
                     {
+                        cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@UserId", userId);
 
                         using (SqlDataReader reader = cmd.ExecuteReader())
@@ -81,7 +51,8 @@ namespace InfoRegSystem.Forms
                             }
                             else
                             {
-                                MessageBox.Show("No data found for the current user.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show("No data found for the current user.", "Information",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                         }
                     }
@@ -104,6 +75,11 @@ namespace InfoRegSystem.Forms
             lblreturned.Text = returnedCount.ToString();
 
             lbldueboo.Text = overdueCount.ToString();
+        }
+
+        private void greetingslbl_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -10,12 +10,10 @@ namespace InfoRegSystem.Classes
 {
     public class MembersFunctions
     {
-        private AdminMemdersInfo adminMemdersInfo;
-        private TextBox searchbox;
-
+        private Helpers helpers;
         public MembersFunctions()
         {
-
+            helpers = new Helpers();
         }
 
         public void SaveMemberInfo(string name, string lastname, int age, string gender, TextBox countryCode, string phonenumber,
@@ -23,12 +21,7 @@ namespace InfoRegSystem.Classes
         {
             try
             {
-                if (!IsValidGmailAddress(email))
-                {
-                    MessageBox.Show("Invalid Gmail address.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
+                helpers.isValidEmail(email);
                 using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
                 {
                     sqlConnection.Open();
@@ -53,20 +46,15 @@ namespace InfoRegSystem.Classes
                     MessageBox.Show("Data Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     displayMemMethod?.Invoke();
+                    displayMethod();
+                    clearMethod();
                 }
-                displayMethod();
-                clearMethod();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Save Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private bool IsValidGmailAddress(string email)
-        {
-            return email.EndsWith("@gmail.com", StringComparison.OrdinalIgnoreCase);
-        }
-
         public void DeleteMemberInfo(DataGridView membergrid, Action displayMethod, Action clearMethod, Action displayMemMethod = null)
         {
             try
@@ -83,27 +71,28 @@ namespace InfoRegSystem.Classes
 
                 if (result == DialogResult.Yes)
                 {
-
-                    SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database);
-                    sqlConnection.Open();
-
-                    using (SqlCommand cnn = new SqlCommand("DeleteMember", sqlConnection))
+                    using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
                     {
-                        cnn.CommandType = CommandType.StoredProcedure;
-                        cnn.Parameters.AddWithValue("@ID", selectedID);
+                        sqlConnection.Open();
 
-                        int rowsAffected = cnn.ExecuteNonQuery();
-                        if (rowsAffected > 0)
+                        using (SqlCommand cnn = new SqlCommand("DeleteMember", sqlConnection))
                         {
-                            MessageBox.Show("Record deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            displayMemMethod?.Invoke();
+                            cnn.CommandType = CommandType.StoredProcedure;
+                            cnn.Parameters.AddWithValue("@ID", selectedID);
+
+                            int rowsAffected = cnn.ExecuteNonQuery();
+                            if (rowsAffected > 0)
+                            {
+                                MessageBox.Show("Record deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                displayMemMethod?.Invoke();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Record not found.", "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
                         }
-                        else
-                        {
-                            MessageBox.Show("Record not found.", "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
+                        sqlConnection.Close();
                     }
-                    sqlConnection.Close();
                 }
             }
             catch (Exception ex)
@@ -113,7 +102,9 @@ namespace InfoRegSystem.Classes
             clearMethod();
             displayMethod();
         }
-        public void UpdateMemberInfo(string name, string lastname, string ageText, string gender, TextBox countryCode, string phoneNumber, string address, string email,DateTime dateTime, DataGridView membergrid, Action displayMethod, Action clearMethod, Action displayMemMethod = null)
+        public void UpdateMemberInfo(string name, string lastname, string ageText, string gender, TextBox countryCode, 
+            string phoneNumber,  string address, string email, DataGridView membergrid,
+            Action displayMethod, Action clearMethod, Action displayMemMethod = null)
         {
             try
             {
@@ -122,12 +113,7 @@ namespace InfoRegSystem.Classes
                     MessageBox.Show("Please ensure all fields are filled, including the gender.", "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-
-                if (!IsValidGmailAddress(email))
-                {
-                    MessageBox.Show("Invalid Gmail address.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                helpers.isValidEmail(email);
 
                 if (membergrid.CurrentRow == null)
                 {
@@ -143,8 +129,7 @@ namespace InfoRegSystem.Classes
 
                     using (SqlCommand cnn = new SqlCommand("UpdateMember", sqlConnection))
                     {
-
-                        if (!int.TryParse(ageText, out int parsedAge) || parsedAge < 10 || parsedAge > 60)
+                        if (!int.TryParse(ageText, out int parsedAge) || parsedAge < 13 || parsedAge > 60)
                         {
                             MessageBox.Show("Please enter a valid age.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
@@ -158,7 +143,6 @@ namespace InfoRegSystem.Classes
                         cnn.Parameters.AddWithValue("@PhoneNumber", phoneNumber.Trim());
                         cnn.Parameters.AddWithValue("@Address", address.Trim());
                         cnn.Parameters.AddWithValue("@Email", email.Trim());
-                        cnn.Parameters.AddWithValue("@DateRegister", dateTime);
                         cnn.Parameters.AddWithValue("@ID", selectedID);
 
                         int rowsAffected = cnn.ExecuteNonQuery();
@@ -221,7 +205,8 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show($"SQL Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public void Cleaner(TextBox name, TextBox lastname, TextBox age, TextBox email, TextBox address, TextBox phoneNum, TextBox countryTxt,ComboBox countrybox,ComboBox genderbox)
+        public void Cleaner(TextBox name, TextBox lastname, TextBox age, TextBox email, TextBox address, TextBox phoneNum, 
+            TextBox countryTxt,ComboBox countrybox,ComboBox genderbox)
         {
             name.Clear();
             lastname.Clear();

@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using InfoRegSystem.Forms;
+using System;
+using System.Windows.Forms;
 
 namespace InfoRegSystem.Classes
 {

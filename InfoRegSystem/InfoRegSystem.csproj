@@ -110,9 +110,9 @@
     <Compile Include="Classes\AdminBookFunction.cs" />
     <Compile Include="Classes\AdminBorrowFunctions.cs" />
     <Compile Include="Classes\AdminDashboardFunctions.cs" />
+    <Compile Include="Classes\ButtonShadow.cs" />
     <Compile Include="Classes\DataGridSelection.cs" />
     <Compile Include="Classes\Display.cs" />
-    <Compile Include="Classes\DurationDate.cs" />
     <Compile Include="Classes\ErrorMessages.cs" />
     <Compile Include="Classes\LoginButton.cs" />
     <Compile Include="Classes\CountryCode.cs" />
@@ -122,7 +122,9 @@
     <Compile Include="Classes\MainformFunctions.cs" />
     <Compile Include="Classes\MembersFunctions.cs" />
     <Compile Include="Classes\UserBookFunction.cs" />
+    <Compile Include="Classes\UserBorrowTransactionFunctions.cs" />
     <Compile Include="Classes\UserDashboardFunctions.cs" />
+    <Compile Include="Classes\UserFormManager.cs" />
     <Compile Include="Classes\UserTransactionFunction.cs" />
     <Compile Include="Forms\AccountCreation.cs">
       <SubType>Form</SubType>

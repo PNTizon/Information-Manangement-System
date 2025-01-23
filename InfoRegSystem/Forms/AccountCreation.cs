@@ -1,4 +1,5 @@
-﻿using InfoRegSystem.Classes;
+﻿using Guna.UI2.WinForms;
+using InfoRegSystem.Classes;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,12 +14,12 @@ namespace InfoRegSystem.Forms
     public partial class AccountCreation : Form
     {
         private Helpers helpers;
-
+        private ButtonShadow shadow;
         public AccountCreation()
         {
             InitializeComponent();
             helpers = new Helpers();
-
+            GunaButton();
         }
 
         private void AccCreation_Load(object sender, EventArgs e)
@@ -176,7 +177,6 @@ namespace InfoRegSystem.Forms
 
                 cnn.ExecuteNonQuery();
             }
-
             sqlConnection.Close();
 
             MessageBox.Show("Data Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -207,25 +207,23 @@ namespace InfoRegSystem.Forms
         {
             helpers.HelperAge(registration_ages);
         }
-
         private void registration_ages_KeyPress(object sender, KeyPressEventArgs e)
         {
             helpers.HelperKeypress(e);
         }
-
-        private void cmbGender_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void countryNumbers_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void registration_pass_TextChanged(object sender, EventArgs e)
         {
             helpers.PasswordHelper(registration_pass);
+        }
+        private void GunaButton()
+        {
+            List<Guna2Button> buttons = new List<Guna2Button>
+            {
+                loginbtn,
+                createbtn
+            };
+            shadow = new ButtonShadow(buttons);
+            shadow.CustomizeGunaButtons();
         }
     }
 }

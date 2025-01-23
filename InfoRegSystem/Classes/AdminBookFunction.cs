@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using Guna.UI2.WinForms;
-using System.Data.SqlClient;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Guna.UI2.WinForms;
 using InfoRegSystem.Forms;
+using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace InfoRegSystem.Classes
 {
-    public  class AdminBookFunction
+    public class AdminBookFunction
     {
         private Display display;
         private AdminDashboard _dashboard;
@@ -21,12 +17,11 @@ namespace InfoRegSystem.Classes
             _dashboard = new AdminDashboard();
         }
 
-        public void SearchBooks(Guna2TextBox searchbox,ComboBox genrebox,DataGridView bookgrid)
+        public void SearchBooks(Guna2TextBox searchbox, ComboBox genrebox, DataGridView bookgrid)
         {
             string searchInput = searchbox.Text.Trim();
             string selectedGenre = genrebox.SelectedItem?.ToString();
 
-            // Check if both fields are empty
             if (string.IsNullOrWhiteSpace(searchInput) && string.IsNullOrWhiteSpace(selectedGenre))
             {
                 MessageBox.Show("Please enter a search term or select a genre.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -42,10 +37,9 @@ namespace InfoRegSystem.Classes
                     using (SqlCommand cmd = new SqlCommand("SearchBooks", sqlConnection))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@SearchInput", searchInput?.Trim() ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@Genre", selectedGenre?.Trim() ?? (object)DBNull.Value);
 
-                        // Add parameters for the stored procedure
-                        cmd.Parameters.AddWithValue("@SearchInput", string.IsNullOrWhiteSpace(searchInput) ? (object)DBNull.Value : searchInput);
-                        cmd.Parameters.AddWithValue("@Genre", string.IsNullOrWhiteSpace(selectedGenre) ? (object)DBNull.Value : selectedGenre);
 
                         SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                         DataTable table = new DataTable();
@@ -67,26 +61,23 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show($"SQL Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public void Cleaner(TextBox title,TextBox author,TextBox copies)
+        public void Cleaner(TextBox title, TextBox author, TextBox copies,ComboBox genre)
         {
             title.Clear();
             author.Clear();
             copies.Clear();
+            genre.SelectedIndex = -1;
         }
-        public void AddBook(TextBox titles,TextBox authors,TextBox copy,ComboBox genrebox,DataGridView bookgrid)
+        public void AddBook(string title, string author, string copy, string genre, DataGridView bookgrid)
         {
-            string title = titles.Text.Trim();
-            string author = authors.Text.Trim();
-            string genre = genrebox.SelectedItem?.ToString();
             int copies;
-
             if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(author) || string.IsNullOrWhiteSpace(genre))
             {
                 MessageBox.Show("Please fill in all required fields.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (!int.TryParse(copy.Text.Trim(), out copies) || copies < 0)
+            if (!int.TryParse(copy.Trim(), out copies) || copies < 0)
             {
                 MessageBox.Show("Please enter a valid number of copies.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -101,8 +92,8 @@ namespace InfoRegSystem.Classes
                 using (SqlCommand cmd = new SqlCommand("AddBook", sqlConnection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Title", title);
-                    cmd.Parameters.AddWithValue("@Author", author);
+                    cmd.Parameters.AddWithValue("@Title", title.Trim());
+                    cmd.Parameters.AddWithValue("@Author", author.Trim());
                     cmd.Parameters.AddWithValue("@Genres", genre);
                     cmd.Parameters.AddWithValue("@Copies", copies);
 
@@ -125,13 +116,13 @@ namespace InfoRegSystem.Classes
             {
                 MessageBox.Show($"SQL Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            Cleaner(titles,authors,copy);
+            display.DisplayBooks(bookgrid);
         }
-        public void UpdateBook(TextBox titles, TextBox authors, TextBox copy,ComboBox genrebox,DataGridView bookgrid)
+        public void UpdateBook(string titles, string authors, string copy, ComboBox genrebox, DataGridView bookgrid)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(titles.Text) || genrebox.SelectedItem == null)
+                if (string.IsNullOrWhiteSpace(titles) || genrebox.SelectedItem == null)
                 {
                     MessageBox.Show("Please ensure all fields are filled, including the genre.", "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -151,9 +142,9 @@ namespace InfoRegSystem.Classes
 
                 SqlCommand cmd = new SqlCommand("UpdateBook", sqlConnection);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Title", titles.Text);
-                cmd.Parameters.AddWithValue("@Author", authors.Text);
-                cmd.Parameters.AddWithValue("@Copies", int.Parse(copy.Text));
+                cmd.Parameters.AddWithValue("@Title", titles.Trim());
+                cmd.Parameters.AddWithValue("@Author", authors.Trim());
+                cmd.Parameters.AddWithValue("@Copies", int.Parse(copy.Trim()));
                 cmd.Parameters.AddWithValue("@Genres", genrebox.SelectedItem.ToString());
                 cmd.Parameters.AddWithValue("@BookID", selectedID);
 
@@ -174,10 +165,9 @@ namespace InfoRegSystem.Classes
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            Cleaner(titles, authors, copy);
             _dashboard.loadbookslist();
         }
-        public void DeleteBook(TextBox title, TextBox author, TextBox copies,DataGridView bookgrid)
+        public void DeleteBook(string title, string author, string copies, DataGridView bookgrid)
         {
             try
             {
@@ -193,34 +183,34 @@ namespace InfoRegSystem.Classes
 
                 if (result == DialogResult.Yes)
                 {
-                    SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database);
-
-                    sqlConnection.Open();
-
-                    SqlCommand cmd = new SqlCommand("DeleteBook", sqlConnection);
-
-                    cmd.Parameters.AddWithValue("@BookID", selectedID);
-
-                    int rowsAffected = cmd.ExecuteNonQuery();
-                    if (rowsAffected > 0)
+                    using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
                     {
-                        MessageBox.Show("Record deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Record not found.", "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
+                        sqlConnection.Open();
 
-                    sqlConnection.Close();
+                        using (SqlCommand cmd = new SqlCommand("DeleteBook", sqlConnection))
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@BookID", selectedID);
 
-                    display.DisplayBooks(bookgrid);
+                            int rowsAffected = cmd.ExecuteNonQuery();
+                            if (rowsAffected > 0)
+                            {
+                                MessageBox.Show("Record deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Record not found.", "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                            sqlConnection.Close();
+                        }
+                    }
                 }
+                display.DisplayBooks(bookgrid);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            Cleaner(title, author, copies);
             _dashboard.loadbookslist();
         }
     }

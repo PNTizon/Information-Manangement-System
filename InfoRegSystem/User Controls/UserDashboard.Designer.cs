@@ -43,7 +43,6 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.lblDash = new System.Windows.Forms.Label();
-            this.greetingslbl = new System.Windows.Forms.Label();
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.panel3.SuspendLayout();
@@ -200,21 +199,11 @@
             this.lblDash.TabIndex = 40;
             this.lblDash.Text = "Dashboard";
             // 
-            // greetingslbl
-            // 
-            this.greetingslbl.AutoSize = true;
-            this.greetingslbl.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.greetingslbl.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.greetingslbl.Location = new System.Drawing.Point(472, 61);
-            this.greetingslbl.Name = "greetingslbl";
-            this.greetingslbl.Size = new System.Drawing.Size(2, 47);
-            this.greetingslbl.TabIndex = 42;
-            // 
             // UserDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.greetingslbl);
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
@@ -252,6 +241,5 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label lblDash;
-        private System.Windows.Forms.Label greetingslbl;
     }
 }
