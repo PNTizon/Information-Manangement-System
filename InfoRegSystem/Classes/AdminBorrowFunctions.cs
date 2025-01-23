@@ -353,7 +353,7 @@ namespace InfoRegSystem.Classes
                         if (rowsAffected > 0)
                         {
                             // Update book copies in the Books table (assuming decrementing for return)
-                            using (SqlCommand updateCopiesCmd = new SqlCommand("IncrementBookCopies", sqlConnection))
+                            using (SqlCommand updateCopiesCmd = new SqlCommand("DecrementBookCopies", sqlConnection))
                             {
                                 updateCopiesCmd.CommandType = CommandType.StoredProcedure;
                                 updateCopiesCmd.Parameters.AddWithValue("@OriginalBook", bookTitle); // Assuming decrementing copies for return
