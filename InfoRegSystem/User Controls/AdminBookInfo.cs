@@ -68,7 +68,7 @@ namespace InfoRegSystem.Forms
 
         private void txtCopies_KeyPress(object sender, KeyPressEventArgs e)
         {
-           helper.HelperKeypress(e);
+           //helper.HelperKeypress(e);
         }
 
         private void bookgridView_CellClick(object sender, DataGridViewCellEventArgs e)

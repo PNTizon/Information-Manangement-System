@@ -31,7 +31,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnSearch = new Guna.UI2.WinForms.Guna2Button();
             this.searchbox = new Guna.UI2.WinForms.Guna2TextBox();
             this.membergrid = new System.Windows.Forms.DataGridView();
@@ -55,20 +54,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.CountryCodecmb = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.membergrid)).BeginInit();
             this.SuspendLayout();
-            // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.Color.White;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(400, 1);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(379, 41);
-            this.textBox1.TabIndex = 4;
-            this.textBox1.Text = "Member\'s Information";
             // 
             // btnSearch
             // 
@@ -114,18 +102,18 @@
             this.membergrid.AllowUserToDeleteRows = false;
             this.membergrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.membergrid.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(245)))), ((int)(((byte)(153)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Info;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Desktop;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.membergrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.membergrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Info;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
@@ -133,7 +121,7 @@
             this.membergrid.DefaultCellStyle = dataGridViewCellStyle2;
             this.membergrid.EnableHeadersVisualStyles = false;
             this.membergrid.GridColor = System.Drawing.Color.Black;
-            this.membergrid.Location = new System.Drawing.Point(38, 310);
+            this.membergrid.Location = new System.Drawing.Point(38, 308);
             this.membergrid.Name = "membergrid";
             this.membergrid.ReadOnly = true;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
@@ -301,6 +289,8 @@
             this.txtNumber.Name = "txtNumber";
             this.txtNumber.Size = new System.Drawing.Size(120, 21);
             this.txtNumber.TabIndex = 54;
+            this.txtNumber.TextChanged += new System.EventHandler(this.txtNumber_TextChanged);
+            this.txtNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumber_KeyPress_1);
             // 
             // txtAge
             // 
@@ -309,6 +299,7 @@
             this.txtAge.Name = "txtAge";
             this.txtAge.Size = new System.Drawing.Size(201, 21);
             this.txtAge.TabIndex = 53;
+            this.txtAge.TextChanged += new System.EventHandler(this.txtAge_TextChanged);
             // 
             // txtName
             // 
@@ -360,11 +351,23 @@
             this.CountryCodecmb.Size = new System.Drawing.Size(119, 23);
             this.CountryCodecmb.TabIndex = 66;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Tahoma", 24.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label7.Location = new System.Drawing.Point(403, 1);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(388, 40);
+            this.label7.TabIndex = 74;
+            this.label7.Text = "Member\'s Information";
+            // 
             // AdminMemdersInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.genderbox);
             this.Controls.Add(this.countyCode);
             this.Controls.Add(this.Gender);
@@ -386,7 +389,6 @@
             this.Controls.Add(this.CountryCodecmb);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.membergrid);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.searchbox);
             this.Name = "AdminMemdersInfo";
@@ -399,7 +401,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button backbtn;
         private Guna.UI2.WinForms.Guna2Button btnSearch;
         private Guna.UI2.WinForms.Guna2TextBox searchbox;
@@ -424,5 +425,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox CountryCodecmb;
+        private System.Windows.Forms.Label label7;
     }
 }

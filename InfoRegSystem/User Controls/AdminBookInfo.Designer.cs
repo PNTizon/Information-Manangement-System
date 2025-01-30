@@ -37,7 +37,6 @@
             this.btnSearch = new Guna.UI2.WinForms.Guna2Button();
             this.searchbox = new Guna.UI2.WinForms.Guna2TextBox();
             this.bookgridView = new System.Windows.Forms.DataGridView();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnAdd = new Guna.UI2.WinForms.Guna2Button();
             this.btnEdit = new Guna.UI2.WinForms.Guna2Button();
@@ -49,6 +48,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbGenres = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bookgridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,9 +63,9 @@
             this.btnViewAll.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(153)))), ((int)(((byte)(78)))));
             this.btnViewAll.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnViewAll.ForeColor = System.Drawing.Color.White;
-            this.btnViewAll.Location = new System.Drawing.Point(1016, 68);
+            this.btnViewAll.Location = new System.Drawing.Point(1016, 66);
             this.btnViewAll.Name = "btnViewAll";
-            this.btnViewAll.Size = new System.Drawing.Size(115, 30);
+            this.btnViewAll.Size = new System.Drawing.Size(115, 33);
             this.btnViewAll.TabIndex = 58;
             this.btnViewAll.Text = "View All";
             this.btnViewAll.Click += new System.EventHandler(this.btnViewAll_Click);
@@ -106,9 +106,9 @@
             this.btnSearch.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(153)))), ((int)(((byte)(78)))));
             this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(895, 68);
+            this.btnSearch.Location = new System.Drawing.Point(895, 66);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(115, 30);
+            this.btnSearch.Size = new System.Drawing.Size(115, 33);
             this.btnSearch.TabIndex = 54;
             this.btnSearch.Text = "Search";
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
@@ -125,12 +125,12 @@
             this.searchbox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.searchbox.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.searchbox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.searchbox.Location = new System.Drawing.Point(271, 68);
+            this.searchbox.Location = new System.Drawing.Point(272, 65);
             this.searchbox.Name = "searchbox";
             this.searchbox.PasswordChar = '\0';
             this.searchbox.PlaceholderText = "";
             this.searchbox.SelectedText = "";
-            this.searchbox.Size = new System.Drawing.Size(618, 30);
+            this.searchbox.Size = new System.Drawing.Size(618, 36);
             this.searchbox.TabIndex = 52;
             // 
             // bookgridView
@@ -140,18 +140,18 @@
             this.bookgridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.bookgridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.bookgridView.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(245)))), ((int)(((byte)(153)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Info;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.bookgridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.bookgridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Info;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
@@ -170,18 +170,6 @@
             this.bookgridView.Size = new System.Drawing.Size(1086, 402);
             this.bookgridView.TabIndex = 53;
             this.bookgridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.bookgridView_CellClick);
-            // 
-            // textBox2
-            // 
-            this.textBox2.BackColor = System.Drawing.Color.White;
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(452, 1);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(289, 38);
-            this.textBox2.TabIndex = 59;
-            this.textBox2.Text = "Book\'s Information";
             // 
             // label1
             // 
@@ -313,11 +301,23 @@
             this.cmbGenres.Size = new System.Drawing.Size(228, 21);
             this.cmbGenres.TabIndex = 71;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Tahoma", 24.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label5.Location = new System.Drawing.Point(461, -2);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(336, 40);
+            this.label5.TabIndex = 72;
+            this.label5.Text = "Book\'s Information";
+            // 
             // AdminBookInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.cmbGenres);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnAdd);
@@ -329,7 +329,6 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.btnViewAll);
             this.Controls.Add(this.cmbGenre);
             this.Controls.Add(this.panel5);
@@ -353,7 +352,6 @@
         private Guna.UI2.WinForms.Guna2Button btnSearch;
         private Guna.UI2.WinForms.Guna2TextBox searchbox;
         private System.Windows.Forms.DataGridView bookgridView;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label1;
         private Guna.UI2.WinForms.Guna2Button btnAdd;
         private Guna.UI2.WinForms.Guna2Button btnEdit;
@@ -365,5 +363,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbGenres;
+        private System.Windows.Forms.Label label5;
     }
 }

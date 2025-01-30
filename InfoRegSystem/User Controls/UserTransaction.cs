@@ -21,7 +21,7 @@ namespace InfoRegSystem.Forms
         private Display display;
         private DataGridSelection selection;
         private UserBorrowTransactions transaction;
-        private UserFormManager formManager;
+        private FormManager formManager;
         private ButtonShadow shadow;
         private UserMainForm userMainForm;
 
@@ -34,7 +34,7 @@ namespace InfoRegSystem.Forms
             userMainForm = exisitngPanel;
             transaction = new UserBorrowTransactions();
             formdash =  new UserDashboard();
-            formManager = new UserFormManager();
+            formManager = new FormManager();
             GunaButton();
         }
         private void returnbtn_Click(object sender, EventArgs e)

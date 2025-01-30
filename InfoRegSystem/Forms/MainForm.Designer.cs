@@ -34,6 +34,7 @@
             this.btnRegister = new System.Windows.Forms.Button();
             this.btnReturnBook = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnTransactions = new System.Windows.Forms.Button();
             this.btnDashboard = new System.Windows.Forms.Button();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -127,6 +128,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(100)))), ((int)(((byte)(54)))));
+            this.panel1.Controls.Add(this.btnTransactions);
             this.panel1.Controls.Add(this.btnDashboard);
             this.panel1.Controls.Add(this.pictureBox4);
             this.panel1.Controls.Add(this.btnRegister);
@@ -138,6 +140,28 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(187, 729);
             this.panel1.TabIndex = 3;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // btnTransactions
+            // 
+            this.btnTransactions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(100)))), ((int)(((byte)(54)))));
+            this.btnTransactions.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTransactions.FlatAppearance.BorderSize = 0;
+            this.btnTransactions.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(173)))), ((int)(((byte)(104)))));
+            this.btnTransactions.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(173)))), ((int)(((byte)(104)))));
+            this.btnTransactions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(173)))), ((int)(((byte)(104)))));
+            this.btnTransactions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTransactions.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTransactions.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnTransactions.Location = new System.Drawing.Point(0, 305);
+            this.btnTransactions.Name = "btnTransactions";
+            this.btnTransactions.Padding = new System.Windows.Forms.Padding(35, 0, 35, 0);
+            this.btnTransactions.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.btnTransactions.Size = new System.Drawing.Size(187, 35);
+            this.btnTransactions.TabIndex = 10;
+            this.btnTransactions.Text = "Transactions";
+            this.btnTransactions.UseVisualStyleBackColor = false;
+            this.btnTransactions.Click += new System.EventHandler(this.btnTransactions_Click_1);
             // 
             // btnDashboard
             // 
@@ -216,5 +240,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnDashboard;
         private Forms.AdminDashboard adminDashboard1;
+        private System.Windows.Forms.Button btnTransactions;
     }
 }

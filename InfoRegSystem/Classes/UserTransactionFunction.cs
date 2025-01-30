@@ -46,11 +46,12 @@ namespace InfoRegSystem.Classes
                     MessageBox.Show("Book information is missing. Please select a valid record.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+
                 string approvalStatus = transactiongrid.CurrentRow.Cells["Status"].Value.ToString();
 
                 if (approvalStatus != "Approved")
                 {
-                    string message = approvalStatus == "Rejected"
+                    string message = approvalStatus == "Declined"
                         ? "The return cannot be processed because the request was rejected by the admin."
                         : "The return cannot be processed because the request has not been approved by the admin.";
                     MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -67,37 +68,56 @@ namespace InfoRegSystem.Classes
                     penaltyAmount = (decimal)(lateDuration.TotalHours * 10);
                     paymentStatus = "Unpaid";
                 }
+                var result = MessageBox.Show("Are you sure you want to return this record?", "Confirm Return", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-                using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                int recordId = Convert.ToInt32(transactiongrid.CurrentRow.Cells["Id"].Value);
+
+                if (result == DialogResult.Yes)
                 {
-                    sqlConnection.Open();
-
-                    // Update Borrow Record
-                    SqlCommand cmd = new SqlCommand("UpdateBorrowRecord", sqlConnection);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Name", GlobalUserInfo.FirstName);
-                    cmd.Parameters.AddWithValue("@Penalty", penaltyAmount);
-                    cmd.Parameters.AddWithValue("@Book", book);
-                    cmd.Parameters.AddWithValue("@ReturnDate", returnDateValue);
-                     cmd.Parameters.AddWithValue("@PaymentStatus", paymentStatus);
-                    int rowsAffected = cmd.ExecuteNonQuery();
-
-                    if (rowsAffected > 0)
+                    using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
                     {
-                        // Increment the book copies in the Books table
-                        SqlCommand updateCopiesCmd = new SqlCommand("IncrementBookCopies", sqlConnection);
-                        updateCopiesCmd.CommandType = CommandType.StoredProcedure;
-                        updateCopiesCmd.Parameters.AddWithValue("@OriginalBook", book); // Ensure @Book is passed correctly
-                        updateCopiesCmd.ExecuteNonQuery();
+                        sqlConnection.Open();
 
-                        // Refresh the user record display and dashboard
-                        displayBorrow();
-                        display.DisplayUserTransaction(transactiongrid);
+                        // Update Borrow Record
+                        using (SqlCommand cmd = new SqlCommand("UpdateBorrowRecord", sqlConnection))
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@Name", GlobalUserInfo.FirstName);
+                            cmd.Parameters.AddWithValue("@Penalty", penaltyAmount);
+                            cmd.Parameters.AddWithValue("@Book", book);
+                            cmd.Parameters.AddWithValue("@ReturnDate", returnDateValue);
+                            cmd.Parameters.AddWithValue("@PaymentStatus", paymentStatus);
+                            int rowsAffected = cmd.ExecuteNonQuery();
+
+
+                            if (rowsAffected > 0)
+                            {
+                                // Increment the book copies in the Books table
+                                using (SqlCommand updateCopiesCmd = new SqlCommand("IncrementBookCopies", sqlConnection))
+                                {
+                                    updateCopiesCmd.CommandType = CommandType.StoredProcedure;
+                                    updateCopiesCmd.Parameters.AddWithValue("@OriginalBook", book); // Ensure @Book is passed correctly
+                                    updateCopiesCmd.ExecuteNonQuery();
+                                }
+
+                                using (SqlCommand status = new SqlCommand("UpdateStatus", sqlConnection))
+                                {
+                                    status.CommandType = CommandType.StoredProcedure;
+                                    status.Parameters.AddWithValue("@BorrowId", recordId);
+
+                                    status.ExecuteNonQuery();
+                                }
+                            }
+                            // Refresh the user record display and dashboard
+                            displayBorrow();
+                            display.DisplayUserTransaction(transactiongrid);
+                        }
+                        MessageBox.Show("The admin is verifying the return of the book.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    else
-                    {
-                        MessageBox.Show("Error: No record found for the specified ID.");
-                    }
+                }
+                else
+                {
+                    MessageBox.Show("Error: No record found for the specified ID.");
                 }
             }
             catch (Exception ex)

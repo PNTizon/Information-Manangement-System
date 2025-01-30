@@ -56,7 +56,6 @@ namespace InfoRegSystem.Forms
                             }
                         }
                     }
-                    sqlConnection.Close();
                 }
             }
             catch (SqlException sqlEx)

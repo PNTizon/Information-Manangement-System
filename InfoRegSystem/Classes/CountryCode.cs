@@ -93,7 +93,6 @@ namespace InfoRegSystem.Classes
                 textBox.Text = string.Empty;
             }
         }
-
     }
 }
 

@@ -40,11 +40,5 @@ namespace InfoRegSystem.Classes
             formManager.openDashboard(userDashboard, pnlDash);
             userDashboard.Location = currentForm.Location;
         }
-
-
-
-
-
-
     }
 }

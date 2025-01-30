@@ -82,6 +82,7 @@
             this.login_password.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.login_password.Location = new System.Drawing.Point(126, 265);
             this.login_password.Name = "login_password";
+            this.login_password.PasswordChar = '●';
             this.login_password.Size = new System.Drawing.Size(170, 13);
             this.login_password.TabIndex = 29;
             // 
@@ -275,8 +276,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.picShow);
             this.Controls.Add(this.picPass);
+            this.Controls.Add(this.picShow);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

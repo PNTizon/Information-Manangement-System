@@ -85,32 +85,32 @@ namespace InfoRegSystem.Classes
 
             try
             {
-                SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database);
-
-                sqlConnection.Open();
-
-                using (SqlCommand cmd = new SqlCommand("AddBook", sqlConnection))
+                using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Title", title.Trim());
-                    cmd.Parameters.AddWithValue("@Author", author.Trim());
-                    cmd.Parameters.AddWithValue("@Genres", genre);
-                    cmd.Parameters.AddWithValue("@Copies", copies);
+                    sqlConnection.Open();
 
-                    int result = cmd.ExecuteNonQuery();
-
-                    if (result > 0)
+                    using (SqlCommand cmd = new SqlCommand("AddBook", sqlConnection))
                     {
-                        MessageBox.Show("Book record added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@Title", title.Trim());
+                        cmd.Parameters.AddWithValue("@Author", author.Trim());
+                        cmd.Parameters.AddWithValue("@Genres", genre);
+                        cmd.Parameters.AddWithValue("@Copies", copies);
 
-                        display.DisplayBooks(bookgrid);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Failed to add the book record.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        int result = cmd.ExecuteNonQuery();
+
+                        if (result > 0)
+                        {
+                            MessageBox.Show("Book record added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            display.DisplayBooks(bookgrid);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to add the book record.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
-                sqlConnection.Close();
             }
             catch (SqlException ex)
             {
@@ -136,29 +136,30 @@ namespace InfoRegSystem.Classes
 
                 int selectedID = Convert.ToInt32(bookgrid.CurrentRow.Cells["BookID"].Value);
 
-                SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database);
-
-                sqlConnection.Open();
-
-                SqlCommand cmd = new SqlCommand("UpdateBook", sqlConnection);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Title", titles.Trim());
-                cmd.Parameters.AddWithValue("@Author", authors.Trim());
-                cmd.Parameters.AddWithValue("@Copies", int.Parse(copy.Trim()));
-                cmd.Parameters.AddWithValue("@Genres", genrebox.SelectedItem.ToString());
-                cmd.Parameters.AddWithValue("@BookID", selectedID);
-
-                int rowsAffected = cmd.ExecuteNonQuery();
-                if (rowsAffected > 0)
+                using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
                 {
-                    MessageBox.Show("Data updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Record not found.", "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+                    sqlConnection.Open();
 
-                sqlConnection.Close();
+                    using (SqlCommand cmd = new SqlCommand("UpdateBook", sqlConnection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@Title", titles.Trim());
+                        cmd.Parameters.AddWithValue("@Author", authors.Trim());
+                        cmd.Parameters.AddWithValue("@Copies", int.Parse(copy.Trim()));
+                        cmd.Parameters.AddWithValue("@Genres", genrebox.SelectedItem.ToString());
+                        cmd.Parameters.AddWithValue("@BookID", selectedID);
+
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Data updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Record not found.", "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                }
                 display.DisplayBooks(bookgrid);
             }
             catch (Exception ex)

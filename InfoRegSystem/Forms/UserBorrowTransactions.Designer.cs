@@ -44,15 +44,18 @@
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label1.Location = new System.Drawing.Point(383, 347);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 16);
+            this.label1.Size = new System.Drawing.Size(102, 16);
             this.label1.TabIndex = 82;
-            this.label1.Text = "Duration";
+            this.label1.Text = "Borrow Duration";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // cmbDuration
             // 
+            this.cmbDuration.DropDownHeight = 90;
             this.cmbDuration.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbDuration.FormattingEnabled = true;
+            this.cmbDuration.IntegralHeight = false;
             this.cmbDuration.Location = new System.Drawing.Point(511, 347);
             this.cmbDuration.Name = "cmbDuration";
             this.cmbDuration.Size = new System.Drawing.Size(284, 24);

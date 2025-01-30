@@ -36,14 +36,15 @@ namespace InfoRegSystem.Forms
             display.DisplayBorrowRecords(dataGridViewBorrow);
             helper.DurationHelper(cmbBorrowDuration);
         }
-        //ON PROCESS
         private void btnBorrow_Click(object sender, EventArgs e)
         {
-            borrowFunction.BorrowHandler(txtName.Text, txtLastname.Text, txtBook.Text, cmbBorrowDuration, dashboard.displayBorrow, dashboard.loadbookslist, dataGridViewBorrow);
+            borrowFunction.BorrowHandler(txtName.Text, txtLastname.Text, txtBook.Text, cmbBorrowDuration,
+                dashboard.displayBorrow, dashboard.loadbookslist, dataGridViewBorrow);
         }
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            borrowFunction.UpdateHandler(txtName, txtLastname, txtBook, cmbBorrowDuration,  dashboard.displayBorrow, dashboard.loadbookslist, dataGridViewBorrow);
+            borrowFunction.UpdateHandler(txtName, txtLastname, txtBook, cmbBorrowDuration,
+                dashboard.displayBorrow, dashboard.loadbookslist, dataGridViewBorrow);
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -97,7 +98,7 @@ namespace InfoRegSystem.Forms
             }
         }
 
-        private void Rejectbtn_Click(object sender, EventArgs e)
+        private void Declinbtn_Click(object sender, EventArgs e)
         {
             if (dataGridViewBorrow.SelectedRows.Count > 0)
             {
@@ -121,7 +122,7 @@ namespace InfoRegSystem.Forms
                 btnDelete,
                 btnUpdate,
                 Approvedbtn,
-                Rejectbtn,
+                Declinebtn,
                 btnSearch
             };
             shadow = new ButtonShadow(gunabtn);

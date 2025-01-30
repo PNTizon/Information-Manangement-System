@@ -6,7 +6,10 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Web.UI.WebControls;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 
 namespace InfoRegSystem.Forms
@@ -15,6 +18,8 @@ namespace InfoRegSystem.Forms
     {
         private Helpers helpers;
         private ButtonShadow shadow;
+        private frmRegistration login;
+        
         public AccountCreation()
         {
             InitializeComponent();
@@ -24,7 +29,7 @@ namespace InfoRegSystem.Forms
 
         private void AccCreation_Load(object sender, EventArgs e)
         {
-            #region Error Box ReadOnly
+            #region ReadOnly
             errorbox1.ReadOnly = true;
             errorbox2.ReadOnly = true;
             errorbox3.ReadOnly = true;
@@ -34,6 +39,7 @@ namespace InfoRegSystem.Forms
             errorbox7.ReadOnly = true;
             errorbox8.ReadOnly = true;
             countryNumbers.ReadOnly = true;
+            //cmbGender.DropDownStyle = ComboBoxStyle.DropDownList;
             #endregion
             helpers.HelperGender(cmbGender);
 
@@ -54,7 +60,7 @@ namespace InfoRegSystem.Forms
       
         private void createbtn_Click(object sender, EventArgs e)
         {
-            bool hasErrors = false; 
+            bool hasErrors = false;
 
             #region ErrorMessages
             if (!helpers.isValidName(registration_firstname.Text) || !helpers.isValidName(registration_lastname.Text))
@@ -125,8 +131,7 @@ namespace InfoRegSystem.Forms
             {
                 errorbox8.Text = "";
             }
-            //ON PROCESS
-            if(!helpers.isValidPhoneNumber(countryNumbers,registration_number))
+            if (!helpers.isValidPhoneNumber(countryNumbers, registration_number))
             {
                 errorbox4.Text = "Enter a 10-digit phone number with a valid country code.";
                 hasErrors = true;
@@ -160,7 +165,7 @@ namespace InfoRegSystem.Forms
             }
             DateTime day = DateTime.Today;
 
-            using (SqlCommand cnn = new SqlCommand ( "InsertStudent",  sqlConnection))
+            using (SqlCommand cnn = new SqlCommand("InsertStudent", sqlConnection))
             {
                 cnn.CommandType = CommandType.StoredProcedure;
                 cnn.Parameters.AddWithValue("@name", registration_firstname.Text.Trim());
@@ -194,22 +199,22 @@ namespace InfoRegSystem.Forms
         {
             PhoneNumberList.comboBox_autoModifier(cmbCountryCode_SelectedIndexChanged, cmbCountryCode, countryNumbers);
         }
+        #region Events
         private void registration_number_TextChanged(object sender, EventArgs e)
         {
             helpers.HelperNumberRestriction(registration_number);
         }
         private void registration_number_KeyPress(object sender, KeyPressEventArgs e)
         {
-            helpers.HelperKeypress(e);
+            //helpers.HelperKeypress(e);
         }
-
         private void registration_ages_TextChanged(object sender, EventArgs e)
         {
             helpers.HelperAge(registration_ages);
         }
         private void registration_ages_KeyPress(object sender, KeyPressEventArgs e)
         {
-            helpers.HelperKeypress(e);
+            //helpers.HelperKeypress(e);
         }
         private void registration_pass_TextChanged(object sender, EventArgs e)
         {
@@ -225,5 +230,20 @@ namespace InfoRegSystem.Forms
             shadow = new ButtonShadow(buttons);
             shadow.CustomizeGunaButtons();
         }
+
+        private void registration_firstname_Leave(object sender, EventArgs e)
+        {
+            helpers.UpperCase(registration_firstname);
+        }
+        private void registration_lastname_Leave(object sender, EventArgs e)
+        {
+            helpers.UpperCase(registration_lastname);
+        }
+
+        private void registration_pass_Leave(object sender, EventArgs e)
+        {
+            helpers.UpperCase(registration_pass);
+        }
+#endregion
     }
 }

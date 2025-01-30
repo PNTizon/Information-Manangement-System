@@ -91,7 +91,6 @@ namespace InfoRegSystem.Classes
                                 MessageBox.Show("Record not found.", "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             }
                         }
-                        sqlConnection.Close();
                     }
                 }
             }
@@ -180,7 +179,6 @@ namespace InfoRegSystem.Classes
             {
                 using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
                 {
-                    sqlConnection.Open();
                     using (SqlDataAdapter adapter = new SqlDataAdapter("SearchMembers", sqlConnection))
                     {
                         adapter.SelectCommand.CommandType = CommandType.StoredProcedure;

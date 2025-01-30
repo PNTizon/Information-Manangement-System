@@ -106,7 +106,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\AccountRegistrationFunction.cs" />
+    <Compile Include="Classes\AccountRegistrationFunctions.cs" />
     <Compile Include="Classes\AdminBookFunction.cs" />
     <Compile Include="Classes\AdminBorrowFunctions.cs" />
     <Compile Include="Classes\AdminDashboardFunctions.cs" />
@@ -132,11 +132,23 @@
     <Compile Include="Forms\AccountCreation.Designer.cs">
       <DependentUpon>AccountCreation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AdminTransactions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminTransactions.Designer.cs">
+      <DependentUpon>AdminTransactions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\UserBorrowTransactions.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\UserBorrowTransactions.Designer.cs">
       <DependentUpon>UserBorrowTransactions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User Controls\AccountRegistration.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User Controls\AccountRegistration.Designer.cs">
+      <DependentUpon>AccountRegistration.cs</DependentUpon>
     </Compile>
     <Compile Include="User Controls\AdminBookInfo.cs">
       <SubType>UserControl</SubType>
@@ -204,8 +216,14 @@
     <EmbeddedResource Include="Forms\AccountCreation.resx">
       <DependentUpon>AccountCreation.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminTransactions.resx">
+      <DependentUpon>AdminTransactions.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserBorrowTransactions.resx">
       <DependentUpon>UserBorrowTransactions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User Controls\AccountRegistration.resx">
+      <DependentUpon>AccountRegistration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User Controls\AdminBookInfo.resx">
       <DependentUpon>AdminBookInfo.cs</DependentUpon>

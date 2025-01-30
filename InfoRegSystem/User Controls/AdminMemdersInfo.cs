@@ -78,15 +78,16 @@ namespace InfoRegSystem.Forms
         }
         public void txtAge_KeyPress(object sender, KeyPressEventArgs e)
         {
-            helpers.HelperKeypress(e);
+            //helpers.HelperKeypress(e);
         }
         private void txtNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
-            helpers.HelperKeypress(e);
+            //helpers.HelperKeypress(e);
         }
         private void txtNumber_TextChanged(object sender, EventArgs e)
         {
             helpers.HelperNumberRestriction(txtNumber);
+            helpers.isValidPhoneNumber(countyCode, txtNumber);
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -109,5 +110,10 @@ namespace InfoRegSystem.Forms
             shadow.CustomizeGunaButtons();
         }
         #endregion
+
+        private void txtNumber_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            //helpers.HelperKeypress(e);
+        }
     }
 }

@@ -7,11 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using InfoRegSystem.Forms;
 
 namespace InfoRegSystem.Classes
 {
     public class UserBookFunction
     {
+        private UserFormManager formMange;
+
+        public UserBookFunction()
+        {
+            formMange = new UserFormManager();
+        }
 
         public void UserBookSearch(Guna2TextBox searchbox,ComboBox genrebox,DataGridView bookgrid)
         {
@@ -57,6 +64,11 @@ namespace InfoRegSystem.Classes
             {
                 MessageBox.Show($"SQL Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        public void BorrowTransaction(Guna2Button transaction, Panel panel)
+        {
+            UserBorrowTransactions transactions = new UserBorrowTransactions();
+            formMange.openUserDashboard(transactions, panel);
         }
     }
 }

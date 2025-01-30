@@ -1,11 +1,7 @@
 ﻿using Guna.UI2.WinForms;
 using InfoRegSystem.Classes;
-using InfoRegSystem.Forms;
-using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Windows.Forms;
 
 
@@ -15,6 +11,7 @@ namespace InfoRegSystem
     {
         private LoginButton login;
         private ButtonShadow shadow;
+        private Helpers helpers = new Helpers();
 
         public frmRegistration()
         {
@@ -39,17 +36,11 @@ namespace InfoRegSystem
         }
         private void picShow_Click(object sender, EventArgs e)
         {
-            picShow.Hide();
-            picPass.Show();
-
-            login_password.PasswordChar = '●';
+            helpers.ShowPassord(picShow, picPass, login_password);
         }
         private void picPass_Click(object sender, EventArgs e)
         {
-            picPass.Hide();
-            picShow.Show();
-             
-            login_password.PasswordChar = '\0';
+            helpers.HidePassword(picShow, picPass, login_password);
         }
         private void GunaButton()
         {
@@ -66,13 +57,13 @@ namespace InfoRegSystem
             {
                 registerbtn
             };
-            shadow = new ButtonShadow(buttons); 
+            shadow = new ButtonShadow(buttons);
             shadow.NormalButton();
         }
 
         private void frmRegistration_Load(object sender, EventArgs e)
         {
-
+            txtError.ReadOnly = true;
         }
     }
 }

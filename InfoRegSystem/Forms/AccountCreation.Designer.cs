@@ -81,7 +81,7 @@
             this.label5.BackColor = System.Drawing.Color.White;
             this.label5.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(55, 31);
+            this.label5.Location = new System.Drawing.Point(431, 26);
             this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(191, 35);
@@ -91,7 +91,7 @@
             // showpass
             // 
             this.showpass.Image = ((System.Drawing.Image)(resources.GetObject("showpass.Image")));
-            this.showpass.Location = new System.Drawing.Point(947, 278);
+            this.showpass.Location = new System.Drawing.Point(947, 277);
             this.showpass.Name = "showpass";
             this.showpass.Size = new System.Drawing.Size(33, 22);
             this.showpass.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -102,7 +102,7 @@
             // hidepass
             // 
             this.hidepass.Image = ((System.Drawing.Image)(resources.GetObject("hidepass.Image")));
-            this.hidepass.Location = new System.Drawing.Point(947, 278);
+            this.hidepass.Location = new System.Drawing.Point(947, 280);
             this.hidepass.Name = "hidepass";
             this.hidepass.Size = new System.Drawing.Size(33, 22);
             this.hidepass.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -358,6 +358,7 @@
             this.registration_firstname.Name = "registration_firstname";
             this.registration_firstname.Size = new System.Drawing.Size(147, 15);
             this.registration_firstname.TabIndex = 112;
+            this.registration_firstname.Leave += new System.EventHandler(this.registration_firstname_Leave);
             // 
             // registration_lastname
             // 
@@ -367,6 +368,7 @@
             this.registration_lastname.Name = "registration_lastname";
             this.registration_lastname.Size = new System.Drawing.Size(147, 15);
             this.registration_lastname.TabIndex = 113;
+            this.registration_lastname.Leave += new System.EventHandler(this.registration_lastname_Leave);
             // 
             // registration_ages
             // 
@@ -381,6 +383,7 @@
             // 
             // cmbGender
             // 
+            this.cmbGender.BackColor = System.Drawing.Color.White;
             this.cmbGender.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGender.FormattingEnabled = true;
             this.cmbGender.Location = new System.Drawing.Point(333, 208);
@@ -442,11 +445,13 @@
             // 
             this.registration_pass.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.registration_pass.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.registration_pass.Location = new System.Drawing.Point(623, 279);
+            this.registration_pass.Location = new System.Drawing.Point(628, 279);
             this.registration_pass.Name = "registration_pass";
-            this.registration_pass.Size = new System.Drawing.Size(321, 15);
+            this.registration_pass.PasswordChar = '●';
+            this.registration_pass.Size = new System.Drawing.Size(279, 15);
             this.registration_pass.TabIndex = 121;
             this.registration_pass.TextChanged += new System.EventHandler(this.registration_pass_TextChanged);
+            this.registration_pass.Leave += new System.EventHandler(this.registration_pass_Leave);
             // 
             // countryNumbers
             // 
@@ -569,8 +574,8 @@
             this.Controls.Add(this.createbtn);
             this.Controls.Add(this.errorbox8);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.showpass);
             this.Controls.Add(this.hidepass);
+            this.Controls.Add(this.showpass);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "AccountCreation";

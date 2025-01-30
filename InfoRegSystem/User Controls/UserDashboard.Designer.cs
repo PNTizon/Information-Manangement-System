@@ -99,7 +99,7 @@
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(153)))), ((int)(((byte)(78)))));
             this.panel3.Controls.Add(this.lblreturned);
             this.panel3.Controls.Add(this.lblReturn);
-            this.panel3.Controls.Add(this.pictureBox3);
+            this.panel3.Controls.Add(this.pictureBox2);
             this.panel3.Location = new System.Drawing.Point(487, 143);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(201, 126);
@@ -130,7 +130,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(22, 25);
+            this.pictureBox3.Location = new System.Drawing.Point(17, 24);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(60, 60);
             this.pictureBox3.TabIndex = 2;
@@ -141,7 +141,7 @@
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(153)))), ((int)(((byte)(78)))));
             this.panel2.Controls.Add(this.lblborrowed);
             this.panel2.Controls.Add(this.lblBorrow);
-            this.panel2.Controls.Add(this.pictureBox2);
+            this.panel2.Controls.Add(this.pictureBox3);
             this.panel2.Location = new System.Drawing.Point(122, 143);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(201, 126);
@@ -172,7 +172,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(14, 25);
+            this.pictureBox2.Location = new System.Drawing.Point(19, 24);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(60, 60);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;

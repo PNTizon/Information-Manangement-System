@@ -20,12 +20,10 @@ namespace InfoRegSystem.Classes
             {
                 sqlConnection.Open();
 
-                string searchInput = searchbox.Text;
-
                 using (SqlDataAdapter adapter = new SqlDataAdapter("SearchBooks", sqlConnection))
                 {
                     adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-                    adapter.SelectCommand.Parameters.AddWithValue("@searchInput", $"%{searchInput}%");
+                    adapter.SelectCommand.Parameters.AddWithValue("@searchInput", $"%{searchbox}%");
                     DataTable table = new DataTable();
                     adapter.Fill(table);
 

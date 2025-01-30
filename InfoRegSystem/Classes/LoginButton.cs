@@ -31,13 +31,13 @@ namespace InfoRegSystem.Classes
                 {
                     using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
                     {
+                        sqlConnection.Open();
+
                         using (SqlCommand cmd = new SqlCommand("GetUserDetails", sqlConnection))
                         {
                             cmd.CommandType = CommandType.StoredProcedure;
                             cmd.Parameters.AddWithValue("@Username", usernameTextBox.Text.Trim());
                             cmd.Parameters.AddWithValue("@Password", passwordTextBox.Text.Trim());
-
-                            sqlConnection.Open();
 
                             using (SqlDataReader reader = cmd.ExecuteReader())
                             {

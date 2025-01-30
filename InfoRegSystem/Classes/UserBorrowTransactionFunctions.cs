@@ -21,37 +21,37 @@ namespace InfoRegSystem.Classes
             formManager = new FormManager();
         }
 
-        public void Borrowbtn(string Book,DateTime Borrowdate, string cmbduration)
+        public void Borrowbtn(string Book,DateTime Borrowdate, string durationcmb)
         {
-            string book = Book;
-            DateTime borrowedDate = Borrowdate;
-            string durationText = cmbduration;
+            //DateTime borrowedDate = Borrowdate;
+            //string durationText = durationcmb;
 
             try
             {
-                if (string.IsNullOrEmpty(book) || string.IsNullOrEmpty(durationText))
+                if (string.IsNullOrEmpty(Book) || string.IsNullOrEmpty(durationcmb))
                 {
                     MessageBox.Show("Please enter all required fields.");
                     return;
                 }
-                if (int.TryParse(durationText, out int duration))
+                if (int.TryParse(durationcmb, out int duration))
                 {
-                    DateTime expectedReturnDate = borrowedDate.AddDays(duration);
+                    DateTime expectedReturnDate = Borrowdate.AddDays(duration);
 
                     using (SqlConnection con = new SqlConnection(sqlconnection.Database))
                     {
+                        con.Open();
+
                         using (SqlCommand cmd = new SqlCommand("AddUserBorrowRecord", con))
                         {
                             cmd.CommandType = CommandType.StoredProcedure;
                             cmd.Parameters.AddWithValue("@StudentId", GlobalUserInfo.UserId);
                             cmd.Parameters.AddWithValue("@Name", GlobalUserInfo.FirstName);
                             cmd.Parameters.AddWithValue("@Lastname", GlobalUserInfo.Lastname);
-                            cmd.Parameters.AddWithValue("@Book", book);
-                            cmd.Parameters.AddWithValue("@BorrowedDate", borrowedDate);
+                            cmd.Parameters.AddWithValue("@Book", Book);
+                            cmd.Parameters.AddWithValue("@BorrowedDate", Borrowdate);
                             cmd.Parameters.AddWithValue("@ExpectedReturnDate", expectedReturnDate);
-                            cmd.Parameters.AddWithValue("@Duration", durationText);
+                            cmd.Parameters.AddWithValue("@Duration", durationcmb);
 
-                            con.Open();
                             cmd.ExecuteNonQuery();
                             MessageBox.Show("Borrow request submitted! Waiting for admin approval.");
                         }

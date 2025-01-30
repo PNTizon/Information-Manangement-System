@@ -37,5 +37,10 @@ namespace InfoRegSystem.Forms
             functions.Borrowbtn(txtBook.Text, borrowDate.Value, cmbDuration.Text);
             functions.Clear(txtBook,cmbDuration);
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

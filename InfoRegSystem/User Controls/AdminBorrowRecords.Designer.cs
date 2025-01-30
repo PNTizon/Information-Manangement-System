@@ -32,11 +32,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.searchbox = new Guna.UI2.WinForms.Guna2TextBox();
             this.btnSearch = new Guna.UI2.WinForms.Guna2Button();
             this.dataGridViewBorrow = new System.Windows.Forms.DataGridView();
-            this.Rejectbtn = new Guna.UI2.WinForms.Guna2Button();
+            this.Declinebtn = new Guna.UI2.WinForms.Guna2Button();
             this.Approvedbtn = new Guna.UI2.WinForms.Guna2Button();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbBorrowDuration = new System.Windows.Forms.ComboBox();
@@ -54,6 +53,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBorrow)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,18 +65,6 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(2000, 2);
             this.panel5.TabIndex = 42;
-            // 
-            // textBox2
-            // 
-            this.textBox2.BackColor = System.Drawing.Color.White;
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(390, 2);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(354, 37);
-            this.textBox2.TabIndex = 36;
-            this.textBox2.Text = "Borrower\'s Information";
             // 
             // searchbox
             // 
@@ -125,7 +113,7 @@
             this.dataGridViewBorrow.BackgroundColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(245)))), ((int)(((byte)(153)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Info;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
@@ -134,7 +122,7 @@
             this.dataGridViewBorrow.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Info;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
@@ -142,7 +130,7 @@
             this.dataGridViewBorrow.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewBorrow.EnableHeadersVisualStyles = false;
             this.dataGridViewBorrow.GridColor = System.Drawing.Color.Black;
-            this.dataGridViewBorrow.Location = new System.Drawing.Point(35, 307);
+            this.dataGridViewBorrow.Location = new System.Drawing.Point(36, 307);
             this.dataGridViewBorrow.Name = "dataGridViewBorrow";
             this.dataGridViewBorrow.ReadOnly = true;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
@@ -155,23 +143,23 @@
             this.dataGridViewBorrow.TabIndex = 38;
             this.dataGridViewBorrow.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
             // 
-            // Rejectbtn
+            // Declinebtn
             // 
-            this.Rejectbtn.BorderRadius = 10;
-            this.Rejectbtn.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            this.Rejectbtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.Rejectbtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.Rejectbtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.Rejectbtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.Rejectbtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(153)))), ((int)(((byte)(78)))));
-            this.Rejectbtn.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Rejectbtn.ForeColor = System.Drawing.Color.White;
-            this.Rejectbtn.Location = new System.Drawing.Point(878, 250);
-            this.Rejectbtn.Name = "Rejectbtn";
-            this.Rejectbtn.Size = new System.Drawing.Size(115, 30);
-            this.Rejectbtn.TabIndex = 64;
-            this.Rejectbtn.Text = "Reject";
-            this.Rejectbtn.Click += new System.EventHandler(this.Rejectbtn_Click);
+            this.Declinebtn.BorderRadius = 10;
+            this.Declinebtn.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            this.Declinebtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.Declinebtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.Declinebtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.Declinebtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.Declinebtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(153)))), ((int)(((byte)(78)))));
+            this.Declinebtn.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Declinebtn.ForeColor = System.Drawing.Color.White;
+            this.Declinebtn.Location = new System.Drawing.Point(878, 250);
+            this.Declinebtn.Name = "Declinebtn";
+            this.Declinebtn.Size = new System.Drawing.Size(115, 30);
+            this.Declinebtn.TabIndex = 64;
+            this.Declinebtn.Text = "Declined";
+            this.Declinebtn.Click += new System.EventHandler(this.Declinbtn_Click);
             // 
             // Approvedbtn
             // 
@@ -188,7 +176,7 @@
             this.Approvedbtn.Name = "Approvedbtn";
             this.Approvedbtn.Size = new System.Drawing.Size(115, 30);
             this.Approvedbtn.TabIndex = 63;
-            this.Approvedbtn.Text = "Approved";
+            this.Approvedbtn.Text = "Approve";
             this.Approvedbtn.Click += new System.EventHandler(this.Approvedbtn_Click);
             // 
             // label1
@@ -198,15 +186,17 @@
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label1.Location = new System.Drawing.Point(573, 156);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 16);
+            this.label1.Size = new System.Drawing.Size(102, 16);
             this.label1.TabIndex = 62;
-            this.label1.Text = "Duration";
+            this.label1.Text = "Borrow Duration";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cmbBorrowDuration
             // 
+            this.cmbBorrowDuration.DropDownHeight = 90;
             this.cmbBorrowDuration.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbBorrowDuration.FormattingEnabled = true;
+            this.cmbBorrowDuration.IntegralHeight = false;
             this.cmbBorrowDuration.Location = new System.Drawing.Point(701, 153);
             this.cmbBorrowDuration.Name = "cmbBorrowDuration";
             this.cmbBorrowDuration.Size = new System.Drawing.Size(274, 24);
@@ -243,7 +233,7 @@
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(115, 30);
             this.btnReturn.TabIndex = 58;
-            this.btnReturn.Text = "Returned";
+            this.btnReturn.Text = "Return";
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
             // btnBorrow
@@ -384,12 +374,24 @@
             this.label2.Text = "Name";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Tahoma", 24.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label6.Location = new System.Drawing.Point(376, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(407, 40);
+            this.label6.TabIndex = 73;
+            this.label6.Text = "Borrower\'s Information";
+            // 
             // AdminBorrowRecords
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.Rejectbtn);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.Declinebtn);
             this.Controls.Add(this.Approvedbtn);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbBorrowDuration);
@@ -408,7 +410,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel5);
-            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.searchbox);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.dataGridViewBorrow);
@@ -424,11 +425,10 @@
         #endregion
 
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.TextBox textBox2;
         private Guna.UI2.WinForms.Guna2TextBox searchbox;
         private Guna.UI2.WinForms.Guna2Button btnSearch;
         private System.Windows.Forms.DataGridView dataGridViewBorrow;
-        private Guna.UI2.WinForms.Guna2Button Rejectbtn;
+        private Guna.UI2.WinForms.Guna2Button Declinebtn;
         private Guna.UI2.WinForms.Guna2Button Approvedbtn;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbBorrowDuration;
@@ -446,5 +446,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label6;
     }
 }

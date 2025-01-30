@@ -106,5 +106,26 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show("Some error occurred: " + ex.Message + " - " + ex.Source);
             }
         }
+        public void BorrowbookSelection(DataGridView bookGrid,TextBox txtBook, int rowIndex)
+        {
+            try
+            {
+                if (rowIndex >= 0)
+                {
+                    DataGridViewRow row = bookGrid.Rows[rowIndex];
+                    string bookTitle = row.Cells["Title"].Value.ToString();
+
+                    // Set the book value
+                    book = bookTitle;
+
+                    // Update the book TextBox in the main form
+                    txtBook.Text = bookTitle;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

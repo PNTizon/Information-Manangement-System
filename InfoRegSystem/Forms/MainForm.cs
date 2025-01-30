@@ -1,8 +1,5 @@
 ﻿using InfoRegSystem.Classes;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace InfoRegSystem
@@ -17,9 +14,8 @@ namespace InfoRegSystem
         {
             InitializeComponent();
             mainfuntion = new MainformFunctions();
-            SystemButton();
         }
-        public MainForm(frmRegistration frmRegistration) : this() 
+        public MainForm(frmRegistration frmRegistration) : this()
         {
             this.frmRegistration = frmRegistration;
         }
@@ -37,28 +33,38 @@ namespace InfoRegSystem
         }
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            mainfuntion.HandleMembers(btnRegister,  panel2);
+            mainfuntion.HandleMembers(btnRegister, panel2);
         }
         private void btnDashboard_Click(object sender, EventArgs e)
         {
-            mainfuntion.HandleDashboard(btnDashboard,  panel2);
+            mainfuntion.HandleDashboard(btnDashboard, panel2);
         }
-        public void SystemButton()
-        {
-            List<Button> buttons = new List<Button>
-            {
-                btnBookInfo,
-                btnDashboard,
-                btnLogout,
-                btnRegister,
-                btnReturnBook
-            };
-            shadow = new ButtonShadow(buttons);
-            shadow.NormalButton();
-        }
+        //public void SystemButton()
+        //{
+        //    List<Button> buttons = new List<Button>
+        //    {
+        //        btnBookInfo,
+        //        btnDashboard,
+        //        btnLogout,
+        //        btnRegister,
+        //        btnReturnBook
+        //    };
+        //    shadow = new ButtonShadow(buttons);
+        //    shadow.NormalButton();
+        //}
         private void adminDashboard1_Load(object sender, EventArgs e)
         {
 
         }
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnTransactions_Click_1(object sender, EventArgs e)
+        {
+            mainfuntion.HandleTransactions(btnTransactions, panel2);
+        }
+
     }
 }

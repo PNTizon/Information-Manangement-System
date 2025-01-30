@@ -13,13 +13,13 @@ namespace InfoRegSystem.Classes
             comboBox.DataSource = genders;
             comboBox.SelectedIndex = -1;
         }
-        public void HelperKeypress(KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
+        //public void HelperKeypress(KeyPressEventArgs e)
+        //{
+        //    //if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+        //    //{
+        //    //    e.Handled = true;
+        //    //}
+        //}
         public void HelperNumberRestriction(TextBox phoneNum)
         {
             string currentText = phoneNum.Text;
@@ -60,14 +60,17 @@ namespace InfoRegSystem.Classes
             combo.DataSource = genres;
             combo.SelectedIndex = -1;
         }
-        public bool GmailHelper(TextBox email)
-        {
-            MessageBox.Show("Invalid Gmail address.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return email.Text.EndsWith("@gmail.com") && email.Text.Contains("@");
-        }
+        //public bool GmailHelper(TextBox email)
+        //{
+        //    MessageBox.Show("Invalid Gmail address.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    return email.Text.EndsWith("@gmail.com") && email.Text.Contains("@");
+        //}
         public void DurationHelper(ComboBox durationBox)
         {
-            List<string> genres = new List<string> { "7", "14", "21", "30" };
+            List<string> genres = new List<string>
+            { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+              "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
+              "21","22","23","24","25","26","27","28","29", "30" };
             durationBox.DataSource = genres;
             durationBox.SelectedIndex = -1;
         }
@@ -113,13 +116,6 @@ namespace InfoRegSystem.Classes
             return password.Length >= 8;
         }
 
-        public void registration_age_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
         public void HidePassword(PictureBox show, PictureBox hide, TextBox password)
         {
             show.Show();
@@ -133,6 +129,14 @@ namespace InfoRegSystem.Classes
             hide.Show();
 
             password.PasswordChar = '●';
+        }
+        public void UpperCase(TextBox textBox)
+        {
+            if (textBox.Text.Length > 0)
+            {
+                textBox.Text = char.ToUpper(textBox.Text[0]) + textBox.Text.Substring(1);
+                textBox.SelectionStart = textBox.Text.Length; // Keep cursor position
+            }
         }
     }
 }

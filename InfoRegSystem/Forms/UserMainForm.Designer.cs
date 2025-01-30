@@ -35,7 +35,6 @@
             this.logoutbtn = new System.Windows.Forms.Button();
             this.bookinfobtn = new System.Windows.Forms.Button();
             this.returnbtn = new System.Windows.Forms.Button();
-            this.guna2ContextMenuStrip1 = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
             this.userpnlDash = new System.Windows.Forms.Panel();
             this.userDashboard1 = new InfoRegSystem.Forms.UserDashboard();
             this.panel1.SuspendLayout();
@@ -150,20 +149,6 @@
             this.returnbtn.UseVisualStyleBackColor = false;
             this.returnbtn.Click += new System.EventHandler(this.returnbtn_Click);
             // 
-            // guna2ContextMenuStrip1
-            // 
-            this.guna2ContextMenuStrip1.Name = "guna2ContextMenuStrip1";
-            this.guna2ContextMenuStrip1.RenderStyle.ArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(143)))), ((int)(((byte)(255)))));
-            this.guna2ContextMenuStrip1.RenderStyle.BorderColor = System.Drawing.Color.Gainsboro;
-            this.guna2ContextMenuStrip1.RenderStyle.ColorTable = null;
-            this.guna2ContextMenuStrip1.RenderStyle.RoundedEdges = true;
-            this.guna2ContextMenuStrip1.RenderStyle.SelectionArrowColor = System.Drawing.Color.White;
-            this.guna2ContextMenuStrip1.RenderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            this.guna2ContextMenuStrip1.RenderStyle.SelectionForeColor = System.Drawing.Color.White;
-            this.guna2ContextMenuStrip1.RenderStyle.SeparatorColor = System.Drawing.Color.Gainsboro;
-            this.guna2ContextMenuStrip1.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            this.guna2ContextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
             // userpnlDash
             // 
             this.userpnlDash.BackColor = System.Drawing.Color.White;
@@ -177,7 +162,7 @@
             // userDashboard1
             // 
             this.userDashboard1.BackColor = System.Drawing.Color.White;
-            this.userDashboard1.Location = new System.Drawing.Point(5, 35);
+            this.userDashboard1.Location = new System.Drawing.Point(-3, -1);
             this.userDashboard1.Name = "userDashboard1";
             this.userDashboard1.Size = new System.Drawing.Size(1157, 729);
             this.userDashboard1.TabIndex = 0;
@@ -204,7 +189,6 @@
         private System.Windows.Forms.Button logoutbtn;
         private System.Windows.Forms.Button bookinfobtn;
         private System.Windows.Forms.Button returnbtn;
-        private Guna.UI2.WinForms.Guna2ContextMenuStrip guna2ContextMenuStrip1;
         private System.Windows.Forms.Panel userpnlDash;
         private System.Windows.Forms.Button btnDasboard;
         private UserDashboard userDashboard1;
