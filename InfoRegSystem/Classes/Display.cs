@@ -44,14 +44,14 @@ namespace InfoRegSystem.Classes
 
                     if (borrowrecords.Columns["Id"] != null)
                         borrowrecords.Columns["Id"].Visible = false;
+
                     if (borrowrecords.Columns["StudentId"] != null)
                         borrowrecords.Columns["StudentId"].Visible = false;
+
                     if (borrowrecords.Columns["PaymentStatus"] != null)
                         borrowrecords.Columns["PaymentStatus"].Visible = false;
 
                     borrowrecords.Columns["Penalty"].DefaultCellStyle.Format = "N2";
-
-                  
                 }
             }
             catch (SqlException ex)
@@ -178,6 +178,5 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
     }
 }

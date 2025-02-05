@@ -20,11 +20,7 @@ namespace InfoRegSystem.Forms
             InitializeComponent();
             formManager = new FormManager();
             functions = new UserDashboardFunctions();
-            NormalButton();
-        }
-        public UserMainForm(frmRegistration frmRegistration) : this()
-        {
-            this.frmRegistration = frmRegistration;
+            //NormalButton();
         }
         private void bookinfobtn_Click(object sender, EventArgs e)
         {
@@ -34,7 +30,6 @@ namespace InfoRegSystem.Forms
         {
             functions.UserTransaction(returnbtn, this, userpnlDash);
         }
-
         private void logoutbtn_Click(object sender, EventArgs e)
         {
             functions.UserLogout(logoutbtn, this);
@@ -44,18 +39,18 @@ namespace InfoRegSystem.Forms
         {
             functions.UserDashboard(btnDasboard, userpnlDash,this);
         }
-        private void NormalButton()
-        {
-            List<Button> buttons = new List<Button>
-            {
-                btnDasboard,
-                bookinfobtn,
-                returnbtn,
-                logoutbtn
-            };
-            shadow = new ButtonShadow(buttons);
-            shadow.NormalButton();
-        }
+        //private void NormalButton()
+        //{
+        //    List<Button> buttons = new List<Button>
+        //    {
+        //        btnDasboard,
+        //        bookinfobtn,
+        //        returnbtn,
+        //        logoutbtn
+        //    };
+        //    shadow = new ButtonShadow(buttons);
+        //    shadow.NormalButton();
+        //}
 
         private void UserMainForm_Load(object sender, EventArgs e)
         {

@@ -6,7 +6,6 @@ namespace InfoRegSystem
 {
     public partial class MainForm : Form
     {
-        private frmRegistration frmRegistration;
         private MainformFunctions mainfuntion;
         private ButtonShadow shadow;
 
@@ -14,10 +13,6 @@ namespace InfoRegSystem
         {
             InitializeComponent();
             mainfuntion = new MainformFunctions();
-        }
-        public MainForm(frmRegistration frmRegistration) : this()
-        {
-            this.frmRegistration = frmRegistration;
         }
         private void btnBookInfo_Click(object sender, EventArgs e)
         {

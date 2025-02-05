@@ -20,16 +20,10 @@ namespace InfoRegSystem.Classes
             formMange = new UserFormManager();
         }
 
-        public void UserBookSearch(Guna2TextBox searchbox,ComboBox genrebox,DataGridView bookgrid)
+        public void UserBookSearch(string searchbox,ComboBox genrebox,DataGridView bookgrid)
         {
-            string searchInput = searchbox.Text.Trim();
+            string searchInput = searchbox.Trim();
             string selectedGenre = genrebox.SelectedItem?.ToString();
-
-            if (string.IsNullOrWhiteSpace(searchInput) && string.IsNullOrWhiteSpace(selectedGenre))
-            {
-                MessageBox.Show("Please enter a search term or select a genre.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
 
             try
             {
@@ -42,8 +36,8 @@ namespace InfoRegSystem.Classes
                         cmd.CommandType = CommandType.StoredProcedure;
 
                         // Add parameters for the stored procedure
-                        cmd.Parameters.AddWithValue("@SearchInput", string.IsNullOrWhiteSpace(searchInput) ? (object)DBNull.Value : searchInput);
-                        cmd.Parameters.AddWithValue("@Genre", string.IsNullOrWhiteSpace(selectedGenre) ? (object)DBNull.Value : selectedGenre);
+                        cmd.Parameters.AddWithValue("@SearchInput", searchInput?.Trim() ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@Genre", (selectedGenre) ?? (object)DBNull.Value);
 
                         SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                         DataTable table = new DataTable();

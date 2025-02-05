@@ -40,22 +40,23 @@ namespace InfoRegSystem.Forms
         }
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            function.UserBookSearch(searchbox, cmbGenre, bookgridView);
-        }
-
-        private void btnViewAll_Click(object sender, EventArgs e)
-        {
-            display.DisplayUserBooks(bookgridView);
+            string search = searchbox.Text;
+            function.UserBookSearch(search, cmbGenre, bookgridView);
         }
         public void GunaButton()
         {
             List<Guna2Button> gunabtn = new List<Guna2Button>
             {
                 btnSearch,
-                btnViewAll
             };
             shadow = new ButtonShadow(gunabtn);
             shadow.CustomizeGunaButtons();
+        }
+
+        private void searchbox_TextChanged(object sender, EventArgs e)
+        {
+            string search = searchbox.Text;
+            function.UserBookSearch(search, cmbGenre, bookgridView);
         }
     }
 }

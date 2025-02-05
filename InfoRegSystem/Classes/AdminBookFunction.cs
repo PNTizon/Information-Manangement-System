@@ -17,16 +17,10 @@ namespace InfoRegSystem.Classes
             _dashboard = new AdminDashboard();
         }
 
-        public void SearchBooks(Guna2TextBox searchbox, ComboBox genrebox, DataGridView bookgrid)
+        public void SearchBooks(string searchbox, ComboBox genrebox, DataGridView bookgrid)
         {
-            string searchInput = searchbox.Text.Trim();
+            string searchInput = searchbox.Trim();
             string selectedGenre = genrebox.SelectedItem?.ToString();
-
-            if (string.IsNullOrWhiteSpace(searchInput) && string.IsNullOrWhiteSpace(selectedGenre))
-            {
-                MessageBox.Show("Please enter a search term or select a genre.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
 
             try
             {
@@ -38,7 +32,7 @@ namespace InfoRegSystem.Classes
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@SearchInput", searchInput?.Trim() ?? (object)DBNull.Value);
-                        cmd.Parameters.AddWithValue("@Genre", selectedGenre?.Trim() ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@Genre", (selectedGenre)?? (object)DBNull.Value);
 
 
                         SqlDataAdapter adapter = new SqlDataAdapter(cmd);

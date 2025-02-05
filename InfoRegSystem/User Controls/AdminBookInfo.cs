@@ -41,7 +41,9 @@ namespace InfoRegSystem.Forms
         }
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            bookFunction.SearchBooks(searchbox, cmbGenre, bookgridView);
+            string search = searchbox.Text;
+
+            bookFunction.SearchBooks(search, cmbGenre, bookgridView);
         }
         private void BookInfo_Load(object sender, EventArgs e)
         {
@@ -66,11 +68,6 @@ namespace InfoRegSystem.Forms
             bookFunction.Cleaner(txtTitle, txtAuthor, txtCopies, cmbGenres);
         }
 
-        private void txtCopies_KeyPress(object sender, KeyPressEventArgs e)
-        {
-           //helper.HelperKeypress(e);
-        }
-
         private void bookgridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             selection.BookSelection(e.RowIndex, txtTitle, txtAuthor, txtCopies, cmbGenres, bookgridView);
@@ -90,6 +87,13 @@ namespace InfoRegSystem.Forms
             };
             shadow = new ButtonShadow(gunabtn);
             shadow.CustomizeGunaButtons();
+        }
+
+        private void searchbox_TextChanged(object sender, EventArgs e)
+        {
+            string search = searchbox.Text;
+
+            bookFunction.SearchBooks(search, cmbGenre, bookgridView);
         }
     }
 }

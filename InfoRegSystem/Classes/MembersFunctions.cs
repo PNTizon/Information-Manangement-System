@@ -166,15 +166,9 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show($"An error occurred: {ex.Message}", "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public void MemberSearch(DataGridView membergrid, Guna2TextBox searchbox)
+        public void MemberSearch(DataGridView membergrid, string searchbox)
         {
-            string searchInput = searchbox.Text;
 
-            if (string.IsNullOrWhiteSpace(searchInput))
-            {
-                MessageBox.Show("Search input cannot be empty.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
             try
             {
                 using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
@@ -182,7 +176,7 @@ namespace InfoRegSystem.Classes
                     using (SqlDataAdapter adapter = new SqlDataAdapter("SearchMembers", sqlConnection))
                     {
                         adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-                        adapter.SelectCommand.Parameters.AddWithValue("@searchInput", $"%{searchInput}%");
+                        adapter.SelectCommand.Parameters.AddWithValue("@searchInput",searchbox);
 
                         DataTable table = new DataTable();
                         adapter.Fill(table);

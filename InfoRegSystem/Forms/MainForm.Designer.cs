@@ -220,6 +220,7 @@
             this.ClientSize = new System.Drawing.Size(1344, 729);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MaximizeBox = false;
             this.Name = "MainForm";

@@ -118,7 +118,8 @@ namespace InfoRegSystem.Forms
         }
         private void btnSearchStudent_Click(object sender, EventArgs e)
         {
-            function.HandleSearch(dataGridViewBookInfo, searchbox);
+            string search = searchbox.Text;
+            function.HandleSearch(dataGridViewBookInfo, search);
         }
         private void GunaButton()
         {
@@ -128,6 +129,12 @@ namespace InfoRegSystem.Forms
             };
             shadow = new ButtonShadow(gunabtn);
             shadow.CustomizeGunaButtons();
+        }
+
+        private void searchbox_TextChanged(object sender, EventArgs e)
+        {
+            string search = searchbox.Text;
+            function.HandleSearch(dataGridViewBookInfo, search);
         }
     }
 }

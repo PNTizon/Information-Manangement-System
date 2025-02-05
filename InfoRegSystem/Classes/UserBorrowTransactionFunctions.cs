@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
+using static Guna.UI2.Native.WinApi;
 
 namespace InfoRegSystem.Classes
 {
@@ -33,6 +35,7 @@ namespace InfoRegSystem.Classes
                     MessageBox.Show("Please enter all required fields.");
                     return;
                 }
+
                 if (int.TryParse(durationcmb, out int duration))
                 {
                     DateTime expectedReturnDate = Borrowdate.AddDays(duration);
@@ -40,7 +43,20 @@ namespace InfoRegSystem.Classes
                     using (SqlConnection con = new SqlConnection(sqlconnection.Database))
                     {
                         con.Open();
+                        using (SqlCommand checkDuplicateCmd = new SqlCommand("CheckDuplication", con))
+                        {
+                            checkDuplicateCmd.CommandType = CommandType.StoredProcedure;
+                            checkDuplicateCmd.Parameters.AddWithValue("@Id", GlobalUserInfo.UserId);
+                            checkDuplicateCmd.Parameters.AddWithValue("@Book", Book);
 
+                            int duplicateCount = (int)checkDuplicateCmd.ExecuteScalar();
+                            if (duplicateCount > 0)
+                            {
+                                MessageBox.Show("This book is already borrowed and not yet returned.", "Duplicate Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                        }
+                        MessageBox.Show($"StudentId: {GlobalUserInfo.UserId}", "Debug");
                         using (SqlCommand cmd = new SqlCommand("AddUserBorrowRecord", con))
                         {
                             cmd.CommandType = CommandType.StoredProcedure;

@@ -4,12 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Web.UI.WebControls;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 
 namespace InfoRegSystem.Forms
@@ -19,7 +14,7 @@ namespace InfoRegSystem.Forms
         private Helpers helpers;
         private ButtonShadow shadow;
         private frmRegistration login;
-        
+
         public AccountCreation()
         {
             InitializeComponent();
@@ -39,14 +34,13 @@ namespace InfoRegSystem.Forms
             errorbox7.ReadOnly = true;
             errorbox8.ReadOnly = true;
             countryNumbers.ReadOnly = true;
-            //cmbGender.DropDownStyle = ComboBoxStyle.DropDownList;
             #endregion
             helpers.HelperGender(cmbGender);
 
             PhoneNumberList.ListPhneNumber(cmbCountryCode_SelectedIndexChanged, cmbCountryCode);
         }
 
-      
+
         #region Helpers
         private void hidepass_Click(object sender, EventArgs e)
         {
@@ -57,7 +51,7 @@ namespace InfoRegSystem.Forms
             helpers.ShowPassord(showpass, hidepass, registration_pass);
         }
         #endregion
-      
+
         private void createbtn_Click(object sender, EventArgs e)
         {
             bool hasErrors = false;
@@ -115,7 +109,7 @@ namespace InfoRegSystem.Forms
             }
             if (!helpers.isValidUsername(registration_username.Text))
             {
-                errorbox7.Text = "Username must contain letters (a-z) and numbers.";
+                errorbox7.Text = "Username must contain one uppercase letter and numbers.";
                 hasErrors = true;
             }
             else
@@ -147,44 +141,49 @@ namespace InfoRegSystem.Forms
                 return;
             }
 
-            SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database);
-            sqlConnection.Open();
-
-            using (SqlCommand checkUsernameCmd = new SqlCommand("CheckUsernameExists", sqlConnection))
+            using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
             {
-                checkUsernameCmd.CommandType = CommandType.StoredProcedure;
-                checkUsernameCmd.Parameters.AddWithValue("@Username", registration_username.Text.Trim());
-                int userCount = (int)checkUsernameCmd.ExecuteScalar();
+                sqlConnection.Open();
 
-                if (userCount > 0)
+                using (SqlCommand checkUsernameCmd = new SqlCommand("CheckUsernameExists", sqlConnection))
                 {
-                    MessageBox.Show("Username already taken. Please choose a different username.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    sqlConnection.Close();
-                    return;
+                    checkUsernameCmd.CommandType = CommandType.StoredProcedure;
+                    checkUsernameCmd.Parameters.AddWithValue("@Username", registration_username.Text.Trim());
+                    int userCount = (int)checkUsernameCmd.ExecuteScalar();
+
+                    if (userCount > 0)
+                    {
+                        MessageBox.Show("Username already taken. Please choose a different username.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        sqlConnection.Close();
+                        return;
+                    }
                 }
+                DateTime day = DateTime.Today;
+
+                using (SqlCommand cnn = new SqlCommand("InsertStudent", sqlConnection))
+                {
+                    cnn.CommandType = CommandType.StoredProcedure;
+                    cnn.Parameters.AddWithValue("@name", registration_firstname.Text.Trim());
+                    cnn.Parameters.AddWithValue("@lastname", registration_lastname.Text.Trim());
+                    cnn.Parameters.AddWithValue("@age", age);
+                    cnn.Parameters.AddWithValue("@gender", cmbGender.Text.Trim());
+                    cnn.Parameters.AddWithValue("@countrycode", countryNumbers.Text.Trim());
+                    cnn.Parameters.AddWithValue("@phonenumber", registration_number.Text.Trim());
+                    cnn.Parameters.AddWithValue("@address", registration_house.Text.Trim());
+                    cnn.Parameters.AddWithValue("@email", registration_emails.Text.Trim());
+                    cnn.Parameters.AddWithValue("@username", registration_username.Text.Trim());
+                    cnn.Parameters.AddWithValue("@password", registration_pass.Text.Trim());
+                    cnn.Parameters.AddWithValue("@dateregister", day);
+
+                    cnn.ExecuteNonQuery();
+
+                    sqlConnection.Close();
+                }
+
+                MessageBox.Show("Data Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            DateTime day = DateTime.Today;
 
-            using (SqlCommand cnn = new SqlCommand("InsertStudent", sqlConnection))
-            {
-                cnn.CommandType = CommandType.StoredProcedure;
-                cnn.Parameters.AddWithValue("@name", registration_firstname.Text.Trim());
-                cnn.Parameters.AddWithValue("@lastname", registration_lastname.Text.Trim());
-                cnn.Parameters.AddWithValue("@age", age);
-                cnn.Parameters.AddWithValue("@gender", cmbGender.Text.Trim());
-                cnn.Parameters.AddWithValue("@countrycode", countryNumbers.Text.Trim());
-                cnn.Parameters.AddWithValue("@phonenumber", registration_number.Text.Trim());
-                cnn.Parameters.AddWithValue("@address", registration_house.Text.Trim());
-                cnn.Parameters.AddWithValue("@email", registration_emails.Text.Trim());
-                cnn.Parameters.AddWithValue("@username", registration_username.Text.Trim());
-                cnn.Parameters.AddWithValue("@password", registration_pass.Text.Trim());
-                cnn.Parameters.AddWithValue("@dateregister", day);
-
-                cnn.ExecuteNonQuery();
-            }
-            sqlConnection.Close();
-
-            MessageBox.Show("Data Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             frmRegistration reg = new frmRegistration();
             reg.Show();
             this.Hide();
@@ -222,15 +221,13 @@ namespace InfoRegSystem.Forms
         }
         private void GunaButton()
         {
-            List<Guna2Button> buttons = new List<Guna2Button>
+            List<Button> buttons = new List<Button>
             {
-                loginbtn,
-                createbtn
+               button1
             };
             shadow = new ButtonShadow(buttons);
-            shadow.CustomizeGunaButtons();
+            shadow.NormalButton();
         }
-
         private void registration_firstname_Leave(object sender, EventArgs e)
         {
             helpers.UpperCase(registration_firstname);
@@ -239,11 +236,26 @@ namespace InfoRegSystem.Forms
         {
             helpers.UpperCase(registration_lastname);
         }
-
         private void registration_pass_Leave(object sender, EventArgs e)
         {
             helpers.UpperCase(registration_pass);
         }
-#endregion
+        private void registration_username_TextChanged(object sender, EventArgs e)
+        {
+            helpers.UpperCase(registration_username);
+        }
+        #endregion
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            frmRegistration reg = new frmRegistration();
+            reg.Show();
+            this.Hide();
+        }
+
+        private void createbtn_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

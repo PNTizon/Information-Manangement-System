@@ -94,6 +94,7 @@
             this.login_username.Name = "login_username";
             this.login_username.Size = new System.Drawing.Size(170, 13);
             this.login_username.TabIndex = 28;
+            this.login_username.TextChanged += new System.EventHandler(this.login_username_TextChanged);
             // 
             // label3
             // 
@@ -210,7 +211,7 @@
             // picPass
             // 
             this.picPass.Image = ((System.Drawing.Image)(resources.GetObject("picPass.Image")));
-            this.picPass.Location = new System.Drawing.Point(302, 265);
+            this.picPass.Location = new System.Drawing.Point(302, 267);
             this.picPass.Name = "picPass";
             this.picPass.Size = new System.Drawing.Size(30, 22);
             this.picPass.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -221,7 +222,7 @@
             // picShow
             // 
             this.picShow.Image = ((System.Drawing.Image)(resources.GetObject("picShow.Image")));
-            this.picShow.Location = new System.Drawing.Point(302, 263);
+            this.picShow.Location = new System.Drawing.Point(302, 264);
             this.picShow.Name = "picShow";
             this.picShow.Size = new System.Drawing.Size(30, 22);
             this.picShow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;

@@ -42,8 +42,6 @@ namespace InfoRegSystem.Forms
         }
         private void btnUpdate(object sender, EventArgs e)
         {
-            //DateTime currentDate = DateTime.Now;
-            //currentDate
             functions.UpdateMemberInfo(txtName.Text, txtLastname.Text, txtAge.Text,
                 genderbox.Text, countyCode, txtNumber.Text, txtAddress.Text,
                 txtEmail.Text, membergrid, Display, Clear, dashboard.displayMem);
@@ -60,7 +58,8 @@ namespace InfoRegSystem.Forms
         }
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            functions.MemberSearch(membergrid, searchbox);
+            string search = searchbox.Text;
+            functions.MemberSearch(membergrid, search);
         }
         private void membergrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -75,14 +74,6 @@ namespace InfoRegSystem.Forms
         public void Clear()
         {
             functions.Cleaner(txtName, txtLastname, txtAge, txtEmail, txtAddress, txtNumber, countyCode, CountryCodecmb, genderbox);
-        }
-        public void txtAge_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //helpers.HelperKeypress(e);
-        }
-        private void txtNumber_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //helpers.HelperKeypress(e);
         }
         private void txtNumber_TextChanged(object sender, EventArgs e)
         {
@@ -110,10 +101,20 @@ namespace InfoRegSystem.Forms
             shadow.CustomizeGunaButtons();
         }
         #endregion
-
-        private void txtNumber_KeyPress_1(object sender, KeyPressEventArgs e)
+        private void searchbox_TextChanged(object sender, EventArgs e)
         {
-            //helpers.HelperKeypress(e);
+            string search = searchbox.Text;
+            functions.MemberSearch(membergrid, search);
+        }
+
+        private void txtName_TextChanged(object sender, EventArgs e)
+        {
+            helpers.UpperCase(txtName);
+        }
+
+        private void txtLastname_TextChanged(object sender, EventArgs e)
+        {
+            helpers.UpperCase(txtLastname);
         }
     }
 }

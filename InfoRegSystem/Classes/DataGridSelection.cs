@@ -92,40 +92,42 @@ namespace InfoRegSystem.Classes
         }
         public void TransactionSelection(DataGridView transacgrid, int rowIndex)
         {
-            try
-            {
-                if (rowIndex >= 0)
-                {
-                    DataGridViewRow row = transacgrid.Rows[rowIndex];
+            #region Old
+            //try
+            //{
+            //    if (rowIndex >= 0)
+            //    {
+            //        DataGridViewRow row = transacgrid.Rows[rowIndex];
 
-                    book = row.Cells["book"].Value.ToString();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Some error occurred: " + ex.Message + " - " + ex.Source);
-            }
+            //        book = row.Cells["book"].Value.ToString();
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Some error occurred: " + ex.Message + " - " + ex.Source);
+            //}
+            #endregion
+            if (rowIndex >= 0)
+                transacgrid.Rows[rowIndex].Cells["book"].Value.ToString();
+                
         }
-        public void BorrowbookSelection(DataGridView bookGrid,TextBox txtBook, int rowIndex)
+        public void BorrowbookSelection(DataGridView bookGrid, TextBox txtBook, int rowIndex)
         {
-            try
-            {
-                if (rowIndex >= 0)
-                {
-                    DataGridViewRow row = bookGrid.Rows[rowIndex];
-                    string bookTitle = row.Cells["Title"].Value.ToString();
+            #region Old
+            //if (rowIndex >= 0)
+            //{
+            //    DataGridViewRow row = bookGrid.Rows[rowIndex];
+            //    string bookTitle = row.Cells["Title"].Value.ToString();
 
-                    // Set the book value
-                    book = bookTitle;
+            //    // Set the book value
+            //    book = bookTitle;
 
-                    // Update the book TextBox in the main form
-                    txtBook.Text = bookTitle;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //    // Update the book TextBox in the main form
+            //    txtBook.Text = bookTitle;
+            //}
+            #endregion
+            if (rowIndex >= 0)
+                txtBook.Text = book = bookGrid.Rows[rowIndex].Cells["Title"].Value.ToString();
         }
     }
 }

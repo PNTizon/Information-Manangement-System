@@ -10,7 +10,7 @@ namespace InfoRegSystem.Classes
     {
         public void HandleLogin(TextBox usernameTextBox, TextBox passwordTextBox, TextBox errorLabel, Form currentForm)
         {
-            const string adminUsername = "admin";
+            const string adminUsername = "Admin";
             const string adminPassword = "admin123";
 
             if (string.IsNullOrWhiteSpace(usernameTextBox.Text) || string.IsNullOrWhiteSpace(passwordTextBox.Text))

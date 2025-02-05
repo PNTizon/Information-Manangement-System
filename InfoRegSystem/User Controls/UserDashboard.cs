@@ -10,7 +10,7 @@ namespace InfoRegSystem.Forms
     {
         private frmRegistration frmRegistration;
 
-        int userId = GlobalUserInfo.UserId;
+        //int userId = GlobalUserInfo.UserId;
         string username = GlobalUserInfo.Username;
 
         public UserDashboard()
@@ -21,10 +21,10 @@ namespace InfoRegSystem.Forms
             //greetingslbl.Text = $"Welcome, {GlobalUserInfo.FirstName}!";
         }
 
-        public UserDashboard(frmRegistration frmRegistration) : this()
-        {
-            this.frmRegistration = frmRegistration;
-        }
+        //public UserDashboard(frmRegistration frmRegistration) : this()
+        //{
+        //    this.frmRegistration = frmRegistration;
+        //}
 
         public void DisplayBorrow()
         {
@@ -37,7 +37,7 @@ namespace InfoRegSystem.Forms
                     using (SqlCommand cmd = new SqlCommand("GetUserBorrowRecords", sqlConnection))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@UserId", userId);
+                        cmd.Parameters.AddWithValue("@UserId", GlobalUserInfo.UserId);
 
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {

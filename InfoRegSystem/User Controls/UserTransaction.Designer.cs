@@ -76,7 +76,7 @@
             this.borrowedbtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(153)))), ((int)(((byte)(78)))));
             this.borrowedbtn.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.borrowedbtn.ForeColor = System.Drawing.Color.White;
-            this.borrowedbtn.Location = new System.Drawing.Point(830, 658);
+            this.borrowedbtn.Location = new System.Drawing.Point(830, 672);
             this.borrowedbtn.Name = "borrowedbtn";
             this.borrowedbtn.Size = new System.Drawing.Size(115, 30);
             this.borrowedbtn.TabIndex = 77;
@@ -94,7 +94,7 @@
             this.returnbtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(153)))), ((int)(((byte)(78)))));
             this.returnbtn.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.returnbtn.ForeColor = System.Drawing.Color.White;
-            this.returnbtn.Location = new System.Drawing.Point(985, 658);
+            this.returnbtn.Location = new System.Drawing.Point(985, 672);
             this.returnbtn.Name = "returnbtn";
             this.returnbtn.Size = new System.Drawing.Size(115, 30);
             this.returnbtn.TabIndex = 76;
@@ -144,7 +144,7 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Info;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
             this.transactiongrid.RowsDefaultCellStyle = dataGridViewCellStyle3;
-            this.transactiongrid.Size = new System.Drawing.Size(1086, 538);
+            this.transactiongrid.Size = new System.Drawing.Size(1086, 571);
             this.transactiongrid.TabIndex = 74;
             this.transactiongrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.transactiongrid_CellClick);
             // 

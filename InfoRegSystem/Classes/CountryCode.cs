@@ -11,7 +11,6 @@ namespace InfoRegSystem.Classes
     }
     public class PhoneNumberList
     {
-        string cmBox;
         public static void ListPhneNumber(EventHandler eventHandler, ComboBox comboBox)
         {
             var countryCodes = new List<CountryCode>
@@ -61,7 +60,7 @@ namespace InfoRegSystem.Classes
             new CountryCode { Country = "UZB", Code = "+998" },
             new CountryCode { Country = "VNM", Code = "+84" },
             new CountryCode { Country = "YEM", Code = "+967" }
-        };
+         };
 
             comboBox.DataSource = null;
 
@@ -69,8 +68,7 @@ namespace InfoRegSystem.Classes
             {
                 comboBox.Items.Add($"{countryCode.Country} | {countryCode.Code}");
             }
-
-            comboBox.SelectedIndexChanged += eventHandler;
+            comboBox.SelectedIndexChanged += eventHandler; 
         }
 
         public static void comboBox_autoModifier(EventHandler eventHandler, ComboBox comboBox, TextBox textBox)

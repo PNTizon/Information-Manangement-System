@@ -17,7 +17,6 @@ namespace InfoRegSystem
         {
             InitializeComponent();
             login = new LoginButton();
-            GunaButton();
             SystemButton();
         }
         private void btnLogin_Click(object sender, EventArgs e)
@@ -28,12 +27,6 @@ namespace InfoRegSystem
         {
             login.HandleRegister(registerbtn, this);
         }
-
-        private void Clear()
-        {
-            login_username.Clear();
-            login_password.Clear();
-        }
         private void picShow_Click(object sender, EventArgs e)
         {
             helpers.ShowPassord(picShow, picPass, login_password);
@@ -41,15 +34,6 @@ namespace InfoRegSystem
         private void picPass_Click(object sender, EventArgs e)
         {
             helpers.HidePassword(picShow, picPass, login_password);
-        }
-        private void GunaButton()
-        {
-            List<Guna2Button> gunaButtons = new List<Guna2Button>
-            {
-                btnLogin
-            };
-            shadow = new ButtonShadow(gunaButtons);
-            shadow.CustomizeGunaButtons();
         }
         private void SystemButton()
         {
@@ -64,6 +48,10 @@ namespace InfoRegSystem
         private void frmRegistration_Load(object sender, EventArgs e)
         {
             txtError.ReadOnly = true;
+        }
+        private void login_username_TextChanged(object sender, EventArgs e)
+        {
+            helpers.UpperCase(login_username);
         }
     }
 }

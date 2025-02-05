@@ -14,7 +14,7 @@ namespace InfoRegSystem.Classes
     {
         private AdminDashboard dashboard;
 
-        public void HandleSearch(DataGridView dataGridViewBookInfo, Guna.UI2.WinForms.Guna2TextBox searchbox)
+        public void HandleSearch(DataGridView dataGridViewBookInfo, string searchbox)
         {
             using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
             {
@@ -23,7 +23,7 @@ namespace InfoRegSystem.Classes
                 using (SqlDataAdapter adapter = new SqlDataAdapter("SearchBooks", sqlConnection))
                 {
                     adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-                    adapter.SelectCommand.Parameters.AddWithValue("@searchInput", $"%{searchbox}%");
+                    adapter.SelectCommand.Parameters.AddWithValue("@searchInput", searchbox);
                     DataTable table = new DataTable();
                     adapter.Fill(table);
 
