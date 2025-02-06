@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Guna.UI2.WinForms;
+using System;
 using System.Windows.Forms;
 
 namespace InfoRegSystem.Classes
@@ -8,8 +9,8 @@ namespace InfoRegSystem.Classes
         private string book { get; set; }
 
 
-        public void MembersSelection(int rowIndex, TextBox name, TextBox lastname, TextBox age, TextBox countrybox,
-            TextBox phone, TextBox address, TextBox email, ComboBox genderbox, DataGridView membergrid)
+        public void MembersSelection(int rowIndex, Guna2TextBox name, Guna2TextBox lastname, TextBox countrybox,
+            Guna2TextBox phone, Guna2TextBox address, Guna2TextBox email, ComboBox genderbox, DataGridView membergrid)
         {
             try
             {
@@ -21,7 +22,6 @@ namespace InfoRegSystem.Classes
 
                     name.Text = GetValue("Name");
                     lastname.Text = GetValue("LastName");
-                    age.Text = GetValue("Age");
                     countrybox.Text = GetValue("CountryCode");
                     phone.Text = GetValue("PhoneNumber");
                     address.Text = GetValue("Address");

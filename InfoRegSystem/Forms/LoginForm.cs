@@ -49,7 +49,7 @@ namespace InfoRegSystem
         {
             txtError.ReadOnly = true;
         }
-        private void login_username_TextChanged(object sender, EventArgs e)
+        private void login_username_Leave_1(object sender, EventArgs e)
         {
             helpers.UpperCase(login_username);
         }

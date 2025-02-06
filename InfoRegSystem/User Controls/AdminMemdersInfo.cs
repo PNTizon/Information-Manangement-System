@@ -31,7 +31,7 @@ namespace InfoRegSystem.Forms
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
-            functions.SaveMemberInfo(txtName.Text, txtLastname.Text, int.Parse(txtAge.Text),
+            functions.SaveMemberInfo(txtName.Text, txtLastname.Text,
                 genderbox.Text,
                 countyCode,
                 txtNumber.Text,
@@ -42,7 +42,7 @@ namespace InfoRegSystem.Forms
         }
         private void btnUpdate(object sender, EventArgs e)
         {
-            functions.UpdateMemberInfo(txtName.Text, txtLastname.Text, txtAge.Text,
+            functions.UpdateMemberInfo(txtName.Text, txtLastname.Text,
                 genderbox.Text, countyCode, txtNumber.Text, txtAddress.Text,
                 txtEmail.Text, membergrid, Display, Clear, dashboard.displayMem);
         }
@@ -63,7 +63,7 @@ namespace InfoRegSystem.Forms
         }
         private void membergrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            selection.MembersSelection(e.RowIndex, txtName, txtLastname, txtAge, countyCode, txtNumber, 
+            selection.MembersSelection(e.RowIndex, txtName, txtLastname, countyCode, txtNumber, 
                 txtAddress, txtEmail, genderbox, membergrid);
         }
         private void LoadGenders()
@@ -73,7 +73,7 @@ namespace InfoRegSystem.Forms
         #region Helpers
         public void Clear()
         {
-            functions.Cleaner(txtName, txtLastname, txtAge, txtEmail, txtAddress, txtNumber, countyCode, CountryCodecmb, genderbox);
+            functions.Cleaner(txtName, txtLastname, txtEmail, txtAddress, txtNumber, countyCode, CountryCodecmb, genderbox);
         }
         private void txtNumber_TextChanged(object sender, EventArgs e)
         {
@@ -84,10 +84,22 @@ namespace InfoRegSystem.Forms
         {
             PhoneNumberList.comboBox_autoModifier(comboBox1_SelectedIndexChanged, CountryCodecmb, countyCode);
         }
-        private void txtAge_TextChanged(object sender, EventArgs e)
+        private void searchbox_TextChanged(object sender, EventArgs e)
         {
-            helpers.HelperAge(txtAge);
+            string search = searchbox.Text;
+            functions.MemberSearch(membergrid, search);
         }
+
+        private void txtName_Leave(object sender, EventArgs e)
+        {
+            helpers.UpperCase(txtName);
+        }
+
+        private void txtLastname_Leave(object sender, EventArgs e)
+        {
+            helpers.UpperCase(txtLastname);
+        }
+
         private void GunaButton()
         {
             List<Guna2Button> gunabtn = new List<Guna2Button>
@@ -101,20 +113,5 @@ namespace InfoRegSystem.Forms
             shadow.CustomizeGunaButtons();
         }
         #endregion
-        private void searchbox_TextChanged(object sender, EventArgs e)
-        {
-            string search = searchbox.Text;
-            functions.MemberSearch(membergrid, search);
-        }
-
-        private void txtName_TextChanged(object sender, EventArgs e)
-        {
-            helpers.UpperCase(txtName);
-        }
-
-        private void txtLastname_TextChanged(object sender, EventArgs e)
-        {
-            helpers.UpperCase(txtLastname);
-        }
     }
 }

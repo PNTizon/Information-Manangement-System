@@ -1,4 +1,5 @@
-﻿using InfoRegSystem.Forms;
+﻿using Guna.UI2.WinForms;
+using InfoRegSystem.Forms;
 using System;
 using System.Data;
 using System.Data.SqlClient;
@@ -8,14 +9,15 @@ namespace InfoRegSystem.Classes
 {
     public class LoginButton
     {
-        public void HandleLogin(TextBox usernameTextBox, TextBox passwordTextBox, TextBox errorLabel, Form currentForm)
+        public void HandleLogin(Guna2TextBox usernameTextBox, Guna2TextBox passwordTextBox, TextBox errorLabel, Form currentForm)
         {
             const string adminUsername = "Admin";
             const string adminPassword = "admin123";
 
             if (string.IsNullOrWhiteSpace(usernameTextBox.Text) || string.IsNullOrWhiteSpace(passwordTextBox.Text))
             {
-                MessageBox.Show("Please fill all the blank fields.", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("Please fill all the blank fields.", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorLabel.Text = "Please fill all the blank fields.";
                 return;
             }
 

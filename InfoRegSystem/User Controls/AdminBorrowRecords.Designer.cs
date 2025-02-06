@@ -298,7 +298,7 @@
             this.txtLastname.Name = "txtLastname";
             this.txtLastname.Size = new System.Drawing.Size(228, 22);
             this.txtLastname.TabIndex = 54;
-            this.txtLastname.TextChanged += new System.EventHandler(this.txtLastname_TextChanged);
+            this.txtLastname.Leave += new System.EventHandler(this.txtLastname_Leave);
             // 
             // lblLastname
             // 
@@ -339,7 +339,7 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(228, 22);
             this.txtName.TabIndex = 50;
-            this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
+            this.txtName.Leave += new System.EventHandler(this.txtName_Leave);
             // 
             // label4
             // 

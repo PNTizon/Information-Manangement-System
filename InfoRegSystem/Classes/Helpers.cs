@@ -21,7 +21,7 @@ namespace InfoRegSystem.Classes
         //    //    e.Handled = true;
         //    //}
         //}
-        public void HelperNumberRestriction(TextBox phoneNum)
+        public void HelperNumberRestriction(Guna2TextBox phoneNum)
         {
             string currentText = phoneNum.Text;//ginakuha niya ang sulod sa phoneNum na textbox 
             phoneNum.Text = string.Concat(currentText.Where(char.IsDigit));//ang purpose ani kay gina kuha lang nya kay 0-9  ug gina wala ang letra o  special char
@@ -34,18 +34,18 @@ namespace InfoRegSystem.Classes
 
             phoneNum.SelectionStart = phoneNum.Text.Length;// para ang cursur magpundo sa last
         }
-        public void HelperAge(TextBox agetext)
-        {
-            string currentText = agetext.Text;
-            agetext.Text = string.Concat(currentText.Where(char.IsDigit));
+        //public void HelperAge(TextBox agetext)
+        //{
+        //    string currentText = agetext.Text;
+        //    agetext.Text = string.Concat(currentText.Where(char.IsDigit));
 
-            if (agetext.Text.Length > 2)
-            {
-                agetext.Text = agetext.Text.Substring(0, 2);
-            }
-            agetext.SelectionStart = agetext.Text.Length;
-        }
-        public void PasswordHelper(TextBox passwordtext)
+        //    if (agetext.Text.Length > 2)
+        //    {
+        //        agetext.Text = agetext.Text.Substring(0, 2);
+        //    }
+        //    agetext.SelectionStart = agetext.Text.Length;
+        //}
+        public void PasswordHelper(Guna2TextBox passwordtext)
         {
             string currentText = passwordtext.Text;
 
@@ -91,7 +91,7 @@ namespace InfoRegSystem.Classes
         {
             return Regex.IsMatch(username, @"^[a-zA-Z0-9]{5,15}$");
         }
-        public bool isValidPhoneNumber(TextBox countryCode, TextBox phoneNumber)
+        public bool isValidPhoneNumber(TextBox countryCode, Guna2TextBox phoneNumber)
         {
             string fullNumber = countryCode.Text + phoneNumber.Text;
 
@@ -122,7 +122,16 @@ namespace InfoRegSystem.Classes
 
             password.PasswordChar = '●';
         }
-        public void UpperCase(TextBox textBox)
+
+        public void UpperCase(Guna2TextBox textBox)
+        {
+            if (textBox.Text.Length > 0)
+            {
+                textBox.Text = char.ToUpper(textBox.Text[0]) + textBox.Text.Substring(1);
+                textBox.SelectionStart = textBox.Text.Length; // Keep cursor position
+            }
+        }
+        public void SystemUppercase(TextBox textBox)
         {
             if (textBox.Text.Length > 0)
             {

@@ -127,15 +127,14 @@ namespace InfoRegSystem.Forms
             borrowFunction.SearchHandler(search, dataGridViewBorrow);
         }
 
-        private void txtName_TextChanged(object sender, EventArgs e)
+        private void txtName_Leave(object sender, EventArgs e)
         {
-            helper.UpperCase(txtLastname);
+            helper.SystemUppercase(txtName);
         }
 
-        private void txtLastname_TextChanged(object sender, EventArgs e)
+        private void txtLastname_Leave(object sender, EventArgs e)
         {
-            helper.UpperCase(txtLastname);
+            helper.SystemUppercase(txtLastname);
         }
-        
     }
 }

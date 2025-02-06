@@ -26,7 +26,7 @@ namespace InfoRegSystem.Forms
         {
             #region ReadOnly
             errorbox1.ReadOnly = true;
-            errorbox2.ReadOnly = true;
+            //errorbox2.ReadOnly = true;
             errorbox3.ReadOnly = true;
             errorbox4.ReadOnly = true;
             errorbox5.ReadOnly = true;
@@ -66,20 +66,6 @@ namespace InfoRegSystem.Forms
             {
                 errorbox1.Text = "";
             }
-            if (!int.TryParse(registration_ages.Text.Trim(), out int age))
-            {
-                errorbox2.Text = "Age must be 13 to 50.";
-                hasErrors = true;
-            }
-            else if (age < 13 || age > 50)
-            {
-                errorbox2.Text = "";
-                hasErrors = true;
-            }
-            else
-            {
-                errorbox2.Text = "";
-            }
             if (!helpers.isValidGender(cmbGender.Text))
             {
                 errorbox3.Text = "Gender must be 'Male', 'Female', or 'Other'.";
@@ -109,7 +95,7 @@ namespace InfoRegSystem.Forms
             }
             if (!helpers.isValidUsername(registration_username.Text))
             {
-                errorbox7.Text = "Username must contain one uppercase letter and numbers.";
+                errorbox7.Text = "Must contain one uppercase letter and numbers.";
                 hasErrors = true;
             }
             else
@@ -127,7 +113,7 @@ namespace InfoRegSystem.Forms
             }
             if (!helpers.isValidPhoneNumber(countryNumbers, registration_number))
             {
-                errorbox4.Text = "Enter a 10-digit phone number with a valid country code.";
+                errorbox4.Text = "Contains 10-digit number with a valid country code.";
                 hasErrors = true;
             }
             else
@@ -166,7 +152,6 @@ namespace InfoRegSystem.Forms
                     cnn.CommandType = CommandType.StoredProcedure;
                     cnn.Parameters.AddWithValue("@name", registration_firstname.Text.Trim());
                     cnn.Parameters.AddWithValue("@lastname", registration_lastname.Text.Trim());
-                    cnn.Parameters.AddWithValue("@age", age);
                     cnn.Parameters.AddWithValue("@gender", cmbGender.Text.Trim());
                     cnn.Parameters.AddWithValue("@countrycode", countryNumbers.Text.Trim());
                     cnn.Parameters.AddWithValue("@phonenumber", registration_number.Text.Trim());
@@ -203,18 +188,6 @@ namespace InfoRegSystem.Forms
         {
             helpers.HelperNumberRestriction(registration_number);
         }
-        private void registration_number_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //helpers.HelperKeypress(e);
-        }
-        private void registration_ages_TextChanged(object sender, EventArgs e)
-        {
-            helpers.HelperAge(registration_ages);
-        }
-        private void registration_ages_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //helpers.HelperKeypress(e);
-        }
         private void registration_pass_TextChanged(object sender, EventArgs e)
         {
             helpers.PasswordHelper(registration_pass);
@@ -232,30 +205,26 @@ namespace InfoRegSystem.Forms
         {
             helpers.UpperCase(registration_firstname);
         }
-        private void registration_lastname_Leave(object sender, EventArgs e)
+       
+        private void panel5_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void registration_lastname_TextChanged(object sender, EventArgs e)
         {
             helpers.UpperCase(registration_lastname);
         }
-        private void registration_pass_Leave(object sender, EventArgs e)
-        {
-            helpers.UpperCase(registration_pass);
-        }
-        private void registration_username_TextChanged(object sender, EventArgs e)
+
+        private void registration_username_TextChanged_1(object sender, EventArgs e)
         {
             helpers.UpperCase(registration_username);
         }
+
+        private void registration_pass_Leave_1(object sender, EventArgs e)
+        {
+            helpers.UpperCase(registration_pass);
+        }
         #endregion
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            frmRegistration reg = new frmRegistration();
-            reg.Show();
-            this.Hide();
-        }
-
-        private void createbtn_Click_1(object sender, EventArgs e)
-        {
-
-        }
     }
 }

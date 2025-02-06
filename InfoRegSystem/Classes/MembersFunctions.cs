@@ -16,11 +16,15 @@ namespace InfoRegSystem.Classes
             helpers = new Helpers();
         }
 
-        public void SaveMemberInfo(string name, string lastname, int age, string gender, TextBox countryCode, string phonenumber,
+        public void SaveMemberInfo(string name, string lastname, string gender, TextBox countryCode, string phonenumber,
             string address, string email, Action displayMethod, Action clearMethod, Action displayMemMethod = null)
         {
             try
             {
+                //if (string.IsNullOrEmpty(name) || (string.IsNullOrEmpty(lastname) || ()|| () || ()) 
+                //{
+
+                //}
                 helpers.isValidEmail(email);
                 using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
                 {
@@ -32,7 +36,6 @@ namespace InfoRegSystem.Classes
                         cnn.CommandType = CommandType.StoredProcedure;
                         cnn.Parameters.AddWithValue("@Name", name.Trim());
                         cnn.Parameters.AddWithValue("@Lastname", lastname.Trim());
-                        cnn.Parameters.AddWithValue("@Age", age);
                         cnn.Parameters.AddWithValue("@Gender", gender.Trim());
                         cnn.Parameters.AddWithValue("@CountryCode", countryCode.Text);
                         cnn.Parameters.AddWithValue("@PhoneNumber", phonenumber.Trim());
@@ -101,7 +104,7 @@ namespace InfoRegSystem.Classes
             clearMethod();
             displayMethod();
         }
-        public void UpdateMemberInfo(string name, string lastname, string ageText, string gender, TextBox countryCode, 
+        public void UpdateMemberInfo(string name, string lastname, string gender, TextBox countryCode, 
             string phoneNumber,  string address, string email, DataGridView membergrid,
             Action displayMethod, Action clearMethod, Action displayMemMethod = null)
         {
@@ -128,15 +131,10 @@ namespace InfoRegSystem.Classes
 
                     using (SqlCommand cnn = new SqlCommand("UpdateMember", sqlConnection))
                     {
-                        if (!int.TryParse(ageText, out int parsedAge) || parsedAge < 13 || parsedAge > 60)
-                        {
-                            MessageBox.Show("Please enter a valid age.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
+                       
                         cnn.CommandType = CommandType.StoredProcedure;
                         cnn.Parameters.AddWithValue("@Name", name.Trim());
                         cnn.Parameters.AddWithValue("@Lastname", lastname.Trim());
-                        cnn.Parameters.AddWithValue("@Age", parsedAge);
                         cnn.Parameters.AddWithValue("@Gender", gender.Trim());
                         cnn.Parameters.AddWithValue("@CountryCode", countryCode.Text);
                         cnn.Parameters.AddWithValue("@PhoneNumber", phoneNumber.Trim());
@@ -197,12 +195,11 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show($"SQL Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public void Cleaner(TextBox name, TextBox lastname, TextBox age, TextBox email, TextBox address, TextBox phoneNum, 
+        public void Cleaner(Guna2TextBox name, Guna2TextBox lastname, Guna2TextBox email, Guna2TextBox address, Guna2TextBox phoneNum,
             TextBox countryTxt,ComboBox countrybox,ComboBox genderbox)
         {
             name.Clear();
             lastname.Clear();
-            age.Clear();
             email.Clear();
             address.Clear();
             phoneNum.Clear();
