@@ -39,19 +39,19 @@ namespace InfoRegSystem.Forms
         }
         private void returnbtn_Click(object sender, EventArgs e)
         {
-            function.RetunTransaction(transactiongrid,formdash.DisplayBorrow);
+            function.RetunTransaction(transactiongrid,formdash.BorrowRecords);
         }
         private void borrowedbtn_Click(object sender, EventArgs e)
         {
-            function.BorrowTransaction(borrowedbtn, userpanel);
+            UserTransactionFunction.BorrowTransaction(borrowedbtn, userpanel);
         }
         private void transactiongrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            selection.TransactionSelection(transactiongrid,e.RowIndex);
+            DataGridSelection.TransactionSelection(transactiongrid,e.RowIndex);
         }
         private void UserTransac_Load(object sender, EventArgs e)
         {
-            display.DisplayUserTransaction(transactiongrid);
+            Display.DisplayUserTransaction(transactiongrid);
         }
         private void GunaButton()
         {

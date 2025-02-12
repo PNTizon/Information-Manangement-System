@@ -35,7 +35,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.lbldueboo = new System.Windows.Forms.Label();
+            this.lblduebooks = new System.Windows.Forms.Label();
             this.btnSearch = new Guna.UI2.WinForms.Guna2Button();
             this.searchbox = new Guna.UI2.WinForms.Guna2TextBox();
             this.dataGridViewBookInfo = new System.Windows.Forms.DataGridView();
@@ -88,7 +88,7 @@
             // panel7
             // 
             this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(153)))), ((int)(((byte)(78)))));
-            this.panel7.Controls.Add(this.lbldueboo);
+            this.panel7.Controls.Add(this.lblduebooks);
             this.panel7.Controls.Add(this.label2);
             this.panel7.Controls.Add(this.pictureBox5);
             this.panel7.Location = new System.Drawing.Point(910, 86);
@@ -96,16 +96,16 @@
             this.panel7.Size = new System.Drawing.Size(201, 126);
             this.panel7.TabIndex = 40;
             // 
-            // lbldueboo
+            // lblduebooks
             // 
-            this.lbldueboo.AutoSize = true;
-            this.lbldueboo.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbldueboo.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbldueboo.Location = new System.Drawing.Point(156, 36);
-            this.lbldueboo.Name = "lbldueboo";
-            this.lbldueboo.Size = new System.Drawing.Size(29, 31);
-            this.lbldueboo.TabIndex = 6;
-            this.lbldueboo.Text = "0";
+            this.lblduebooks.AutoSize = true;
+            this.lblduebooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblduebooks.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblduebooks.Location = new System.Drawing.Point(156, 36);
+            this.lblduebooks.Name = "lblduebooks";
+            this.lblduebooks.Size = new System.Drawing.Size(29, 31);
+            this.lblduebooks.TabIndex = 6;
+            this.lblduebooks.Text = "0";
             // 
             // btnSearch
             // 
@@ -372,7 +372,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Label lbldueboo;
+        private System.Windows.Forms.Label lblduebooks;
         private Guna.UI2.WinForms.Guna2Button btnSearch;
         private Guna.UI2.WinForms.Guna2TextBox searchbox;
         private System.Windows.Forms.DataGridView dataGridViewBookInfo;

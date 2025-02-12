@@ -9,9 +9,9 @@ namespace InfoRegSystem.Classes
 {
     public class UserFormManager
     {
-        public Form activeForm = null;
+        public static  Form activeForm = null;
 
-        public void openUserDashboard(Form control, Panel container)
+        public static void openUserDashboard(Form control, Panel container)
         {
             if (activeForm != null)
                 activeForm.Close();

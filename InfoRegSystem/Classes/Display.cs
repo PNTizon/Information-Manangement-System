@@ -8,8 +8,7 @@ namespace InfoRegSystem.Classes
 {
     public class Display
     {
-
-        public void DisplayMembers(DataGridView membergrid)
+        public static void DisplayMembers(DataGridView membergrid)
         {
             using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
             {
@@ -28,7 +27,7 @@ namespace InfoRegSystem.Classes
                 }
             }
         }
-        public void DisplayBorrowRecords(DataGridView borrowrecords)
+        public static void DisplayBorrowRecords(DataGridView borrowrecords)
         {
             try
             {
@@ -59,7 +58,7 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show("SQL Error: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public void DisplayBooks(DataGridView books)
+        public static void DisplayBooks(DataGridView books)
         {
             try
             {
@@ -70,6 +69,7 @@ namespace InfoRegSystem.Classes
                     SqlDataAdapter dataAdapter = new SqlDataAdapter("GetBooks", sqlConnection);
                     DataTable dataTable = new DataTable();
                     dataAdapter.Fill(dataTable);
+
                     books.DataSource = dataTable;
 
                     if (books.Columns.Contains("BookID"))
@@ -83,7 +83,7 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show("SQL Error: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public void DisplayUserBooks(DataGridView bookgrid)
+        public static void DisplayUserBooks(DataGridView bookgrid)
         {
             try
             {
@@ -107,7 +107,7 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show("SQL Error: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public void DisplayUserTransaction(DataGridView transactiongrid)
+        public static void DisplayUserTransaction(DataGridView transactiongrid)
         {
             try
             {
@@ -145,7 +145,7 @@ namespace InfoRegSystem.Classes
             }
         }
 
-        public void Transaction(DataGridView transaction)
+        public static void Transaction(DataGridView transaction)
         {
             try
             {

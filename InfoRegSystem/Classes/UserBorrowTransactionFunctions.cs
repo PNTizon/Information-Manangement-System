@@ -14,20 +14,8 @@ namespace InfoRegSystem.Classes
 {
     public class UserBorrowTransactionFunctions
     {
-        private FormManager formManager;
-        private Helpers helper;
-
-        public UserBorrowTransactionFunctions()
+        public static void Borrowbtn(string Book,DateTime Borrowdate, string durationcmb)
         {
-            helper = new Helpers();
-            formManager = new FormManager();
-        }
-
-        public void Borrowbtn(string Book,DateTime Borrowdate, string durationcmb)
-        {
-            //DateTime borrowedDate = Borrowdate;
-            //string durationText = durationcmb;
-
             try
             {
                 if (string.IsNullOrEmpty(Book) || string.IsNullOrEmpty(durationcmb))
@@ -43,6 +31,7 @@ namespace InfoRegSystem.Classes
                     using (SqlConnection con = new SqlConnection(sqlconnection.Database))
                     {
                         con.Open();
+
                         using (SqlCommand checkDuplicateCmd = new SqlCommand("CheckDuplication", con))
                         {
                             checkDuplicateCmd.CommandType = CommandType.StoredProcedure;
@@ -67,8 +56,8 @@ namespace InfoRegSystem.Classes
                             cmd.Parameters.AddWithValue("@BorrowedDate", Borrowdate);
                             cmd.Parameters.AddWithValue("@ExpectedReturnDate", expectedReturnDate);
                             cmd.Parameters.AddWithValue("@Duration", durationcmb);
-
                             cmd.ExecuteNonQuery();
+
                             MessageBox.Show("Borrow request submitted! Waiting for admin approval.");
                         }
                     }
@@ -83,7 +72,7 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show($"SQL Error: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public void Clear(TextBox book, ComboBox duration)
+        public static void Clear(TextBox book, ComboBox duration)
         {
             book.Clear();
             duration.SelectedIndex = -1;

@@ -15,33 +15,27 @@ namespace InfoRegSystem.Forms
 {
     public partial class UserBook : UserControl
     {
-        private Helpers helper;
-        private Display display;
-        private UserBookFunction function;
         private ButtonShadow shadow;
 
         public UserBook()
         {
             InitializeComponent();
-            helper = new Helpers();
-            display = new Display();
-            function = new UserBookFunction();
             GunaButton();
         }
 
         private void UserBookInfo_Load(object sender, EventArgs e)
         {
-            display.DisplayUserBooks(bookgridView);
+            Display.DisplayUserBooks(bookgridView);
             LoadGenresForSearch();
         }
         private void LoadGenresForSearch()
         {
-            helper.GenresHelper(cmbGenre);
+            Helpers.GenresHelper(cmbGenre);
         }
         private void btnSearch_Click(object sender, EventArgs e)
         {
             string search = searchbox.Text;
-            function.UserBookSearch(search, cmbGenre, bookgridView);
+            UserBookFunction.UserBookSearch(search, cmbGenre, bookgridView);
         }
         public void GunaButton()
         {
@@ -52,11 +46,10 @@ namespace InfoRegSystem.Forms
             shadow = new ButtonShadow(gunabtn);
             shadow.CustomizeGunaButtons();
         }
-
         private void searchbox_TextChanged(object sender, EventArgs e)
         {
             string search = searchbox.Text;
-            function.UserBookSearch(search, cmbGenre, bookgridView);
+            UserBookFunction.UserBookSearch(search, cmbGenre, bookgridView);
         }
     }
 }

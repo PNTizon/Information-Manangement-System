@@ -6,60 +6,35 @@ namespace InfoRegSystem
 {
     public partial class MainForm : Form
     {
-        private MainformFunctions mainfuntion;
         private ButtonShadow shadow;
 
         public MainForm()
         {
             InitializeComponent();
-            mainfuntion = new MainformFunctions();
         }
         private void btnBookInfo_Click(object sender, EventArgs e)
         {
-            mainfuntion.HandleBookInfoForm(btnBookInfo, panel2);
+            MainformFunctions.HandleBookInfoForm(btnBookInfo, panel2);
         }
         private void btnReturnBook_Click(object sender, EventArgs e)
         {
-            mainfuntion.HandleBorrowRecords(btnReturnBook, panel2);
+            MainformFunctions.HandleBorrowRecords(btnReturnBook, panel2);
         }
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            mainfuntion.HandleLogout(btnLogout, this);
+            MainformFunctions.HandleLogout(btnLogout, this);
         }
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            mainfuntion.HandleMembers(btnRegister, panel2);
+            MainformFunctions.HandleMembers(btnRegister, panel2);
         }
         private void btnDashboard_Click(object sender, EventArgs e)
         {
-            mainfuntion.HandleDashboard(btnDashboard, panel2);
+            MainformFunctions.HandleDashboard(btnDashboard, panel2);
         }
-        //public void SystemButton()
-        //{
-        //    List<Button> buttons = new List<Button>
-        //    {
-        //        btnBookInfo,
-        //        btnDashboard,
-        //        btnLogout,
-        //        btnRegister,
-        //        btnReturnBook
-        //    };
-        //    shadow = new ButtonShadow(buttons);
-        //    shadow.NormalButton();
-        //}
-        private void adminDashboard1_Load(object sender, EventArgs e)
-        {
-
-        }
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void btnTransactions_Click_1(object sender, EventArgs e)
         {
-            mainfuntion.HandleTransactions(btnTransactions, panel2);
+            MainformFunctions.HandleTransactions(btnTransactions, panel2);
         }
-
     }
 }

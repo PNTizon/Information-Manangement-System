@@ -10,16 +10,14 @@ namespace InfoRegSystem.Classes
     public class UserTransactionFunction
     {
         private Display display;
-        private UserFormManager formMange;
 
         private string book { get; set; }
 
         public UserTransactionFunction()
         {
             display = new Display();
-            formMange = new UserFormManager();
         }
-        public void RetunTransaction(DataGridView transactiongrid, Action displayBorrow)
+        public  void RetunTransaction(DataGridView transactiongrid, Action displayBorrow)
         {
             try
             {
@@ -29,14 +27,13 @@ namespace InfoRegSystem.Classes
                     return;
                 }
 
-                // Get the expected return date
+                // kani siya kay ginakuha niya ang expected return date
                 DateTime expectedReturnDate = DateTime.MinValue;
                 if (transactiongrid.CurrentRow.Cells["ExpectedReturnDate"].Value != DBNull.Value)
                 {
                     expectedReturnDate = Convert.ToDateTime(transactiongrid.CurrentRow.Cells["ExpectedReturnDate"].Value);
                 }
 
-                // Get the book value from the selected row
                 if (transactiongrid.CurrentRow.Cells["Book"].Value != DBNull.Value)
                 {
                     book = transactiongrid.CurrentRow.Cells["Book"].Value.ToString();
@@ -89,17 +86,14 @@ namespace InfoRegSystem.Classes
                             cmd.Parameters.AddWithValue("@PaymentStatus", paymentStatus);
                             int rowsAffected = cmd.ExecuteNonQuery();
 
-
                             if (rowsAffected > 0)
                             {
-                                // Increment the book copies in the Books table
                                 using (SqlCommand updateCopiesCmd = new SqlCommand("IncrementBookCopies", sqlConnection))
                                 {
                                     updateCopiesCmd.CommandType = CommandType.StoredProcedure;
-                                    updateCopiesCmd.Parameters.AddWithValue("@OriginalBook", book); // Ensure @Book is passed correctly
+                                    updateCopiesCmd.Parameters.AddWithValue("@OriginalBook", book); 
                                     updateCopiesCmd.ExecuteNonQuery();
                                 }
-
                                 using (SqlCommand status = new SqlCommand("UpdateStatus", sqlConnection))
                                 {
                                     status.CommandType = CommandType.StoredProcedure;
@@ -108,9 +102,8 @@ namespace InfoRegSystem.Classes
                                     status.ExecuteNonQuery();
                                 }
                             }
-                            // Refresh the user record display and dashboard
                             displayBorrow();
-                            display.DisplayUserTransaction(transactiongrid);
+                            Display.DisplayUserTransaction(transactiongrid);
                         }
                         MessageBox.Show("The admin is verifying the return of the book.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -125,10 +118,10 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public void BorrowTransaction(Guna2Button transaction, Panel panel)
+        public static void BorrowTransaction(Guna2Button transaction, Panel panel)
         {
             UserBorrowTransactions transactions = new UserBorrowTransactions();
-            formMange.openUserDashboard(transactions, panel);
+            UserFormManager.openUserDashboard(transactions, panel);
         }
     }
 }

@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 using System.Windows.Forms;
-using Mysqlx.Resultset;
 
 namespace InfoRegSystem.Classes
 {
     public class AdminTransactionFinctions
     {
-        public void PaidButton(DataGridView transactiongrid)
+        public static void PaidButton(DataGridView transactiongrid)
         {
             if (transactiongrid.CurrentRow == null)
             {
@@ -60,31 +55,30 @@ namespace InfoRegSystem.Classes
                 }
             }
         }
-        public void SearchTransactions(DataGridView transactiongrid,string searchbox)
+        public static void SearchTransactions(DataGridView transactiongrid, string searchbox)
         {
-            string searchInput = searchbox; 
             try
             {
                 using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
                 {
                     sqlConnection.Open();
 
-                    using(SqlCommand cmd = new SqlCommand("SearchTransactions", sqlConnection))
+                    using (SqlCommand cmd = new SqlCommand("SearchTransactions", sqlConnection))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@SearchInput", searchInput?.Trim() ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@SearchInput", searchbox?.Trim() ?? (object)DBNull.Value);
 
                         SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                         DataTable table = new DataTable();
                         adapter.Fill(table);
 
-                        if(table.Rows.Count > 0)
+                        if (table.Rows.Count > 0)
                         {
                             transactiongrid.DataSource = table;
                         }
                         else
                         {
-                            MessageBox.Show("No records found matching your search." , "No Results" , MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("No records found matching your search.", "No Results", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                 }

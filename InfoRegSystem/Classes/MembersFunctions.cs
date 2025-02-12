@@ -1,31 +1,25 @@
-﻿using InfoRegSystem.Forms;
-using Guna.UI2.WinForms;
-using System.Data.SqlClient;
-using System.Data;
-using System.Windows.Forms;
+﻿using Guna.UI2.WinForms;
 using System;
-using System.Xml.Linq;
+using System.Data;
+using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace InfoRegSystem.Classes
 {
     public class MembersFunctions
     {
-        private Helpers helpers;
-        public MembersFunctions()
-        {
-            helpers = new Helpers();
-        }
-
-        public void SaveMemberInfo(string name, string lastname, string gender, TextBox countryCode, string phonenumber,
+        public static void SaveMemberInfo(string name, string lastname, string gender, TextBox countryCode, string phonenumber,
             string address, string email, Action displayMethod, Action clearMethod, Action displayMemMethod = null)
         {
             try
             {
-                //if (string.IsNullOrEmpty(name) || (string.IsNullOrEmpty(lastname) || ()|| () || ()) 
-                //{
+                if(!Helpers.isValidName(name) || !Helpers.isValidName(lastname) || !Helpers.isValidAddress(address)
+                    || string.IsNullOrEmpty(phonenumber) || !Helpers.isValidEmail(email) || !Helpers.isValidGender(gender))
+                {
+                    MessageBox.Show("Please fill all the blank fields.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
 
-                //}
-                helpers.isValidEmail(email);
                 using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
                 {
                     sqlConnection.Open();
@@ -58,7 +52,7 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show($"An error occurred: {ex.Message}", "Save Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public void DeleteMemberInfo(DataGridView membergrid, Action displayMethod, Action clearMethod, Action displayMemMethod = null)
+        public static void DeleteMemberInfo(DataGridView membergrid, Action displayMethod, Action clearMethod, Action displayMemMethod = null)
         {
             try
             {
@@ -104,22 +98,22 @@ namespace InfoRegSystem.Classes
             clearMethod();
             displayMethod();
         }
-        public void UpdateMemberInfo(string name, string lastname, string gender, TextBox countryCode, 
-            string phoneNumber,  string address, string email, DataGridView membergrid,
+        public static void UpdateMemberInfo(string name, string lastname, string gender, TextBox countryCode,
+            string phoneNumber, string address, string email, DataGridView membergrid,
             Action displayMethod, Action clearMethod, Action displayMemMethod = null)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(name) || gender == null)
-                {
-                    MessageBox.Show("Please ensure all fields are filled, including the gender.", "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                helpers.isValidEmail(email);
-
                 if (membergrid.CurrentRow == null)
                 {
                     MessageBox.Show("No record selected. Please select a record to update.", "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (!Helpers.isValidName(name) || !Helpers.isValidName(lastname) || !Helpers.isValidAddress(address)
+                   || string.IsNullOrEmpty(phoneNumber) || !Helpers.isValidEmail(email) || !Helpers.isValidGender(gender))
+                {
+                    MessageBox.Show("Please fill all the blank fields.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
@@ -131,7 +125,7 @@ namespace InfoRegSystem.Classes
 
                     using (SqlCommand cnn = new SqlCommand("UpdateMember", sqlConnection))
                     {
-                       
+
                         cnn.CommandType = CommandType.StoredProcedure;
                         cnn.Parameters.AddWithValue("@Name", name.Trim());
                         cnn.Parameters.AddWithValue("@Lastname", lastname.Trim());
@@ -164,17 +158,18 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show($"An error occurred: {ex.Message}", "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public void MemberSearch(DataGridView membergrid, string searchbox)
+        public static void MemberSearch(DataGridView membergrid, string searchbox)
         {
-
             try
             {
                 using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
                 {
+                    sqlConnection.Open();
+
                     using (SqlDataAdapter adapter = new SqlDataAdapter("SearchMembers", sqlConnection))
                     {
                         adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-                        adapter.SelectCommand.Parameters.AddWithValue("@searchInput",searchbox);
+                        adapter.SelectCommand.Parameters.AddWithValue("@searchInput", searchbox);
 
                         DataTable table = new DataTable();
                         adapter.Fill(table);
@@ -195,8 +190,8 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show($"SQL Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public void Cleaner(Guna2TextBox name, Guna2TextBox lastname, Guna2TextBox email, Guna2TextBox address, Guna2TextBox phoneNum,
-            TextBox countryTxt,ComboBox countrybox,ComboBox genderbox)
+        public static void Cleaner(Guna2TextBox name, Guna2TextBox lastname, Guna2TextBox email, Guna2TextBox address,
+            Guna2TextBox phoneNum,  TextBox countryTxt, ComboBox countrybox, ComboBox genderbox)
         {
             name.Clear();
             lastname.Clear();

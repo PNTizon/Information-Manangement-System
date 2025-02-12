@@ -9,77 +9,65 @@ namespace InfoRegSystem.Forms
     public partial class AdminBorrowRecords : UserControl
     {
         private AdminDashboard dashboard;
-        private AdminBorrowFunctions borrowFunction;
-        private Display display;
-        private Helpers helper;
-        private DataGridSelection select;
         private ButtonShadow shadow;
 
         public AdminBorrowRecords()
         {
             InitializeComponent();
-            borrowFunction = new AdminBorrowFunctions();
-            display = new Display();
             dashboard = new AdminDashboard();
-            helper = new Helpers();
-            select = new DataGridSelection();
             GunaButton();
         }
 
-        //public AdminBorrowRecords(AdminDashboard dashboard)
-        //{
-        //    this.dashboard = dashboard;
-        //}
         private void LoadData()
         {
-            display.DisplayBorrowRecords(dataGridViewBorrow);
-            helper.DurationHelper(cmbBorrowDuration);
+            Display.DisplayBorrowRecords(dataGridViewBorrow);
+            Helpers.DurationHelper(cmbBorrowDuration);
         }
         private void btnBorrow_Click(object sender, EventArgs e)
         {
-            borrowFunction.BorrowHandler(txtName.Text, txtLastname.Text, txtBook.Text, cmbBorrowDuration,
-                dashboard.displayBorrow, dashboard.loadbookslist, dataGridViewBorrow);
-            borrowFunction.Clear(txtBook, txtLastname, txtName, cmbBorrowDuration);
+            AdminBorrowFunctions.BorrowHandler(txtName.Text, txtLastname.Text, txtBook.Text, borrowDate.Value ,cmbBorrowDuration,
+                dashboard.BorrowRecords, dashboard.loadbookslist, dataGridViewBorrow);
+            AdminBorrowFunctions.Clear(txtBook, txtLastname, txtName, cmbBorrowDuration);
         }
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            borrowFunction.UpdateHandler(txtName, txtLastname, txtBook, cmbBorrowDuration,
-                dashboard.displayBorrow, dashboard.loadbookslist, dataGridViewBorrow);
-            borrowFunction.Clear(txtBook, txtLastname, txtName, cmbBorrowDuration);
+            AdminBorrowFunctions.UpdateHandler(txtName, txtLastname, txtBook, cmbBorrowDuration,
+                dashboard.BorrowRecords, dashboard.loadbookslist, dataGridViewBorrow);
+            AdminBorrowFunctions.Clear(txtBook, txtLastname, txtName, cmbBorrowDuration);
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            borrowFunction.DeleteHandler(dataGridViewBorrow, dashboard.displayBorrow, dashboard.loadbookslist);
-            borrowFunction.Clear(txtBook, txtLastname, txtName, cmbBorrowDuration);
+            AdminBorrowFunctions.DeleteHandler(dataGridViewBorrow, dashboard.BorrowRecords, dashboard.loadbookslist);
+            AdminBorrowFunctions.Clear(txtBook, txtLastname, txtName, cmbBorrowDuration);
         }
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
-            borrowFunction.HandleReturn(
+            AdminBorrowFunctions.HandleReturn(
             dataGridViewBorrow,
             returnDate,
             txtBook.Text,
-            dashboard.displayBorrow,
+            dashboard.BorrowRecords,
             dashboard.loadbookslist
             );
-            borrowFunction.Clear(txtBook, txtLastname, txtName, cmbBorrowDuration);
+            AdminBorrowFunctions.Clear(txtBook, txtLastname, txtName, cmbBorrowDuration);
             LoadData();
         }
       
         private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = dataGridViewBorrow.CurrentCell.RowIndex;
-            select.BorrowRecordsSelection(selectedRowIndex, dataGridViewBorrow, txtName, txtBook, txtLastname, cmbBorrowDuration, borrowDate, returnDate);
+            DataGridSelection.BorrowRecordsSelection(selectedRowIndex, dataGridViewBorrow, txtName, txtBook, txtLastname, cmbBorrowDuration, borrowDate, returnDate);
         }
         private void BorrowForm_Load(object sender, EventArgs e)
         {
-            display.DisplayBorrowRecords(dataGridViewBorrow);
-            helper.DurationHelper(cmbBorrowDuration);
+            Display.DisplayBorrowRecords(dataGridViewBorrow);
+            Helpers.DurationHelper(cmbBorrowDuration);
         }
         private void btnSearch_Click(object sender, EventArgs e)
         {
             string search = searchbox.Text;
-            borrowFunction.SearchHandler(search, dataGridViewBorrow);
+            AdminBorrowFunctions.SearchHandler(search, dataGridViewBorrow);
         }
 
         private void Approvedbtn_Click(object sender, EventArgs e)
@@ -88,13 +76,13 @@ namespace InfoRegSystem.Forms
             {
                 int borrowId = Convert.ToInt32(dataGridViewBorrow.SelectedRows[0].Cells["Id"].Value);
 
-                borrowFunction.ApproveRequest(txtBook.Text,borrowId,txtName.Text,dataGridViewBorrow);
+                AdminBorrowFunctions.ApproveRequest(txtBook.Text,borrowId,txtName.Text,dataGridViewBorrow);
             }
             else
             {
                 MessageBox.Show("Please select a request to approve.");
             }
-            borrowFunction.Clear(txtBook,txtLastname,txtName,cmbBorrowDuration);
+            AdminBorrowFunctions.Clear(txtBook,txtLastname,txtName,cmbBorrowDuration);
         }
 
         private void Declinbtn_Click(object sender, EventArgs e)
@@ -103,7 +91,7 @@ namespace InfoRegSystem.Forms
             {
                 int borrowId = Convert.ToInt32(dataGridViewBorrow.SelectedRows[0].Cells["Id"].Value);
 
-                borrowFunction.RejectRequest(borrowId,txtBook.Text,dataGridViewBorrow);
+                AdminBorrowFunctions.RejectRequest(borrowId,dataGridViewBorrow);
             }
             else
             {
@@ -124,17 +112,17 @@ namespace InfoRegSystem.Forms
         private void searchbox_TextChanged(object sender, EventArgs e)
         {
             string search = searchbox.Text;
-            borrowFunction.SearchHandler(search, dataGridViewBorrow);
+            AdminBorrowFunctions.SearchHandler(search, dataGridViewBorrow);
         }
 
         private void txtName_Leave(object sender, EventArgs e)
         {
-            helper.SystemUppercase(txtName);
+            Helpers.UpperCase(txtName);
         }
 
         private void txtLastname_Leave(object sender, EventArgs e)
         {
-            helper.SystemUppercase(txtLastname);
+            Helpers.UpperCase(txtLastname);
         }
     }
 }

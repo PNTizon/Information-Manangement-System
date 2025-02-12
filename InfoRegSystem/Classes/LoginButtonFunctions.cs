@@ -7,16 +7,15 @@ using System.Windows.Forms;
 
 namespace InfoRegSystem.Classes
 {
-    public class LoginButton
+    public class LoginButtonFunctions
     {
-        public void HandleLogin(Guna2TextBox usernameTextBox, Guna2TextBox passwordTextBox, TextBox errorLabel, Form currentForm)
+        public static void HandleLogin(Guna2TextBox usernameTextBox, Guna2TextBox passwordTextBox, TextBox errorLabel, Form currentForm)
         {
             const string adminUsername = "Admin";
             const string adminPassword = "admin123";
 
             if (string.IsNullOrWhiteSpace(usernameTextBox.Text) || string.IsNullOrWhiteSpace(passwordTextBox.Text))
             {
-                //MessageBox.Show("Please fill all the blank fields.", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 errorLabel.Text = "Please fill all the blank fields.";
                 return;
             }
@@ -73,7 +72,7 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show("Unexpected Error: " + ex.Message, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public void HandleRegister(Button registerButton, Form currentForm)
+        public static void HandleRegister(Button registerButton, Form currentForm)
         {
             AccountCreation regis = new AccountCreation();
             regis.Show();

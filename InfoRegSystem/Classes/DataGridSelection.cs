@@ -6,10 +6,10 @@ namespace InfoRegSystem.Classes
 {
     public class DataGridSelection
     {
-        private string book { get; set; }
+        private static string book { get; set; }
 
 
-        public void MembersSelection(int rowIndex, Guna2TextBox name, Guna2TextBox lastname, TextBox countrybox,
+        public static  void MembersSelection(int rowIndex, Guna2TextBox name, Guna2TextBox lastname, TextBox countrybox,
             Guna2TextBox phone, Guna2TextBox address, Guna2TextBox email, ComboBox genderbox, DataGridView membergrid)
         {
             try
@@ -39,8 +39,8 @@ namespace InfoRegSystem.Classes
             }
         }
 
-        public void BorrowRecordsSelection(int rowIndex, DataGridView recordsgrid, TextBox txtName, TextBox txtBook,
-            TextBox txtLastname, ComboBox duration, DateTimePicker borrowDate, DateTimePicker returnDate)
+        public static void BorrowRecordsSelection(int rowIndex, DataGridView recordsgrid, Guna2TextBox txtName, TextBox txtBook,
+            Guna2TextBox txtLastname, ComboBox duration, DateTimePicker borrowDate, DateTimePicker returnDate)
         {
             try
             {
@@ -66,7 +66,7 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show("Some error occurred: " + ex.Message + " - " + ex.Source);
             }
         }
-        public void BookSelection(int rowIndex, TextBox title, TextBox author, TextBox copies, ComboBox genrebox, DataGridView bookgrid)
+        public static void BookSelection(int rowIndex, TextBox title, TextBox author, TextBox copies, ComboBox genrebox, DataGridView bookgrid)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show("Some error occured: " + ex.Message + " - " + ex.Source);
             }
         }
-        public void TransactionSelection(DataGridView transacgrid, int rowIndex)
+        public static void TransactionSelection(DataGridView transacgrid, int rowIndex)
         {
             #region Old
             //try
@@ -111,7 +111,7 @@ namespace InfoRegSystem.Classes
                 transacgrid.Rows[rowIndex].Cells["book"].Value.ToString();
                 
         }
-        public void BorrowbookSelection(DataGridView bookGrid, TextBox txtBook, int rowIndex)
+        public static void BorrowbookSelection(DataGridView bookGrid, TextBox txtBook, int rowIndex)
         {
             #region Old
             //if (rowIndex >= 0)

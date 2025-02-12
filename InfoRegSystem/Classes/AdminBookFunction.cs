@@ -9,15 +9,9 @@ namespace InfoRegSystem.Classes
 {
     public class AdminBookFunction
     {
-        private Display display;
-        private AdminDashboard _dashboard;
-        public AdminBookFunction()
-        {
-            display = new Display();
-            _dashboard = new AdminDashboard();
-        }
-
-        public void SearchBooks(string searchbox, ComboBox genrebox, DataGridView bookgrid)
+        private static AdminDashboard _dashboard =  new AdminDashboard();
+        
+        public static void SearchBooks(string searchbox, ComboBox genrebox, DataGridView bookgrid)
         {
             string searchInput = searchbox.Trim();
             string selectedGenre = genrebox.SelectedItem?.ToString();
@@ -55,16 +49,17 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show($"SQL Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public void Cleaner(TextBox title, TextBox author, TextBox copies,ComboBox genre)
+        public static void Cleaner(TextBox title, TextBox author, TextBox copies,ComboBox genre)
         {
             title.Clear();
             author.Clear();
             copies.Clear();
             genre.SelectedIndex = -1;
         }
-        public void AddBook(string title, string author, string copy, string genre, DataGridView bookgrid)
+        public static void AddBook(string title, string author, string copy, string genre, DataGridView bookgrid)
         {
             int copies;
+
             if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(author) || string.IsNullOrWhiteSpace(genre))
             {
                 MessageBox.Show("Please fill in all required fields.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -97,7 +92,7 @@ namespace InfoRegSystem.Classes
                         {
                             MessageBox.Show("Book record added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                            display.DisplayBooks(bookgrid);
+                            Display.DisplayBooks(bookgrid);
                         }
                         else
                         {
@@ -110,9 +105,9 @@ namespace InfoRegSystem.Classes
             {
                 MessageBox.Show($"SQL Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            display.DisplayBooks(bookgrid);
+            Display.DisplayBooks(bookgrid);
         }
-        public void UpdateBook(string titles, string authors, string copy, ComboBox genrebox, DataGridView bookgrid)
+        public static void UpdateBook(string titles, string authors, string copy, ComboBox genrebox, DataGridView bookgrid)
         {
             try
             {
@@ -154,7 +149,7 @@ namespace InfoRegSystem.Classes
                         }
                     }
                 }
-                display.DisplayBooks(bookgrid);
+                Display.DisplayBooks(bookgrid);
             }
             catch (Exception ex)
             {
@@ -162,7 +157,7 @@ namespace InfoRegSystem.Classes
             }
             _dashboard.loadbookslist();
         }
-        public void DeleteBook(string title, string author, string copies, DataGridView bookgrid)
+        public static void DeleteBook(string title, string author, string copies, DataGridView bookgrid)
         {
             try
             {
@@ -200,7 +195,7 @@ namespace InfoRegSystem.Classes
                         }
                     }
                 }
-                display.DisplayBooks(bookgrid);
+                Display.DisplayBooks(bookgrid);
             }
             catch (Exception ex)
             {

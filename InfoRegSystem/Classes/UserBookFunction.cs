@@ -13,14 +13,14 @@ namespace InfoRegSystem.Classes
 {
     public class UserBookFunction
     {
-        private UserFormManager formMange;
+        //private UserFormManager formMange;
 
         public UserBookFunction()
         {
-            formMange = new UserFormManager();
+            //formMange = new UserFormManager();
         }
 
-        public void UserBookSearch(string searchbox,ComboBox genrebox,DataGridView bookgrid)
+        public static void UserBookSearch(string searchbox,ComboBox genrebox,DataGridView bookgrid)
         {
             string searchInput = searchbox.Trim();
             string selectedGenre = genrebox.SelectedItem?.ToString();
@@ -59,10 +59,10 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show($"SQL Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public void BorrowTransaction(Guna2Button transaction, Panel panel)
+        public static void BorrowTransaction(Guna2Button transaction, Panel panel)
         {
             UserBorrowTransactions transactions = new UserBorrowTransactions();
-            formMange.openUserDashboard(transactions, panel);
+            UserFormManager.openUserDashboard(transactions, panel);
         }
     }
 }

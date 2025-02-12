@@ -11,47 +11,29 @@ namespace InfoRegSystem.Forms
     public partial class UserMainForm : Form
     {
         public Panel dashboardPanel { get { return userpnlDash; } }
-        private frmRegistration frmRegistration;
-        private UserDashboardFunctions functions;
-        private FormManager formManager;
+        //private frmRegistration frmRegistration;
         private ButtonShadow shadow;
         public UserMainForm()
         {
             InitializeComponent();
-            formManager = new FormManager();
-            functions = new UserDashboardFunctions();
-            //NormalButton();
         }
         private void bookinfobtn_Click(object sender, EventArgs e)
         {
-            functions.UserBookInfo(bookinfobtn, this, userpnlDash);
+            UserDashboardFunctions.UserBookInfo(bookinfobtn, this, userpnlDash);
         }
         private void returnbtn_Click(object sender, EventArgs e)
         {
-            functions.UserTransaction(returnbtn, this, userpnlDash);
+            UserDashboardFunctions.UserTransaction(returnbtn, this, userpnlDash);
         }
         private void logoutbtn_Click(object sender, EventArgs e)
         {
-            functions.UserLogout(logoutbtn, this);
+            UserDashboardFunctions.UserLogout(logoutbtn, this);
         }
 
         private void btnDasboard_Click(object sender, EventArgs e)
         {
-            functions.UserDashboard(btnDasboard, userpnlDash,this);
+            UserDashboardFunctions.UserDashboard(btnDasboard, userpnlDash,this);
         }
-        //private void NormalButton()
-        //{
-        //    List<Button> buttons = new List<Button>
-        //    {
-        //        btnDasboard,
-        //        bookinfobtn,
-        //        returnbtn,
-        //        logoutbtn
-        //    };
-        //    shadow = new ButtonShadow(buttons);
-        //    shadow.NormalButton();
-        //}
-
         private void UserMainForm_Load(object sender, EventArgs e)
         {
 

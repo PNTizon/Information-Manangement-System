@@ -114,8 +114,7 @@
     <Compile Include="Classes\ButtonShadow.cs" />
     <Compile Include="Classes\DataGridSelection.cs" />
     <Compile Include="Classes\Display.cs" />
-    <Compile Include="Classes\ErrorMessages.cs" />
-    <Compile Include="Classes\LoginButton.cs" />
+    <Compile Include="Classes\LoginButtonFunctions.cs" />
     <Compile Include="Classes\CountryCode.cs" />
     <Compile Include="Classes\FormManager.cs" />
     <Compile Include="Classes\GlobalUserInfo.cs" />

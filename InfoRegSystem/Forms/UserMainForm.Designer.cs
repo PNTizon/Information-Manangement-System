@@ -175,6 +175,8 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.userpnlDash);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "UserMainForm";
             this.Load += new System.EventHandler(this.UserMainForm_Load);
             this.panel1.ResumeLayout(false);

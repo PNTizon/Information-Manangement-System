@@ -10,12 +10,10 @@ namespace InfoRegSystem.Forms
     {
         private Helpers helper;
         private ButtonShadow shadow;
-        private UserBorrowTransactionFunctions functions;
         public UserBorrowTransactions()
         {
             InitializeComponent();
             helper = new Helpers();
-            functions = new UserBorrowTransactionFunctions();
             GunaButton();
         }
 
@@ -30,12 +28,12 @@ namespace InfoRegSystem.Forms
         }
         private void UserBorrowTransactions_Load(object sender, EventArgs e)
         {
-            helper.DurationHelper(cmbDuration);
+            Helpers.DurationHelper(cmbDuration);
         }
         private void btnBorrow_Click(object sender, EventArgs e)
         {
-            functions.Borrowbtn(txtBook.Text, borrowDate.Value, cmbDuration.Text);
-            functions.Clear(txtBook,cmbDuration);
+            UserBorrowTransactionFunctions.Borrowbtn(txtBook.Text, borrowDate.Value, cmbDuration.Text);
+            UserBorrowTransactionFunctions.Clear(txtBook,cmbDuration);
         }
 
         private void label1_Click(object sender, EventArgs e)

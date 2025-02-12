@@ -140,7 +140,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(187, 729);
             this.panel1.TabIndex = 3;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // btnTransactions
             // 
@@ -210,7 +209,6 @@
             this.adminDashboard1.Name = "adminDashboard1";
             this.adminDashboard1.Size = new System.Drawing.Size(1157, 729);
             this.adminDashboard1.TabIndex = 0;
-            this.adminDashboard1.Load += new System.EventHandler(this.adminDashboard1_Load);
             // 
             // MainForm
             // 
@@ -223,6 +221,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.panel1.ResumeLayout(false);

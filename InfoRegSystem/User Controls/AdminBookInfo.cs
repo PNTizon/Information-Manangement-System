@@ -2,8 +2,6 @@
 using InfoRegSystem.Classes;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace InfoRegSystem.Forms
@@ -11,70 +9,54 @@ namespace InfoRegSystem.Forms
     public partial class AdminBookInfo : UserControl
     {
         private AdminDashboard _dashboard;
-        private Helpers helper;
-        private AdminBookFunction bookFunction;
-        private Display display;
-        private DataGridSelection selection;
         private ButtonShadow shadow;
 
-        public AdminBookInfo(AdminDashboard dashboard)
-        {
-            InitializeComponent();
-            _dashboard = dashboard;
-        }
+       
         public AdminBookInfo()
         {
             InitializeComponent();
-            helper = new Helpers();
-            bookFunction = new AdminBookFunction();
-            display = new Display();
-            selection = new DataGridSelection();
             GunaButton();
         }
         private void LoadGenres()
         {
-            helper.GenresHelper(cmbGenres);
+            Helpers.GenresHelper(cmbGenres);
         }
         private void LoadGenresForSearch()
         {
-            helper.GenresHelper(cmbGenre);
+            Helpers.GenresHelper(cmbGenre);
         }
         private void btnSearch_Click(object sender, EventArgs e)
         {
             string search = searchbox.Text;
 
-            bookFunction.SearchBooks(search, cmbGenre, bookgridView);
+            AdminBookFunction.SearchBooks(search, cmbGenre, bookgridView);
         }
         private void BookInfo_Load(object sender, EventArgs e)
         {
-            display.DisplayBooks(bookgridView);
+            Display.DisplayBooks(bookgridView);
             LoadGenres();
             LoadGenresForSearch();
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
-            bookFunction.AddBook(txtTitle.Text, txtAuthor.Text, txtCopies.Text, cmbGenres.Text, bookgridView);
-            bookFunction.Cleaner(txtTitle, txtAuthor, txtCopies,cmbGenres);
+            AdminBookFunction.AddBook(txtTitle.Text, txtAuthor.Text, txtCopies.Text, cmbGenres.Text, bookgridView);
+            AdminBookFunction.Cleaner(txtTitle, txtAuthor, txtCopies, cmbGenres);
         }
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-           bookFunction.UpdateBook(txtTitle.Text, txtAuthor.Text, txtCopies.Text,cmbGenres, bookgridView);
-            bookFunction.Cleaner(txtTitle, txtAuthor, txtCopies, cmbGenres);
+            AdminBookFunction.UpdateBook(txtTitle.Text, txtAuthor.Text, txtCopies.Text, cmbGenres, bookgridView);
+            AdminBookFunction.Cleaner(txtTitle, txtAuthor, txtCopies, cmbGenres);
 
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            bookFunction.DeleteBook(txtTitle.Text, txtAuthor.Text, txtCopies.Text, bookgridView);
-            bookFunction.Cleaner(txtTitle, txtAuthor, txtCopies, cmbGenres);
+            AdminBookFunction.DeleteBook(txtTitle.Text, txtAuthor.Text, txtCopies.Text, bookgridView);
+            AdminBookFunction.Cleaner(txtTitle, txtAuthor, txtCopies, cmbGenres);
         }
 
         private void bookgridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            selection.BookSelection(e.RowIndex, txtTitle, txtAuthor, txtCopies, cmbGenres, bookgridView);
-        }
-        private void btnViewAll_Click(object sender, EventArgs e)
-        {
-            display.DisplayBooks(bookgridView);
+            DataGridSelection.BookSelection(e.RowIndex, txtTitle, txtAuthor, txtCopies, cmbGenres, bookgridView);
         }
         public void GunaButton()
         {
@@ -93,8 +75,12 @@ namespace InfoRegSystem.Forms
         {
             string search = searchbox.Text;
 
-            bookFunction.SearchBooks(search, cmbGenre, bookgridView);
+            AdminBookFunction.SearchBooks(search, cmbGenre, bookgridView);
+        }
+
+        private void txtCopies_TextChanged(object sender, EventArgs e)
+        {
+            Helpers.Copies(txtCopies);
         }
     }
 }
- 

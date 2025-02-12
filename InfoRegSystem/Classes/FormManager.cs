@@ -6,9 +6,9 @@ namespace InfoRegSystem.Classes
 {
     public class FormManager
     {
-        public Form activeForm = null;
+        public static Form activeForm = null;
 
-        public void openDashboard(UserControl control, Panel container)
+        public static void openDashboard(UserControl control, Panel container)
         {
             container.Controls.Clear();
             control.Dock = DockStyle.Fill;

@@ -1,6 +1,8 @@
 ﻿using InfoRegSystem.Forms;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,35 +12,75 @@ namespace InfoRegSystem.Classes
 {
     public class UserDashboardFunctions
     {
-        private UserDashboard userdash;
-        private FormManager formManager;
         
-        public UserDashboardFunctions()
-        {
-            formManager = new FormManager();
-        }
-
-        public void UserLogout(Button logoutbtn, Form currentForm)
+        public static void UserLogout(Button logoutbtn, Form currentForm)
         {
             Application.Restart();
         }
-        public void UserBookInfo(Button bookbtn, Form currentForm, Panel pnlDash)
+        public static void UserBookInfo(Button bookbtn, Form currentForm, Panel pnlDash)
         {
             UserBook bookInfo = new UserBook();
-            formManager.openDashboard(bookInfo, pnlDash);
+            FormManager.openDashboard(bookInfo, pnlDash);
             bookInfo.Location = currentForm.Location;
         }
-        public void UserTransaction(Button transacbtn, Form currentForm, Panel pnlDash, UserMainForm Panel = null)
+        public static void UserTransaction(Button transacbtn, Form currentForm, Panel pnlDash, UserMainForm Panel = null)
         {
             UserTransaction transac = new UserTransaction(Panel);
-            formManager.openDashboard(transac, pnlDash);
+            FormManager.openDashboard(transac, pnlDash);
             transac.Location = currentForm.Location;
         }
-        public void UserDashboard(Button button, Panel pnlDash, Form currentForm)
+        public static void UserDashboard(Button button, Panel pnlDash, Form currentForm)
         {
             UserDashboard userDashboard = new UserDashboard();
-            formManager.openDashboard(userDashboard, pnlDash);
+            FormManager.openDashboard(userDashboard, pnlDash);
             userDashboard.Location = currentForm.Location;
+        }
+        public static void DisplayRecords(Label borrowed,Label returned,Label dues)
+        {
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                {
+                    sqlConnection.Open();
+
+                    using (SqlCommand cmd = new SqlCommand("GetUserBorrowRecords", sqlConnection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@UserId", GlobalUserInfo.UserId);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                int borrowedCount = Convert.ToInt32(reader["BorrowedCount"]);
+                                int returnedCount = Convert.ToInt32(reader["ReturnedCount"]);
+                                int overdueCount = Convert.ToInt32(reader["OverdueCount"]);
+
+                                if (borrowed != null)
+                                    borrowed.Text = borrowedCount.ToString();
+
+                                if (returned != null)
+                                    returned.Text = returnedCount.ToString();
+
+                                if (dues != null)
+                                    dues.Text = overdueCount.ToString();
+                            }
+                            else
+                            {
+                                MessageBox.Show("No data found for the current user.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show($"Database Error: {sqlEx.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

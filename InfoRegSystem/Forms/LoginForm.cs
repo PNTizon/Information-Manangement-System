@@ -9,31 +9,28 @@ namespace InfoRegSystem
 {
     public partial class frmRegistration : Form
     {
-        private LoginButton login;
         private ButtonShadow shadow;
-        private Helpers helpers = new Helpers();
 
         public frmRegistration()
         {
             InitializeComponent();
-            login = new LoginButton();
             SystemButton();
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            login.HandleLogin(login_username, login_password, txtError, this);
+            LoginButtonFunctions.HandleLogin(login_username, login_password, txtError, this);
         }
         private void registerbtn_Click(object sender, EventArgs e)
         {
-            login.HandleRegister(registerbtn, this);
+            LoginButtonFunctions.HandleRegister(registerbtn, this);
         }
         private void picShow_Click(object sender, EventArgs e)
         {
-            helpers.ShowPassord(picShow, picPass, login_password);
+            Helpers.ShowPassord(picShow, picPass, login_password);
         }
         private void picPass_Click(object sender, EventArgs e)
         {
-            helpers.HidePassword(picShow, picPass, login_password);
+            Helpers.HidePassword(picShow, picPass, login_password);
         }
         private void SystemButton()
         {
@@ -44,14 +41,14 @@ namespace InfoRegSystem
             shadow = new ButtonShadow(buttons);
             shadow.NormalButton();
         }
-
         private void frmRegistration_Load(object sender, EventArgs e)
         {
             txtError.ReadOnly = true;
+            ActiveControl = login_username;
         }
         private void login_username_Leave_1(object sender, EventArgs e)
         {
-            helpers.UpperCase(login_username);
+            Helpers.UpperCase(login_username);
         }
     }
 }
