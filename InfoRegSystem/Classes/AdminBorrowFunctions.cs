@@ -327,6 +327,7 @@ namespace InfoRegSystem.Classes
 
                         using (SqlCommand cmd = new SqlCommand("UpdateReturnDetails", sqlConnection))
                         {
+<<<<<<< HEAD
                             cmd.CommandType = CommandType.StoredProcedure;
                             cmd.Parameters.Add("@Id", SqlDbType.Int).Value = recordId;
                             cmd.Parameters.Add("@ReturnDate", SqlDbType.DateTime).Value = returnDateValue;
@@ -337,6 +338,10 @@ namespace InfoRegSystem.Classes
                             int rowsAffected = cmd.ExecuteNonQuery();
 
                             if (rowsAffected > 0)
+=======
+                            // Update book copies in the Books table (assuming decrementing for return)
+                            using (SqlCommand updateCopiesCmd = new SqlCommand("DecrementBookCopies", sqlConnection))
+>>>>>>> 422a01843c0a4198c45f08a0a73a0d6021331512
                             {
                                 using (SqlCommand updateCopiesCmd = new SqlCommand("IncrementBookCopies", sqlConnection))
                                 {
