@@ -11,13 +11,13 @@ namespace InfoRegSystem.Classes
     {
         private Display display;
 
-        private string book { get; set; }
+        private static string book { get; set; }
 
         public UserTransactionFunction()
         {
             display = new Display();
         }
-        public  void RetunTransaction(DataGridView transactiongrid, Action displayBorrow)
+        public  static void RetunTransaction(DataGridView transactiongrid, Action displayBorrow)
         {
             try
             {
@@ -125,4 +125,3 @@ namespace InfoRegSystem.Classes
         }
     }
 }
-

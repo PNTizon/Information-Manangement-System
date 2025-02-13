@@ -28,7 +28,6 @@ namespace InfoRegSystem.Classes
                         cmd.Parameters.AddWithValue("@SearchInput", searchInput?.Trim() ?? (object)DBNull.Value);
                         cmd.Parameters.AddWithValue("@Genre", (selectedGenre)?? (object)DBNull.Value);
 
-
                         SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                         DataTable table = new DataTable();
                         adapter.Fill(table);

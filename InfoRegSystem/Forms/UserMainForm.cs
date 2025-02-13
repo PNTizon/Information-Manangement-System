@@ -10,8 +10,7 @@ namespace InfoRegSystem.Forms
 {
     public partial class UserMainForm : Form
     {
-        public Panel dashboardPanel { get { return userpnlDash; } }
-        //private frmRegistration frmRegistration;
+        //public Panel dashboardPanel { get { return userpnlDash; } }
         private ButtonShadow shadow;
         public UserMainForm()
         {

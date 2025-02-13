@@ -10,9 +10,6 @@ namespace InfoRegSystem.Classes
     {
         static string firstName, lastName;
 
-        public AdminBorrowFunctions()
-        {
-        }
         public static void BorrowHandler(string name, string lastname, string book, DateTime borrwedDate, ComboBox duration,
             Action displayBorrow, Action displayBookList, DataGridView borrowRecords)
         {
@@ -21,16 +18,15 @@ namespace InfoRegSystem.Classes
                 firstName = name;
                 lastName = lastname;
             }
-            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(lastname) || string.IsNullOrWhiteSpace(book))
+            if(!string.IsNullOrEmpty(name) || !string.IsNullOrEmpty(lastname) || !string.IsNullOrEmpty(book))
             {
-                MessageBox.Show("All fields are required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("All fields are required." , "Error" , MessageBoxButtons.OK,MessageBoxIcon.Error);
                 return;
             }
-
-            if (duration.SelectedItem == null)
+            if(duration.SelectedItem == null)
             {
-                MessageBox.Show("Please select the borrowing duration.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                MessageBox.Show("Please select borrowing duration." , "Warning", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return ;
             }
 
             try
@@ -47,7 +43,7 @@ namespace InfoRegSystem.Classes
                         checkStudentCmd.Parameters.AddWithValue("@Name", firstName);
                         checkStudentCmd.Parameters.AddWithValue("@Lastname", lastName);
 
-                        var result = checkStudentCmd.ExecuteScalar();
+                        object result = checkStudentCmd.ExecuteScalar();
                         if (result == null)
                         {
                             MessageBox.Show("The entered student is not registered in the system.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -55,7 +51,6 @@ namespace InfoRegSystem.Classes
                         }
                         studentId = Convert.ToInt32(result);
                     }
-
                     using (SqlCommand checkBookCmd = new SqlCommand("CheckBookExistsAvailability", sqlConnection))
                     {
                         checkBookCmd.CommandType = CommandType.StoredProcedure;
@@ -141,13 +136,11 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show("All fields are required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             if (duration.SelectedItem == null)
             {
                 MessageBox.Show("Please select the borrowing duration.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             try
             {
                 using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
@@ -316,7 +309,6 @@ namespace InfoRegSystem.Classes
                 {
                     expectedReturnDate = Convert.ToDateTime(dataGridViewBorrow.CurrentRow.Cells["ExpectedReturnDate"].Value);
                 }
-
                 // Calculate penalty if return is late
                 if (returnDateValue > expectedReturnDate)
                 {
@@ -352,7 +344,6 @@ namespace InfoRegSystem.Classes
                                     updateCopiesCmd.Parameters.AddWithValue("@OriginalBook", bookTitle);
                                     updateCopiesCmd.ExecuteNonQuery();
                                 }
-
                                 // Update DataGridView to reflect return details
                                 dataGridViewBorrow.CurrentRow.Cells["ReturnDate"].Value = returnDateValue;
                                 dataGridViewBorrow.CurrentRow.Cells["Penalty"].Value = penaltyAmount;
@@ -415,7 +406,6 @@ namespace InfoRegSystem.Classes
             {
                 firstName = name;
             }
-
             using (SqlConnection con = new SqlConnection(sqlconnection.Database))
             {
                 con.Open();
@@ -424,19 +414,16 @@ namespace InfoRegSystem.Classes
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@BorrowId", borrowId);
-
                     cmd.ExecuteNonQuery();
+
                     MessageBox.Show("Borrow request approved.");
                 }
-
                 using (SqlCommand decrementCopiesCmd = new SqlCommand("DecrementBookCopies", con))
                 {
                     decrementCopiesCmd.CommandType = CommandType.StoredProcedure;
                     decrementCopiesCmd.Parameters.AddWithValue("@BorrowBook", book);
-
                     decrementCopiesCmd.ExecuteNonQuery();
                 }
-
                 Display.DisplayBorrowRecords(recordsgrid);
             }
         }
@@ -445,17 +432,16 @@ namespace InfoRegSystem.Classes
             using (SqlConnection con = new SqlConnection(sqlconnection.Database))
             {
                 con.Open();
-
                 using (SqlCommand cmd = new SqlCommand("RejectRequest", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@BorrowId", borrowId);
-
                     cmd.ExecuteNonQuery();
+
                     MessageBox.Show("Borrow request declined.");
                 }
-                Display.DisplayBorrowRecords(recordsgrid);
             }
+            Display.DisplayBorrowRecords(recordsgrid);
         }
         public static void Clear(TextBox book, Guna2TextBox lastname, Guna2TextBox name, ComboBox duration)
         {

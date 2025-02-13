@@ -53,6 +53,7 @@
             this.userpanel.Name = "userpanel";
             this.userpanel.Size = new System.Drawing.Size(1157, 729);
             this.userpanel.TabIndex = 0;
+            this.userpanel.Paint += new System.Windows.Forms.PaintEventHandler(this.userpanel_Paint);
             // 
             // label7
             // 

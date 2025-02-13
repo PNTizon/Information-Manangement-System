@@ -13,12 +13,12 @@ namespace InfoRegSystem.Classes
 {
     public class UserBookFunction
     {
-        //private UserFormManager formMange;
+        ////private UserFormManager formMange;
 
-        public UserBookFunction()
-        {
-            //formMange = new UserFormManager();
-        }
+        //public UserBookFunction()
+        //{
+        //    //formMange = new UserFormManager();
+        //}
 
         public static void UserBookSearch(string searchbox,ComboBox genrebox,DataGridView bookgrid)
         {

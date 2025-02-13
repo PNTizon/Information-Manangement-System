@@ -54,6 +54,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtName = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtLastname = new Guna.UI2.WinForms.Guna2TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBorrow)).BeginInit();
             this.SuspendLayout();
             // 
@@ -363,11 +364,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Tahoma", 24.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(376, 0);
+            this.label6.Location = new System.Drawing.Point(418, 5);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(407, 40);
+            this.label6.Size = new System.Drawing.Size(337, 33);
             this.label6.TabIndex = 73;
             this.label6.Text = "Borrower\'s Information";
             // 
@@ -419,11 +420,21 @@
             this.txtLastname.TabIndex = 228;
             this.txtLastname.Leave += new System.EventHandler(this.txtLastname_Leave);
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.panel1.Location = new System.Drawing.Point(-422, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(2000, 2);
+            this.panel1.TabIndex = 229;
+            // 
             // AdminBorrowRecords
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.txtLastname);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.label6);
@@ -481,5 +492,6 @@
         private System.Windows.Forms.Label label6;
         private Guna.UI2.WinForms.Guna2TextBox txtName;
         private Guna.UI2.WinForms.Guna2TextBox txtLastname;
+        private System.Windows.Forms.Panel panel1;
     }
 }

@@ -23,11 +23,13 @@ namespace InfoRegSystem.Forms
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
-            MembersFunctions.SaveMemberInfo(txtName.Text, txtLastname.Text, genderbox.Text, countyCode, txtNumber.Text, txtAddress.Text, txtEmail.Text, DisplayMembers, Clear, dashboard.TotalMembers);
+            MembersFunctions.SaveMemberInfo(txtName.Text, txtLastname.Text, genderbox.Text, countyCode, txtNumber.Text, txtAddress.Text, txtEmail.Text,
+                DisplayMembers, Clear, dashboard.TotalMembers);
         }
         private void btnUpdate(object sender, EventArgs e)
         {
-            MembersFunctions.UpdateMemberInfo(txtName.Text, txtLastname.Text, genderbox.Text, countyCode, txtNumber.Text, txtAddress.Text, txtEmail.Text, membergrid, DisplayMembers, Clear, dashboard.TotalMembers);
+            MembersFunctions.UpdateMemberInfo(txtName.Text, txtLastname.Text, genderbox.Text, countyCode, txtNumber.Text, txtAddress.Text, txtEmail.Text,
+                membergrid, DisplayMembers, Clear, dashboard.TotalMembers);
         }
         private void DisplayMembers()
         {
@@ -46,8 +48,7 @@ namespace InfoRegSystem.Forms
         }
         private void membergrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridSelection.MembersSelection(e.RowIndex, txtName, txtLastname, countyCode, txtNumber,
-                txtAddress, txtEmail, genderbox, membergrid);
+            DataGridSelection.MembersSelection(e.RowIndex, txtName, txtLastname, countyCode, txtNumber, txtAddress, txtEmail, genderbox, membergrid);
         }
         private void LoadGenders()
         {

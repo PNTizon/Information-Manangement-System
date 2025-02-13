@@ -39,8 +39,8 @@ namespace InfoRegSystem.Forms
         private void createbtn_Click(object sender, EventArgs e)
         {
             AccountRegistrationFunctions.Register(registration_firstname.Text, registration_lastname.Text, registration_house.Text, registration_emails.Text,
-                registration_number,  countryNumbers, registration_username.Text, registration_pass.Text, cmbGender, errorbox1, errorbox3,
-                errorbox4, errorbox5, errorbox6, errorbox7, errorbox8, this);
+                registration_number,  countryNumbers, registration_username.Text, registration_pass.Text, cmbGender, errorbox1, errorbox3, errorbox4, errorbox5,
+                errorbox6, errorbox7, errorbox8, this);
         }
         private void loginbtn_Click(object sender, EventArgs e)
         {
