@@ -50,7 +50,7 @@ namespace InfoRegSystem.Classes
                     if (borrowrecords.Columns["PaymentStatus"] != null)
                         borrowrecords.Columns["PaymentStatus"].Visible = false;
 
-                    borrowrecords.Columns["Penalty"].DefaultCellStyle.Format = "N2";
+                    //borrowrecords.Columns["Penalty"].DefaultCellStyle.Format = "N2";
                 }
             }
             catch (SqlException ex)
@@ -130,7 +130,7 @@ namespace InfoRegSystem.Classes
                             {
                                 transactiongrid.Columns["Id"].Visible = false;
                             }
-                            transactiongrid.Columns["Penalty"].DefaultCellStyle.Format = "N2";
+                            //transactiongrid.Columns["Penalty"].DefaultCellStyle.Format = "N0";
                         }
                     }
                 }
@@ -166,7 +166,7 @@ namespace InfoRegSystem.Classes
                                 transaction.Columns["Id"].Visible = false;
                         }
                     }
-                    transaction.Columns["Penalty"].DefaultCellStyle.Format = "N2";
+                    //transaction.Columns["Penalty"].DefaultCellStyle.Format = "N0";
                 }
             }
             catch (SqlException ex)

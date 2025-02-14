@@ -24,17 +24,17 @@ namespace InfoRegSystem.Forms
 
         private void btnPaid_Click(object sender, EventArgs e)
         {
-           AdminTransactionFinctions.PaidButton(transactiongrid);
+           AdminTransactionFunctions.PaidButton(transactiongrid);
         }
         private void btnSearch_Click(object sender, EventArgs e)
         {
             string search = searchbox.Text;
-            AdminTransactionFinctions.SearchTransactions(transactiongrid, search);
+            AdminTransactionFunctions.SearchTransactions(transactiongrid, search);
         }
         private void searchbox_TextChanged(object sender, EventArgs e)
         {
             string search = searchbox.Text;
-            AdminTransactionFinctions.SearchTransactions(transactiongrid, search);
+            AdminTransactionFunctions.SearchTransactions(transactiongrid, search);
         }
     }
 }

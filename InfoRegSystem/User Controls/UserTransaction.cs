@@ -16,9 +16,9 @@ namespace InfoRegSystem.Forms
 {
     public partial class UserTransaction : UserControl
     {
-        private UserDashboard formdash;
+        private readonly UserDashboard formdash;
         private ButtonShadow shadow;
-        private UserMainForm userMainForm;
+        private readonly UserMainForm userMainForm;
 
         public UserTransaction(UserMainForm exisitngPanel)
         {

@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace InfoRegSystem.Classes
 {
-    public class AdminTransactionFinctions
+    public class AdminTransactionFunctions
     {
         public static void PaidButton(DataGridView transactiongrid)
         {
@@ -35,7 +35,7 @@ namespace InfoRegSystem.Classes
                     using (SqlCommand cmd = new SqlCommand("Payment", sqlConnection))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.Add("@Id", SqlDbType.Int).Value = recordId;
+                        cmd.Parameters.AddWithValue("@Id", recordId);
 
                         int rowsAffected = cmd.ExecuteNonQuery();
 

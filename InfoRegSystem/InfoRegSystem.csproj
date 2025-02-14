@@ -110,7 +110,7 @@
     <Compile Include="Classes\AdminBookFunction.cs" />
     <Compile Include="Classes\AdminBorrowFunctions.cs" />
     <Compile Include="Classes\AdminDashboardFunctions.cs" />
-    <Compile Include="Classes\AdminTransactionFinctions.cs" />
+    <Compile Include="Classes\AdminTransactionFunctions.cs" />
     <Compile Include="Classes\ButtonShadow.cs" />
     <Compile Include="Classes\DataGridSelection.cs" />
     <Compile Include="Classes\Display.cs" />

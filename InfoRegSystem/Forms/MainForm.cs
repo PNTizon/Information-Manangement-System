@@ -6,7 +6,7 @@ namespace InfoRegSystem
 {
     public partial class MainForm : Form
     {
-        private ButtonShadow shadow;
+        //private readonly ButtonShadow shadow;
 
         public MainForm()
         {

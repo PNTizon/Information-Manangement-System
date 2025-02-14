@@ -18,15 +18,15 @@ namespace InfoRegSystem.Classes
                 firstName = name;
                 lastName = lastname;
             }
-            if(!string.IsNullOrEmpty(name) || !string.IsNullOrEmpty(lastname) || !string.IsNullOrEmpty(book))
+            if (!string.IsNullOrEmpty(name) || !string.IsNullOrEmpty(lastname) || !string.IsNullOrEmpty(book))
             {
-                MessageBox.Show("All fields are required." , "Error" , MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("All fields are required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if(duration.SelectedItem == null)
+            if (duration.SelectedItem == null)
             {
-                MessageBox.Show("Please select borrowing duration." , "Warning", MessageBoxButtons.OK,MessageBoxIcon.Error);
-                return ;
+                MessageBox.Show("Please select borrowing duration.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
             try
@@ -55,8 +55,8 @@ namespace InfoRegSystem.Classes
                     {
                         checkBookCmd.CommandType = CommandType.StoredProcedure;
                         checkBookCmd.Parameters.AddWithValue("@Book", book);
-                        object bookCopiesResult = checkBookCmd.ExecuteScalar();
 
+                        object bookCopiesResult = checkBookCmd.ExecuteScalar();
                         if (bookCopiesResult == null)
                         {
                             MessageBox.Show("The entered book is not registered in the system.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -106,10 +106,11 @@ namespace InfoRegSystem.Classes
                         insertBorrowCmd.ExecuteNonQuery();
                     }
 
-                    using (SqlCommand decrementCopiesCmd = new SqlCommand("DecrementBookCopies", sqlConnection))
+                    using (SqlCommand decrementCopiesCmd = new SqlCommand("UpdateBookCopiesForBorrow", sqlConnection))
                     {
                         decrementCopiesCmd.CommandType = CommandType.StoredProcedure;
-                        decrementCopiesCmd.Parameters.AddWithValue("@BorrowBook", book);
+                        decrementCopiesCmd.Parameters.AddWithValue("@BookTitle", book);
+                        decrementCopiesCmd.Parameters.AddWithValue("@ActionType", "BORROW");
                         decrementCopiesCmd.ExecuteNonQuery();
                     }
 
@@ -128,8 +129,7 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public static void UpdateHandler(Guna2TextBox name, Guna2TextBox lastname, TextBox book, ComboBox duration,
-            Action displayBorrow, Action displayBookList, DataGridView borrowRecords)
+        public static void UpdateHandler(Guna2TextBox name, Guna2TextBox lastname, TextBox book, ComboBox duration,Action displayBorrow, Action displayBookList, DataGridView borrowRecords)
         {
             if (string.IsNullOrWhiteSpace(name.Text) || string.IsNullOrWhiteSpace(lastname.Text) || string.IsNullOrWhiteSpace(book.Text))
             {
@@ -198,7 +198,7 @@ namespace InfoRegSystem.Classes
                     // Update book copies if the book title has changed
                     if (!string.Equals(originalBookTitle, updatedBookTitle, StringComparison.OrdinalIgnoreCase))
                     {
-                        using (SqlCommand updateCopiesCmd = new SqlCommand("UpdateBookCopiesForBorrow", sqlConnection))
+                        using (SqlCommand updateCopiesCmd = new SqlCommand("UpdateCopies", sqlConnection))
                         {
                             updateCopiesCmd.CommandType = CommandType.StoredProcedure;
                             updateCopiesCmd.Parameters.AddWithValue("@OriginalBook", originalBookTitle);
@@ -254,13 +254,16 @@ namespace InfoRegSystem.Classes
                             if (rowsAffected > 0)
                             {
                                 // Increase book copies in Books table
-                                SqlCommand updateCopiesCmd = new SqlCommand("IncrementBookCopies", sqlConnection);
+                                using (SqlCommand updateCopiesCmd = new SqlCommand("UpdateBookCopiesForBorrow", sqlConnection))
+                                {
+                                    updateCopiesCmd.CommandType = CommandType.StoredProcedure;
+                                    updateCopiesCmd.Parameters.AddWithValue("@BookTitle", bookTitle);
+                                    updateCopiesCmd.Parameters.AddWithValue("@ActionType", "RETURN");
 
-                                updateCopiesCmd.CommandType = CommandType.StoredProcedure;
-                                updateCopiesCmd.Parameters.AddWithValue("@OriginalBook", bookTitle);
-                                updateCopiesCmd.ExecuteNonQuery();
+                                    updateCopiesCmd.ExecuteNonQuery();
 
-                                MessageBox.Show("Record deleted successfully.");
+                                    MessageBox.Show("Record deleted successfully.");
+                                }
                             }
                             else
                             {
@@ -327,26 +330,21 @@ namespace InfoRegSystem.Classes
 
                         using (SqlCommand cmd = new SqlCommand("UpdateReturnDetails", sqlConnection))
                         {
-<<<<<<< HEAD
                             cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.Add("@Id", SqlDbType.Int).Value = recordId;
-                            cmd.Parameters.Add("@ReturnDate", SqlDbType.DateTime).Value = returnDateValue;
-                            cmd.Parameters.Add("@Penalty", SqlDbType.Decimal).Value = penaltyAmount;
-                            cmd.Parameters.Add("@PaymentStatus", SqlDbType.VarChar).Value = paymentStatus;
-
+                            cmd.Parameters.AddWithValue("@Id", recordId);
+                            cmd.Parameters.AddWithValue("@ReturnDate", returnDateValue);
+                            cmd.Parameters.AddWithValue("@Penalty", penaltyAmount);
+                            cmd.Parameters.AddWithValue("@PaymentStatus", paymentStatus);
 
                             int rowsAffected = cmd.ExecuteNonQuery();
 
                             if (rowsAffected > 0)
-=======
-                            // Update book copies in the Books table (assuming decrementing for return)
-                            using (SqlCommand updateCopiesCmd = new SqlCommand("DecrementBookCopies", sqlConnection))
->>>>>>> 422a01843c0a4198c45f08a0a73a0d6021331512
                             {
-                                using (SqlCommand updateCopiesCmd = new SqlCommand("IncrementBookCopies", sqlConnection))
+                                using (SqlCommand updateCopiesCmd = new SqlCommand("UpdateBookCopiesForBorrow", sqlConnection))
                                 {
                                     updateCopiesCmd.CommandType = CommandType.StoredProcedure;
-                                    updateCopiesCmd.Parameters.AddWithValue("@OriginalBook", bookTitle);
+                                    updateCopiesCmd.Parameters.AddWithValue("@BookTitle", bookTitle);
+                                    updateCopiesCmd.Parameters.AddWithValue("@ActionType", "RETURN");
                                     updateCopiesCmd.ExecuteNonQuery();
                                 }
                                 // Update DataGridView to reflect return details
@@ -423,10 +421,11 @@ namespace InfoRegSystem.Classes
 
                     MessageBox.Show("Borrow request approved.");
                 }
-                using (SqlCommand decrementCopiesCmd = new SqlCommand("DecrementBookCopies", con))
+                using (SqlCommand decrementCopiesCmd = new SqlCommand("UpdateBookCopiesForBorrow", con))
                 {
                     decrementCopiesCmd.CommandType = CommandType.StoredProcedure;
-                    decrementCopiesCmd.Parameters.AddWithValue("@BorrowBook", book);
+                    decrementCopiesCmd.Parameters.AddWithValue("@BookTitle", book);
+                    decrementCopiesCmd.Parameters.AddWithValue("@ActionType", "BORROW");
                     decrementCopiesCmd.ExecuteNonQuery();
                 }
                 Display.DisplayBorrowRecords(recordsgrid);
