@@ -18,7 +18,7 @@ namespace InfoRegSystem.Classes
                 firstName = name;
                 lastName = lastname;
             }
-            if (!string.IsNullOrEmpty(name) || !string.IsNullOrEmpty(lastname) || !string.IsNullOrEmpty(book))
+            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(lastname) || string.IsNullOrEmpty(book))
             {
                 MessageBox.Show("All fields are required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -31,12 +31,11 @@ namespace InfoRegSystem.Classes
 
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
                 {
                     sqlConnection.Open();
 
                     int studentId = GlobalUserInfo.UserId;
-
                     using (SqlCommand checkStudentCmd = new SqlCommand("CheckStudentExist", sqlConnection))
                     {
                         checkStudentCmd.CommandType = CommandType.StoredProcedure;
@@ -143,7 +142,7 @@ namespace InfoRegSystem.Classes
             }
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
                 {
                     sqlConnection.Open();
 
@@ -152,7 +151,6 @@ namespace InfoRegSystem.Classes
                         MessageBox.Show("Please select a record to update.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
-
                     // Retrieve record ID
                     object idValue = borrowRecords.CurrentRow.Cells["Id"].Value;
                     if (idValue == DBNull.Value || idValue == null)
@@ -160,7 +158,6 @@ namespace InfoRegSystem.Classes
                         MessageBox.Show("Invalid record selected. No ID found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-
                     int recordId = Convert.ToInt32(idValue);
 
                     // Get original book title to manage stock
@@ -168,6 +165,7 @@ namespace InfoRegSystem.Classes
                     string updatedBookTitle = book.Text.Trim();
 
                     // Parse duration and calculate new Expected Return Date
+
                     DateTime updatedBorrowedDate = DateTime.Now;
                     if (!int.TryParse(duration.SelectedItem.ToString(), out int borrowDurationDays))
                     {
@@ -194,7 +192,6 @@ namespace InfoRegSystem.Classes
                             return;
                         }
                     }
-
                     // Update book copies if the book title has changed
                     if (!string.Equals(originalBookTitle, updatedBookTitle, StringComparison.OrdinalIgnoreCase))
                     {
@@ -240,7 +237,7 @@ namespace InfoRegSystem.Classes
 
                 if (result == DialogResult.Yes)
                 {
-                    using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                    using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
                     {
                         sqlConnection.Open();
 
@@ -259,7 +256,6 @@ namespace InfoRegSystem.Classes
                                     updateCopiesCmd.CommandType = CommandType.StoredProcedure;
                                     updateCopiesCmd.Parameters.AddWithValue("@BookTitle", bookTitle);
                                     updateCopiesCmd.Parameters.AddWithValue("@ActionType", "RETURN");
-
                                     updateCopiesCmd.ExecuteNonQuery();
 
                                     MessageBox.Show("Record deleted successfully.");
@@ -304,7 +300,7 @@ namespace InfoRegSystem.Classes
                 }
 
                 DateTime returnDateValue = returnDatePicker.Checked ? returnDatePicker.Value : DateTime.Now;
-                decimal penaltyAmount = 0;
+                int penaltyAmount = 0;
                 string paymentStatus = "Paid";
 
                 DateTime expectedReturnDate = DateTime.MinValue;
@@ -316,7 +312,7 @@ namespace InfoRegSystem.Classes
                 if (returnDateValue > expectedReturnDate)
                 {
                     TimeSpan lateDuration = returnDateValue - expectedReturnDate;
-                    penaltyAmount = (decimal)(lateDuration.TotalHours * 10);
+                    penaltyAmount = (int)(lateDuration.TotalHours * 10);
                     paymentStatus = "Unpaid";
                 }
 
@@ -324,7 +320,7 @@ namespace InfoRegSystem.Classes
 
                 if (result == DialogResult.Yes)
                 {
-                    using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                    using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
                     {
                         sqlConnection.Open();
 
@@ -364,6 +360,7 @@ namespace InfoRegSystem.Classes
                         }
                     }
                 }
+                Display.DisplayBorrowRecords(dataGridViewBorrow);
             }
             catch (Exception ex)
             {
@@ -374,7 +371,7 @@ namespace InfoRegSystem.Classes
         {
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
                 {
                     sqlConnection.Open();
 
@@ -394,8 +391,8 @@ namespace InfoRegSystem.Classes
                         {
                             MessageBox.Show("No records found matching your search.", "No Results", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
+                        sqlConnection.Close();
                     }
-                    sqlConnection.Close();
                 }
             }
             catch (SqlException ex)
@@ -409,7 +406,7 @@ namespace InfoRegSystem.Classes
             {
                 firstName = name;
             }
-            using (SqlConnection con = new SqlConnection(sqlconnection.Database))
+            using (SqlConnection con = new SqlConnection(Connection.Database))
             {
                 con.Open();
 
@@ -433,7 +430,7 @@ namespace InfoRegSystem.Classes
         }
         public static void RejectRequest(int borrowId, DataGridView recordsgrid)
         {
-            using (SqlConnection con = new SqlConnection(sqlconnection.Database))
+            using (SqlConnection con = new SqlConnection(Connection.Database))
             {
                 con.Open();
                 using (SqlCommand cmd = new SqlCommand("RejectRequest", con))

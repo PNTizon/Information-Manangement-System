@@ -97,7 +97,7 @@
             this.transactiongrid.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.transactiongrid.Size = new System.Drawing.Size(1086, 553);
             this.transactiongrid.TabIndex = 79;
-            this.transactiongrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.transactiongrid_CellContentClick);
+            this.transactiongrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Transactiongrid_CellContentClick);
             // 
             // btnPaid
             // 
@@ -115,7 +115,7 @@
             this.btnPaid.Size = new System.Drawing.Size(115, 30);
             this.btnPaid.TabIndex = 82;
             this.btnPaid.Text = "Paid";
-            this.btnPaid.Click += new System.EventHandler(this.btnPaid_Click);
+            this.btnPaid.Click += new System.EventHandler(this.BtnPaid_Click);
             // 
             // btnSearch
             // 
@@ -154,7 +154,7 @@
             this.searchbox.SelectedText = "";
             this.searchbox.Size = new System.Drawing.Size(770, 35);
             this.searchbox.TabIndex = 83;
-            this.searchbox.TextChanged += new System.EventHandler(this.searchbox_TextChanged);
+            this.searchbox.TextChanged += new System.EventHandler(this.Searchbox_TextChanged);
             // 
             // panel1
             // 

@@ -30,7 +30,7 @@ namespace InfoRegSystem.Classes
                 }
                 else
                 {
-                    using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                    using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
                     {
                         sqlConnection.Open();
 
@@ -72,7 +72,7 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show("Unexpected Error: " + ex.Message, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public static void HandleRegister(Button registerButton, Form currentForm)
+        public static void HandleRegister(Form currentForm)
         {
             AccountCreation regis = new AccountCreation();
             regis.Show();

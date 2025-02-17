@@ -15,7 +15,7 @@ namespace InfoRegSystem.Classes
     {
         public static void HandleSearch(DataGridView dataGridViewBookInfo, string searchbox)
         {
-            using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+            using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
             {
                 sqlConnection.Open();
 
@@ -35,7 +35,7 @@ namespace InfoRegSystem.Classes
         {
             try
             {
-                SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database);
+                SqlConnection sqlConnection = new SqlConnection(Connection.Database);
 
                 sqlConnection.Open();
 
@@ -60,7 +60,7 @@ namespace InfoRegSystem.Classes
         {
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
                 {
                     sqlConnection.Open();
 

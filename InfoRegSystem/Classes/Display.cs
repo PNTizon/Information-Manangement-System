@@ -10,7 +10,7 @@ namespace InfoRegSystem.Classes
     {
         public static void DisplayMembers(DataGridView membergrid)
         {
-            using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+            using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
             {
                 sqlConnection.Open();
 
@@ -31,7 +31,7 @@ namespace InfoRegSystem.Classes
         {
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
                 {
                     sqlConnection.Open();
 
@@ -41,16 +41,13 @@ namespace InfoRegSystem.Classes
                     dataAdapter.Fill(dataTable);
                     borrowrecords.DataSource = dataTable;
 
-                    if (borrowrecords.Columns["Id"] != null)
-                        borrowrecords.Columns["Id"].Visible = false;
+                    string[] columnsToHide = { "Id", "StudentId", "PaymentStatus" };
 
-                    if (borrowrecords.Columns["StudentId"] != null)
-                        borrowrecords.Columns["StudentId"].Visible = false;
-
-                    if (borrowrecords.Columns["PaymentStatus"] != null)
-                        borrowrecords.Columns["PaymentStatus"].Visible = false;
-
-                    //borrowrecords.Columns["Penalty"].DefaultCellStyle.Format = "N2";
+                    foreach (var columnName in columnsToHide)
+                    {
+                        if (borrowrecords.Columns[columnName] != null)
+                            borrowrecords.Columns[columnName].Visible = false;
+                    }
                 }
             }
             catch (SqlException ex)
@@ -62,7 +59,7 @@ namespace InfoRegSystem.Classes
         {
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
                 {
                     sqlConnection.Open();
 
@@ -73,9 +70,7 @@ namespace InfoRegSystem.Classes
                     books.DataSource = dataTable;
 
                     if (books.Columns.Contains("BookID"))
-                    {
                         books.Columns["BookID"].Visible = false;
-                    }
                 }
             }
             catch (SqlException ex)
@@ -87,7 +82,7 @@ namespace InfoRegSystem.Classes
         {
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
                 {
                     sqlConnection.Open();
 
@@ -97,9 +92,7 @@ namespace InfoRegSystem.Classes
                     bookgrid.DataSource = dataTable;
 
                     if (bookgrid.Columns.Contains("BookID"))
-                    {
                         bookgrid.Columns["BookID"].Visible = false;
-                    }
                 }
             }
             catch (SqlException ex)
@@ -111,7 +104,7 @@ namespace InfoRegSystem.Classes
         {
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
                 {
                     sqlConnection.Open();
 
@@ -127,10 +120,7 @@ namespace InfoRegSystem.Classes
                             transactiongrid.DataSource = dataTable;
 
                             if (transactiongrid.Columns.Contains("Id"))
-                            {
                                 transactiongrid.Columns["Id"].Visible = false;
-                            }
-                            //transactiongrid.Columns["Penalty"].DefaultCellStyle.Format = "N0";
                         }
                     }
                 }
@@ -144,12 +134,11 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         public static void Transaction(DataGridView transaction)
         {
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
                 {
                     sqlConnection.Open();
 
@@ -157,7 +146,6 @@ namespace InfoRegSystem.Classes
                     {
                         using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
                         {
-                            // Fill the DataTable and bind it to the DataGridView
                             DataTable dataTable = new DataTable();
                             dataAdapter.Fill(dataTable);
                             transaction.DataSource = dataTable;
@@ -166,7 +154,6 @@ namespace InfoRegSystem.Classes
                                 transaction.Columns["Id"].Visible = false;
                         }
                     }
-                    //transaction.Columns["Penalty"].DefaultCellStyle.Format = "N0";
                 }
             }
             catch (SqlException ex)

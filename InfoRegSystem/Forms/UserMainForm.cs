@@ -11,27 +11,27 @@ namespace InfoRegSystem.Forms
     public partial class UserMainForm : Form
     {
         //public Panel dashboardPanel { get { return userpnlDash; } }
-        private ButtonShadow shadow;
+        //private ButtonShadow shadow;
         public UserMainForm()
         {
             InitializeComponent();
         }
         private void bookinfobtn_Click(object sender, EventArgs e)
         {
-            UserDashboardFunctions.UserBookInfo(bookinfobtn, this, userpnlDash);
+            UserDashboardFunctions.UserBookInfo( this, userpnlDash);
         }
-        private void returnbtn_Click(object sender, EventArgs e)
+        private void Returnbtn_Click(object sender, EventArgs e)
         {
-            UserDashboardFunctions.UserTransaction(returnbtn, this, userpnlDash);
+            UserDashboardFunctions.UserTransaction( this, userpnlDash);
         }
         private void logoutbtn_Click(object sender, EventArgs e)
         {
-            UserDashboardFunctions.UserLogout(logoutbtn, this);
+            UserDashboardFunctions.UserLogout( this);
         }
 
         private void btnDasboard_Click(object sender, EventArgs e)
         {
-            UserDashboardFunctions.UserDashboard(btnDasboard, userpnlDash,this);
+            UserDashboardFunctions.UserDashboard( userpnlDash,this);
         }
         private void UserMainForm_Load(object sender, EventArgs e)
         {

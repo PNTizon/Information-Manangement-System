@@ -34,7 +34,7 @@
             this.userpanel = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
             this.borrowedbtn = new Guna.UI2.WinForms.Guna2Button();
-            this.returnbtn = new Guna.UI2.WinForms.Guna2Button();
+            this.Returnbtn = new Guna.UI2.WinForms.Guna2Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.transactiongrid = new System.Windows.Forms.DataGridView();
             this.userpanel.SuspendLayout();
@@ -45,7 +45,7 @@
             // 
             this.userpanel.Controls.Add(this.label7);
             this.userpanel.Controls.Add(this.borrowedbtn);
-            this.userpanel.Controls.Add(this.returnbtn);
+            this.userpanel.Controls.Add(this.Returnbtn);
             this.userpanel.Controls.Add(this.panel5);
             this.userpanel.Controls.Add(this.transactiongrid);
             this.userpanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -53,7 +53,6 @@
             this.userpanel.Name = "userpanel";
             this.userpanel.Size = new System.Drawing.Size(1157, 729);
             this.userpanel.TabIndex = 0;
-            this.userpanel.Paint += new System.Windows.Forms.PaintEventHandler(this.userpanel_Paint);
             // 
             // label7
             // 
@@ -84,23 +83,23 @@
             this.borrowedbtn.Text = "Borrow";
             this.borrowedbtn.Click += new System.EventHandler(this.borrowedbtn_Click);
             // 
-            // returnbtn
+            // Returnbtn
             // 
-            this.returnbtn.BorderRadius = 10;
-            this.returnbtn.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            this.returnbtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.returnbtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.returnbtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.returnbtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.returnbtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(153)))), ((int)(((byte)(78)))));
-            this.returnbtn.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.returnbtn.ForeColor = System.Drawing.Color.White;
-            this.returnbtn.Location = new System.Drawing.Point(985, 672);
-            this.returnbtn.Name = "returnbtn";
-            this.returnbtn.Size = new System.Drawing.Size(115, 30);
-            this.returnbtn.TabIndex = 76;
-            this.returnbtn.Text = "Returned ";
-            this.returnbtn.Click += new System.EventHandler(this.returnbtn_Click);
+            this.Returnbtn.BorderRadius = 10;
+            this.Returnbtn.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            this.Returnbtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.Returnbtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.Returnbtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.Returnbtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.Returnbtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(153)))), ((int)(((byte)(78)))));
+            this.Returnbtn.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.Returnbtn.ForeColor = System.Drawing.Color.White;
+            this.Returnbtn.Location = new System.Drawing.Point(985, 672);
+            this.Returnbtn.Name = "Returnbtn";
+            this.Returnbtn.Size = new System.Drawing.Size(115, 30);
+            this.Returnbtn.TabIndex = 76;
+            this.Returnbtn.Text = "Returned ";
+            this.Returnbtn.Click += new System.EventHandler(this.Returnbtn_Click);
             // 
             // panel5
             // 
@@ -147,7 +146,7 @@
             this.transactiongrid.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.transactiongrid.Size = new System.Drawing.Size(1086, 571);
             this.transactiongrid.TabIndex = 74;
-            this.transactiongrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.transactiongrid_CellClick);
+            this.transactiongrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Transactiongrid_CellClick);
             // 
             // UserTransaction
             // 
@@ -169,7 +168,7 @@
         private Guna.UI2.WinForms.Guna2Button borrowbtn;
         private System.Windows.Forms.Panel userpanel;
         private Guna.UI2.WinForms.Guna2Button borrowedbtn;
-        private Guna.UI2.WinForms.Guna2Button returnbtn;
+        private Guna.UI2.WinForms.Guna2Button Returnbtn;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.DataGridView transactiongrid;
         private System.Windows.Forms.Label label7;

@@ -239,7 +239,7 @@
             this.registration_username.SelectedText = "";
             this.registration_username.Size = new System.Drawing.Size(215, 26);
             this.registration_username.TabIndex = 221;
-            this.registration_username.Leave += new System.EventHandler(this.registration_username_Leave);
+            this.registration_username.Leave += new System.EventHandler(this.Registration_username_Leave);
             // 
             // registration_pass
             // 
@@ -262,7 +262,7 @@
             this.registration_pass.SelectedText = "";
             this.registration_pass.Size = new System.Drawing.Size(215, 26);
             this.registration_pass.TabIndex = 220;
-            this.registration_pass.TextChanged += new System.EventHandler(this.registration_pass_TextChanged);
+            this.registration_pass.TextChanged += new System.EventHandler(this.Registration_pass_TextChanged);
             // 
             // button1
             // 
@@ -310,6 +310,7 @@
             this.cmbGender.Name = "cmbGender";
             this.cmbGender.Size = new System.Drawing.Size(215, 26);
             this.cmbGender.TabIndex = 209;
+            this.cmbGender.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CmbGender_KeyPress);
             // 
             // errorbox7
             // 
@@ -542,7 +543,7 @@
             this.showpass.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.showpass.TabIndex = 188;
             this.showpass.TabStop = false;
-            this.showpass.Click += new System.EventHandler(this.showpass_Click);
+            this.showpass.Click += new System.EventHandler(this.Showpass_Click);
             // 
             // panel1
             // 

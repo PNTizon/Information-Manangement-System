@@ -9,18 +9,18 @@ namespace InfoRegSystem.Classes
     public class MembersFunctions
     {
         public static void SaveMemberInfo(string name, string lastname, string gender, TextBox countryCode, string phonenumber,
-            string address, string email, Action displayMethod, Action clearMethod, Action displayMemMethod = null)
+            string address, string email, DataGridView membergrid, Action clearMethod, Action displayMemMethod = null)
         {
             try
             {
-                if(!Helpers.isValidName(name) || !Helpers.isValidName(lastname) || !Helpers.isValidAddress(address)
+                if (!Helpers.isValidName(name) || !Helpers.isValidName(lastname) || !Helpers.isValidAddress(address)
                     || string.IsNullOrEmpty(phonenumber) || !Helpers.isValidEmail(email) || !Helpers.isValidGender(gender))
                 {
                     MessageBox.Show("Please fill all the blank fields.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
-                using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
                 {
                     sqlConnection.Open();
 
@@ -41,18 +41,17 @@ namespace InfoRegSystem.Classes
                     }
 
                     MessageBox.Show("Data Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    displayMemMethod?.Invoke();
-                    displayMethod();
-                    clearMethod();
                 }
+                displayMemMethod?.Invoke();
+                clearMethod();
+                Display.DisplayMembers(membergrid);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Save Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public static void DeleteMemberInfo(DataGridView membergrid, Action displayMethod, Action clearMethod, Action displayMemMethod = null)
+        public static void DeleteMemberInfo(DataGridView membergrid, Action clearMethod, Action displayMemMethod = null)
         {
             try
             {
@@ -68,7 +67,7 @@ namespace InfoRegSystem.Classes
 
                 if (result == DialogResult.Yes)
                 {
-                    using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                    using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
                     {
                         sqlConnection.Open();
 
@@ -90,13 +89,13 @@ namespace InfoRegSystem.Classes
                         }
                     }
                 }
+                Display.DisplayMembers(membergrid);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             clearMethod();
-            displayMethod();
         }
         public static void UpdateMemberInfo(string name, string lastname, string gender, TextBox countryCode,
             string phoneNumber, string address, string email, DataGridView membergrid,
@@ -119,7 +118,7 @@ namespace InfoRegSystem.Classes
 
                 int selectedID = Convert.ToInt32(membergrid.CurrentRow.Cells["ID"].Value);
 
-                using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
                 {
                     sqlConnection.Open();
 
@@ -152,6 +151,7 @@ namespace InfoRegSystem.Classes
                 }
                 displayMethod();
                 clearMethod();
+                Display.DisplayMembers(membergrid);
             }
             catch (Exception ex)
             {
@@ -162,7 +162,7 @@ namespace InfoRegSystem.Classes
         {
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
                 {
                     sqlConnection.Open();
 
@@ -191,7 +191,7 @@ namespace InfoRegSystem.Classes
             }
         }
         public static void Cleaner(Guna2TextBox name, Guna2TextBox lastname, Guna2TextBox email, Guna2TextBox address,
-            Guna2TextBox phoneNum,  TextBox countryTxt, ComboBox countrybox, ComboBox genderbox)
+            Guna2TextBox phoneNum, TextBox countryTxt, ComboBox countrybox, ComboBox genderbox)
         {
             name.Clear();
             lastname.Clear();

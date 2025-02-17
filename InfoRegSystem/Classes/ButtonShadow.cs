@@ -11,8 +11,8 @@ namespace InfoRegSystem.Classes
 {
     public class ButtonShadow
     {
-        private List<Guna2Button> gunaButton;
-        private List<System.Windows.Forms.Button> systemButtons;
+        private readonly List<Guna2Button> gunaButton;
+        private readonly List<System.Windows.Forms.Button> systemButtons;
 
         public ButtonShadow(List<Guna2Button> gunaButtons)
         {

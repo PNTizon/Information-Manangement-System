@@ -16,7 +16,7 @@ namespace InfoRegSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(mainForm: new frmRegistration());
+            Application.Run(mainForm: new FrmRegistration());
         }
     }
 }

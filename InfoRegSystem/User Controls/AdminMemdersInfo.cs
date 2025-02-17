@@ -19,17 +19,17 @@ namespace InfoRegSystem.Forms
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            MembersFunctions.DeleteMemberInfo(membergrid, DisplayMembers, Clear, dashboard.TotalMembers);
+            MembersFunctions.DeleteMemberInfo(membergrid, Clear, dashboard.TotalMembers);
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
             MembersFunctions.SaveMemberInfo(txtName.Text, txtLastname.Text, genderbox.Text, countyCode, txtNumber.Text, txtAddress.Text, txtEmail.Text,
-                DisplayMembers, Clear, dashboard.TotalMembers);
+                membergrid,Clear, dashboard.TotalMembers);
         }
         private void btnUpdate(object sender, EventArgs e)
         {
             MembersFunctions.UpdateMemberInfo(txtName.Text, txtLastname.Text, genderbox.Text, countyCode, txtNumber.Text, txtAddress.Text, txtEmail.Text,
-                membergrid, DisplayMembers, Clear, dashboard.TotalMembers);
+                membergrid, Clear, dashboard.TotalMembers);
         }
         private void DisplayMembers()
         {
@@ -66,7 +66,7 @@ namespace InfoRegSystem.Forms
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PhoneNumberList.comboBox_autoModifier(comboBox1_SelectedIndexChanged, CountryCodecmb, countyCode);
+            PhoneNumberList.ComboBox_autoModifier(comboBox1_SelectedIndexChanged, CountryCodecmb, countyCode);
         }
         private void searchbox_TextChanged(object sender, EventArgs e)
         {

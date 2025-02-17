@@ -70,7 +70,7 @@ namespace InfoRegSystem.Classes
             }
             comboBox.SelectedIndexChanged += eventHandler; 
         }
-        public static void comboBox_autoModifier(EventHandler eventHandler, ComboBox comboBox, TextBox textBox)
+        public static void ComboBox_autoModifier(EventHandler eventHandler, ComboBox comboBox, TextBox textBox)
         {
             if (comboBox.SelectedIndex >= 0)
             {

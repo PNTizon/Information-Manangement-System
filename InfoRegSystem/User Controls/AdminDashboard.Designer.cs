@@ -149,7 +149,7 @@
             this.searchbox.SelectedText = "";
             this.searchbox.Size = new System.Drawing.Size(812, 30);
             this.searchbox.TabIndex = 43;
-            this.searchbox.TextChanged += new System.EventHandler(this.searchbox_TextChanged);
+            this.searchbox.TextChanged += new System.EventHandler(this.Searchbox_TextChanged);
             // 
             // dataGridViewBookInfo
             // 

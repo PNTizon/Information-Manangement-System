@@ -28,7 +28,7 @@ namespace InfoRegSystem.Classes
 
             if (result == DialogResult.Yes)
             {
-                using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
                 {
                     sqlConnection.Open();
 
@@ -54,12 +54,13 @@ namespace InfoRegSystem.Classes
                     }
                 }
             }
+            //Display.Transaction(transactiongrid);
         }
         public static void SearchTransactions(DataGridView transactiongrid, string searchbox)
         {
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
                 {
                     sqlConnection.Open();
 

@@ -12,24 +12,23 @@ namespace InfoRegSystem.Classes
 {
     public class UserDashboardFunctions
     {
-        
-        public static void UserLogout(Button logoutbtn, Form currentForm)
+        public static void UserLogout(Form currentForm)
         {
             Application.Restart();
         }
-        public static void UserBookInfo(Button bookbtn, Form currentForm, Panel pnlDash)
+        public static void UserBookInfo( Form currentForm, Panel pnlDash)
         {
             UserBook bookInfo = new UserBook();
             FormManager.openDashboard(bookInfo, pnlDash);
             bookInfo.Location = currentForm.Location;
         }
-        public static void UserTransaction(Button transacbtn, Form currentForm, Panel pnlDash, UserMainForm Panel = null)
+        public static void UserTransaction( Form currentForm, Panel pnlDash, UserMainForm Panel = null)
         {
             UserTransaction transac = new UserTransaction(Panel);
             FormManager.openDashboard(transac, pnlDash);
             transac.Location = currentForm.Location;
         }
-        public static void UserDashboard(Button button, Panel pnlDash, Form currentForm)
+        public static void UserDashboard(Panel pnlDash, Form currentForm)
         {
             UserDashboard userDashboard = new UserDashboard();
             FormManager.openDashboard(userDashboard, pnlDash);
@@ -39,7 +38,7 @@ namespace InfoRegSystem.Classes
         {
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
                 {
                     sqlConnection.Open();
 

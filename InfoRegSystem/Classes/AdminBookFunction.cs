@@ -18,7 +18,7 @@ namespace InfoRegSystem.Classes
 
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
                 {
                     sqlConnection.Open();
 
@@ -73,7 +73,7 @@ namespace InfoRegSystem.Classes
 
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
                 {
                     sqlConnection.Open();
 
@@ -124,7 +124,7 @@ namespace InfoRegSystem.Classes
 
                 int selectedID = Convert.ToInt32(bookgrid.CurrentRow.Cells["BookID"].Value);
 
-                using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
                 {
                     sqlConnection.Open();
 
@@ -172,7 +172,7 @@ namespace InfoRegSystem.Classes
 
                 if (result == DialogResult.Yes)
                 {
-                    using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                    using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
                     {
                         sqlConnection.Open();
 

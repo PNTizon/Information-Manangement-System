@@ -147,7 +147,7 @@
             this.returnbtn.TabIndex = 5;
             this.returnbtn.Text = "Borrow/Return";
             this.returnbtn.UseVisualStyleBackColor = false;
-            this.returnbtn.Click += new System.EventHandler(this.returnbtn_Click);
+            this.returnbtn.Click += new System.EventHandler(this.Returnbtn_Click);
             // 
             // userpnlDash
             // 

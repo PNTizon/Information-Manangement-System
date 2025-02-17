@@ -6,35 +6,33 @@ namespace InfoRegSystem
 {
     public partial class MainForm : Form
     {
-        //private readonly ButtonShadow shadow;
-
         public MainForm()
         {
             InitializeComponent();
         }
-        private void btnBookInfo_Click(object sender, EventArgs e)
+        private void BookInfobtn_Click(object sender, EventArgs e)
         {
-            MainformFunctions.HandleBookInfoForm(btnBookInfo, panel2);
+            MainformFunctions.HandleBookInfoForm(panel2);
         }
         private void btnReturnBook_Click(object sender, EventArgs e)
         {
-            MainformFunctions.HandleBorrowRecords(btnReturnBook, panel2);
+            MainformFunctions.HandleBorrowRecords( panel2);
         }
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            MainformFunctions.HandleLogout(btnLogout, this);
+            MainformFunctions.HandleLogout( this);
         }
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            MainformFunctions.HandleMembers(btnRegister, panel2);
+            MainformFunctions.HandleMembers( panel2);
         }
         private void btnDashboard_Click(object sender, EventArgs e)
         {
-            MainformFunctions.HandleDashboard(btnDashboard, panel2);
+            MainformFunctions.HandleDashboard( panel2);
         }
         private void btnTransactions_Click_1(object sender, EventArgs e)
         {
-            MainformFunctions.HandleTransactions(btnTransactions, panel2);
+            MainformFunctions.HandleTransactions( panel2);
         }
     }
 }

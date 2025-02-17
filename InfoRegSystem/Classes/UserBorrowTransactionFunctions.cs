@@ -28,7 +28,7 @@ namespace InfoRegSystem.Classes
                 {
                     DateTime expectedReturnDate = Borrowdate.AddDays(duration);
 
-                    using (SqlConnection con = new SqlConnection(sqlconnection.Database))
+                    using (SqlConnection con = new SqlConnection(Connection.Database))
                     {
                         con.Open();
 

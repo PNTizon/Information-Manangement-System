@@ -9,14 +9,10 @@ namespace InfoRegSystem.Classes
 {
     public class UserTransactionFunction
     {
-        private Display display;
 
-        private static string book { get; set; }
+        private static string Book { get; set; }
 
-        public UserTransactionFunction()
-        {
-            display = new Display();
-        }
+    
         public  static void RetunTransaction(DataGridView transactiongrid, Action displayBorrow)
         {
             try
@@ -36,7 +32,7 @@ namespace InfoRegSystem.Classes
 
                 if (transactiongrid.CurrentRow.Cells["Book"].Value != DBNull.Value)
                 {
-                    book = transactiongrid.CurrentRow.Cells["Book"].Value.ToString();
+                    Book = transactiongrid.CurrentRow.Cells["Book"].Value.ToString();
                 }
                 else
                 {
@@ -56,13 +52,13 @@ namespace InfoRegSystem.Classes
                 }
 
                 DateTime returnDateValue = DateTime.Now;
-                decimal penaltyAmount = 0;
+                int penaltyAmount = 0;
                 string paymentStatus = "Paid";
 
                 if (returnDateValue > expectedReturnDate)
                 {
                     TimeSpan lateDuration = returnDateValue - expectedReturnDate;
-                    penaltyAmount = (decimal)(lateDuration.TotalHours * 10);
+                    penaltyAmount = (int)(lateDuration.TotalHours * 10);
                     paymentStatus = "Unpaid";
                 }
                 var result = MessageBox.Show("Are you sure you want to return this record?", "Confirm Return", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -71,7 +67,7 @@ namespace InfoRegSystem.Classes
 
                 if (result == DialogResult.Yes)
                 {
-                    using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+                    using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
                     {
                         sqlConnection.Open();
 
@@ -81,7 +77,7 @@ namespace InfoRegSystem.Classes
                             cmd.CommandType = CommandType.StoredProcedure;
                             cmd.Parameters.AddWithValue("@Name", GlobalUserInfo.FirstName);
                             cmd.Parameters.AddWithValue("@Penalty", penaltyAmount);
-                            cmd.Parameters.AddWithValue("@Book", book);
+                            cmd.Parameters.AddWithValue("@Book", Book);
                             cmd.Parameters.AddWithValue("@ReturnDate", returnDateValue);
                             cmd.Parameters.AddWithValue("@PaymentStatus", paymentStatus);
                             int rowsAffected = cmd.ExecuteNonQuery();
@@ -91,7 +87,7 @@ namespace InfoRegSystem.Classes
                                 using (SqlCommand updateCopiesCmd = new SqlCommand("IncrementBookCopies", sqlConnection))
                                 {
                                     updateCopiesCmd.CommandType = CommandType.StoredProcedure;
-                                    updateCopiesCmd.Parameters.AddWithValue("@OriginalBook", book); 
+                                    updateCopiesCmd.Parameters.AddWithValue("@OriginalBook", Book); 
                                     updateCopiesCmd.ExecuteNonQuery();
                                 }
                                 using (SqlCommand status = new SqlCommand("UpdateStatus", sqlConnection))
@@ -118,7 +114,7 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public static void BorrowTransaction(Guna2Button transaction, Panel panel)
+        public static void BorrowTransaction(Panel panel)
         {
             UserBorrowTransactions transactions = new UserBorrowTransactions();
             UserFormManager.openUserDashboard(transactions, panel);

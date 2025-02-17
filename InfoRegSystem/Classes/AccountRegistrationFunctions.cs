@@ -9,7 +9,7 @@ namespace InfoRegSystem.Classes
 
     public class AccountRegistrationFunctions
     {
-        private static frmRegistration login;
+        private static FrmRegistration login;
         
         public static void Register(string firstname, string lastname, string address, string email, Guna2TextBox phoneNums, TextBox countryNums, string username,
           string password, ComboBox genderbox, TextBox error1, TextBox error3, TextBox error4, TextBox error5, TextBox error6, TextBox error7, TextBox error8, Form currentForm)
@@ -87,7 +87,7 @@ namespace InfoRegSystem.Classes
                 return;
             }
 
-            using (SqlConnection sqlConnection = new SqlConnection(sqlconnection.Database))
+            using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
             {
                 sqlConnection.Open();
 
@@ -125,7 +125,7 @@ namespace InfoRegSystem.Classes
             }
             MessageBox.Show("Data Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            login = new frmRegistration();
+            login = new FrmRegistration();
             login.Show();
             currentForm.Hide();
         }

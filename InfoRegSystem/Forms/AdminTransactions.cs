@@ -17,12 +17,12 @@ namespace InfoRegSystem.Forms
         {
             Display.Transaction(transactiongrid);
         }
-        private void transactiongrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void Transactiongrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridSelection.TransactionSelection(transactiongrid,e.RowIndex);
         }
 
-        private void btnPaid_Click(object sender, EventArgs e)
+        private void BtnPaid_Click(object sender, EventArgs e)
         {
            AdminTransactionFunctions.PaidButton(transactiongrid);
         }
@@ -31,7 +31,7 @@ namespace InfoRegSystem.Forms
             string search = searchbox.Text;
             AdminTransactionFunctions.SearchTransactions(transactiongrid, search);
         }
-        private void searchbox_TextChanged(object sender, EventArgs e)
+        private void Searchbox_TextChanged(object sender, EventArgs e)
         {
             string search = searchbox.Text;
             AdminTransactionFunctions.SearchTransactions(transactiongrid, search);

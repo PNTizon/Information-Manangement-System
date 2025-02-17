@@ -47,7 +47,7 @@ namespace InfoRegSystem.Forms
             shadow = new ButtonShadow(gunabtn);
             shadow.CustomizeGunaButtons();
         }
-        private void searchbox_TextChanged(object sender, EventArgs e)
+        private void Searchbox_TextChanged(object sender, EventArgs e)
         {
             string search = searchbox.Text;
             AdminDashboardFunctions.HandleSearch(dataGridViewBookInfo, search);

@@ -16,7 +16,6 @@ namespace InfoRegSystem.Forms
 {
     public partial class UserTransaction : UserControl
     {
-        private readonly UserDashboard formdash;
         private ButtonShadow shadow;
         private readonly UserMainForm userMainForm;
 
@@ -26,15 +25,12 @@ namespace InfoRegSystem.Forms
             userMainForm = exisitngPanel;
             GunaButton();
         }
-        private void returnbtn_Click(object sender, EventArgs e)
-        {
-            UserTransactionFunction.RetunTransaction(transactiongrid,formdash.BorrowRecords);
-        }
+        
         private void borrowedbtn_Click(object sender, EventArgs e)
         {
-            UserTransactionFunction.BorrowTransaction(borrowedbtn, userpanel);
+            UserTransactionFunction.BorrowTransaction( userpanel);
         }
-        private void transactiongrid_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void Transactiongrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridSelection.TransactionSelection(transactiongrid,e.RowIndex);
         }
@@ -47,15 +43,15 @@ namespace InfoRegSystem.Forms
             List<Guna2Button> gunabtn = new List<Guna2Button>
             {
                 borrowedbtn,
-                returnbtn
+                Returnbtn
             };
             shadow = new ButtonShadow(gunabtn);
             shadow.CustomizeGunaButtons();
         }
-
-        private void userpanel_Paint(object sender, PaintEventArgs e)
+        private void Returnbtn_Click(object sender, EventArgs e)
         {
-
+            UserDashboard dash = new UserDashboard();
+            UserTransactionFunction.RetunTransaction(transactiongrid, dash.BorrowRecords);
         }
     }
 }

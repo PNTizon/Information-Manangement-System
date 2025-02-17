@@ -63,7 +63,7 @@
             this.btnBookInfo.TabIndex = 2;
             this.btnBookInfo.Text = "Book Info";
             this.btnBookInfo.UseVisualStyleBackColor = false;
-            this.btnBookInfo.Click += new System.EventHandler(this.btnBookInfo_Click);
+            this.btnBookInfo.Click += new System.EventHandler(this.BookInfobtn_Click);
             // 
             // btnLogout
             // 

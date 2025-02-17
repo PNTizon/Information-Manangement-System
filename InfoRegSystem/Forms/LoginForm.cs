@@ -7,11 +7,11 @@ using System.Windows.Forms;
 
 namespace InfoRegSystem
 {
-    public partial class frmRegistration : Form
+    public partial class FrmRegistration : Form
     {
         private ButtonShadow shadow;
 
-        public frmRegistration()
+        public FrmRegistration()
         {
             InitializeComponent();
             SystemButton();
@@ -22,7 +22,7 @@ namespace InfoRegSystem
         }
         private void registerbtn_Click(object sender, EventArgs e)
         {
-            LoginButtonFunctions.HandleRegister(registerbtn, this);
+            LoginButtonFunctions.HandleRegister( this);
         }
         private void picShow_Click(object sender, EventArgs e)
         {

@@ -24,7 +24,7 @@ namespace InfoRegSystem.Forms
             #endregion
             Helpers.HelperGender(cmbGender);
 
-            PhoneNumberList.ListPhneNumber(cmbCountryCode_SelectedIndexChanged, cmbCountryCode);
+            PhoneNumberList.ListPhneNumber(CmbCountryCode_SelectedIndexChanged, cmbCountryCode);
 
             ActiveControl = registration_firstname;
         }
@@ -32,7 +32,7 @@ namespace InfoRegSystem.Forms
         {
             Helpers.HidePassword(showpass, hidepass, registration_pass);
         }
-        private void showpass_Click(object sender, EventArgs e)
+        private void Showpass_Click(object sender, EventArgs e)
         {
             Helpers.ShowPassord(showpass, hidepass, registration_pass);
         }
@@ -44,20 +44,20 @@ namespace InfoRegSystem.Forms
         }
         private void loginbtn_Click(object sender, EventArgs e)
         {
-            frmRegistration reg = new frmRegistration();
+            FrmRegistration reg = new FrmRegistration();
             reg.Show();
             this.Hide();
         }
-        private void cmbCountryCode_SelectedIndexChanged(object sender, EventArgs e)
+        private void CmbCountryCode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PhoneNumberList.comboBox_autoModifier(cmbCountryCode_SelectedIndexChanged, cmbCountryCode, countryNumbers);
+            PhoneNumberList.ComboBox_autoModifier(CmbCountryCode_SelectedIndexChanged, cmbCountryCode, countryNumbers);
         }
         #region Events
         private void registration_number_TextChanged(object sender, EventArgs e)
         {
             Helpers.HelperNumberRestriction(registration_number);
         }
-        private void registration_pass_TextChanged(object sender, EventArgs e)
+        private void Registration_pass_TextChanged(object sender, EventArgs e)
         {
             Helpers.PasswordHelper(registration_pass);
         }
@@ -78,10 +78,14 @@ namespace InfoRegSystem.Forms
         {
             Helpers.UpperCase(registration_lastname);
         }
-        private void registration_username_Leave(object sender, EventArgs e)
+        private void Registration_username_Leave(object sender, EventArgs e)
         {
             Helpers.UpperCase(registration_username);
         }
         #endregion
+        private void CmbGender_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

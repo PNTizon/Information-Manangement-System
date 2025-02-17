@@ -86,7 +86,7 @@
             this.searchbox.SelectedText = "";
             this.searchbox.Size = new System.Drawing.Size(812, 30);
             this.searchbox.TabIndex = 39;
-            this.searchbox.TextChanged += new System.EventHandler(this.searchbox_TextChanged);
+            this.searchbox.TextChanged += new System.EventHandler(this.Searchbox_TextChanged);
             // 
             // btnSearch
             // 
@@ -143,7 +143,7 @@
             this.dataGridViewBorrow.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.dataGridViewBorrow.Size = new System.Drawing.Size(1086, 402);
             this.dataGridViewBorrow.TabIndex = 38;
-            this.dataGridViewBorrow.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
+            this.dataGridViewBorrow.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellContentClick_1);
             // 
             // Declinebtn
             // 
@@ -394,7 +394,7 @@
             this.txtName.SelectedText = "";
             this.txtName.Size = new System.Drawing.Size(230, 22);
             this.txtName.TabIndex = 227;
-            this.txtName.Leave += new System.EventHandler(this.txtName_Leave);
+            this.txtName.Leave += new System.EventHandler(this.TxtName_Leave);
             // 
             // txtLastname
             // 
@@ -418,7 +418,7 @@
             this.txtLastname.SelectedText = "";
             this.txtLastname.Size = new System.Drawing.Size(230, 22);
             this.txtLastname.TabIndex = 228;
-            this.txtLastname.Leave += new System.EventHandler(this.txtLastname_Leave);
+            this.txtLastname.Leave += new System.EventHandler(this.TxtLastname_Leave);
             // 
             // panel1
             // 

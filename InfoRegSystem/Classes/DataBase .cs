@@ -9,7 +9,7 @@ using System.Web.SessionState;
 
 namespace InfoRegSystem
 {
-    public class sqlconnection
+    public class Connection
     {
         public static string Database { get; } = (@"Data Source=DESKTOP-NF4HS4J;Initial Catalog=librarydb;Integrated Security=True;Encrypt=False");
     }
