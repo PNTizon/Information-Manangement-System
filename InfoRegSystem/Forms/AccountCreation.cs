@@ -9,6 +9,8 @@ namespace InfoRegSystem.Forms
     public partial class AccountCreation : Form
     {
         private ButtonShadow shadow;
+        private AccountRegistrationFunctions function = new AccountRegistrationFunctions();
+        private Helpers helper = new Helpers();
 
         public AccountCreation()
         {
@@ -18,35 +20,27 @@ namespace InfoRegSystem.Forms
 
         private void AccCreation_Load(object sender, EventArgs e)
         {
-            #region ReadOnly
-            errorbox1.ReadOnly = true;  errorbox3.ReadOnly = true; errorbox4.ReadOnly = true;errorbox5.ReadOnly = true;
-            errorbox6.ReadOnly = true;  errorbox7.ReadOnly = true; errorbox8.ReadOnly = true;countryNumbers.ReadOnly = true;
-            #endregion
-            Helpers.HelperGender(cmbGender);
-
+            helper.SetReadOnly(errorbox1, errorbox3, errorbox4, errorbox5, errorbox6, errorbox7, errorbox8, countryNumbers);
+            helper.HelperGender(cmbGender);
             PhoneNumberList.ListPhneNumber(CmbCountryCode_SelectedIndexChanged, cmbCountryCode);
-
             ActiveControl = registration_firstname;
         }
         private void hidepass_Click(object sender, EventArgs e)
         {
-            Helpers.HidePassword(showpass, hidepass, registration_pass);
+            helper.HidePassword(showpass, hidepass, registration_pass);
         }
         private void Showpass_Click(object sender, EventArgs e)
         {
-            Helpers.ShowPassord(showpass, hidepass, registration_pass);
+            helper.ShowPassord(showpass, hidepass, registration_pass);
         }
         private void createbtn_Click(object sender, EventArgs e)
         {
-            AccountRegistrationFunctions.Register(registration_firstname.Text, registration_lastname.Text, registration_house.Text, registration_emails.Text,
-                registration_number,  countryNumbers, registration_username.Text, registration_pass.Text, cmbGender, errorbox1, errorbox3, errorbox4, errorbox5,
-                errorbox6, errorbox7, errorbox8, this);
+            function.Register(registration_firstname.Text, registration_lastname.Text, registration_house.Text, registration_emails.Text, registration_number,
+                countryNumbers, registration_username.Text, registration_pass.Text, cmbGender, errorbox1, errorbox3, errorbox4, errorbox5,  errorbox6, errorbox7, errorbox8, this);
         }
         private void loginbtn_Click(object sender, EventArgs e)
         {
-            FrmRegistration reg = new FrmRegistration();
-            reg.Show();
-            this.Hide();
+            function.Login(this);
         }
         private void CmbCountryCode_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -55,11 +49,11 @@ namespace InfoRegSystem.Forms
         #region Events
         private void registration_number_TextChanged(object sender, EventArgs e)
         {
-            Helpers.HelperNumberRestriction(registration_number);
+            helper.HelperNumberRestriction(registration_number);
         }
         private void Registration_pass_TextChanged(object sender, EventArgs e)
         {
-            Helpers.PasswordHelper(registration_pass);
+            helper.PasswordHelper(registration_pass);
         }
         private void GunaButton()
         {
@@ -72,15 +66,15 @@ namespace InfoRegSystem.Forms
         }
         private void registration_firstname_Leave_1(object sender, EventArgs e)
         {
-            Helpers.UpperCase(registration_firstname);
+            helper.UpperCase(registration_firstname);
         }
-        private void registration_lastname_Leave(object sender, EventArgs e)
+        private void Registration_lastname_Leave(object sender, EventArgs e)
         {
-            Helpers.UpperCase(registration_lastname);
+            helper.UpperCase(registration_lastname);
         }
         private void Registration_username_Leave(object sender, EventArgs e)
         {
-            Helpers.UpperCase(registration_username);
+            helper.UpperCase(registration_username);
         }
         #endregion
         private void CmbGender_KeyPress(object sender, KeyPressEventArgs e)

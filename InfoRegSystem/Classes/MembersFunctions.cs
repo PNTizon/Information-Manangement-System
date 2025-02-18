@@ -8,13 +8,14 @@ namespace InfoRegSystem.Classes
 {
     public class MembersFunctions
     {
-        public static void SaveMemberInfo(string name, string lastname, string gender, TextBox countryCode, string phonenumber,
+        private Helpers helper = new Helpers();
+        public  void SaveMemberInfo(string name, string lastname, string gender, TextBox countryCode, string phonenumber,
             string address, string email, DataGridView membergrid, Action clearMethod, Action displayMemMethod = null)
         {
             try
             {
-                if (!Helpers.isValidName(name) || !Helpers.isValidName(lastname) || !Helpers.isValidAddress(address)
-                    || string.IsNullOrEmpty(phonenumber) || !Helpers.isValidEmail(email) || !Helpers.isValidGender(gender))
+                if (!helper.isValidName(name) || !helper.isValidName(lastname) || !helper.isValidAddress(address)
+                    || string.IsNullOrEmpty(phonenumber) || !helper.isValidEmail(email) || !helper.isValidGender(gender))
                 {
                     MessageBox.Show("Please fill all the blank fields.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
@@ -97,7 +98,7 @@ namespace InfoRegSystem.Classes
             }
             clearMethod();
         }
-        public static void UpdateMemberInfo(string name, string lastname, string gender, TextBox countryCode,
+        public  void UpdateMemberInfo(string name, string lastname, string gender, TextBox countryCode,
             string phoneNumber, string address, string email, DataGridView membergrid,
             Action displayMethod, Action clearMethod, Action displayMemMethod = null)
         {
@@ -109,8 +110,8 @@ namespace InfoRegSystem.Classes
                     return;
                 }
 
-                if (!Helpers.isValidName(name) || !Helpers.isValidName(lastname) || !Helpers.isValidAddress(address)
-                   || string.IsNullOrEmpty(phoneNumber) || !Helpers.isValidEmail(email) || !Helpers.isValidGender(gender))
+                if (!helper.isValidName(name) || !helper.isValidName(lastname) || !helper.isValidAddress(address)
+                   || string.IsNullOrEmpty(phoneNumber) || !helper.isValidEmail(email) || !helper.isValidGender(gender))
                 {
                     MessageBox.Show("Please fill all the blank fields.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;

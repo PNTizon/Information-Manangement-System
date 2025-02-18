@@ -8,13 +8,13 @@ namespace InfoRegSystem.Classes
 {
     public class Helpers
     {
-        public static void HelperGender(ComboBox comboBox)
+        public  void HelperGender(ComboBox comboBox)
         {
             List<string> genders = new List<string> { "Male", "Female", "Other" };
             comboBox.DataSource = genders;
             comboBox.SelectedIndex = -1;
         }
-        public static void HelperNumberRestriction(Guna2TextBox phoneNum)
+        public  void HelperNumberRestriction(Guna2TextBox phoneNum)
         {
             string currentText = phoneNum.Text;//ginakuha niya ang sulod sa phoneNum na textbox 
             phoneNum.Text = string.Concat(currentText.Where(char.IsDigit));//ang purpose ani kay gina kuha lang nya kay 0-9  ug gina wala ang letra o  special char
@@ -27,7 +27,7 @@ namespace InfoRegSystem.Classes
 
             phoneNum.SelectionStart = phoneNum.Text.Length;// para ang cursur magpundo sa last
         }
-        public static void Copies(TextBox copy)
+        public  void Copies(TextBox copy)
         {
             string currentText = copy.Text;
             copy.Text = string.Concat(currentText.Where(char.IsDigit));
@@ -37,7 +37,7 @@ namespace InfoRegSystem.Classes
             }
             copy.SelectionStart = copy.Text.Length;
         }
-        public static void PasswordHelper(Guna2TextBox passwordtext)
+        public  void PasswordHelper(Guna2TextBox passwordtext)
         {
             string currentText = passwordtext.Text;
 
@@ -47,14 +47,14 @@ namespace InfoRegSystem.Classes
             }
             passwordtext.SelectionStart = passwordtext.Text.Length;
         }
-        public static void GenresHelper(ComboBox combo)
+        public  void GenresHelper(ComboBox combo)
         {
             List<string> genres = new List<string> { "Fiction", "Non-Fiction", "Mystery", "Fantasy", "Sci-Fi", "Biography", "History", "Romance" };
             combo.DataSource = genres;
             combo.SelectedIndex = -1;
         }
 
-        public static void DurationHelper(ComboBox durationBox)
+        public  void DurationHelper(ComboBox durationBox)
         {
             List<string> duration = new List<string>
             { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
@@ -63,27 +63,27 @@ namespace InfoRegSystem.Classes
             durationBox.DataSource = duration;
             durationBox.SelectedIndex = -1;
         }
-        public static bool isValidName(string name)
+        public  bool isValidName(string name)
         {
             return Regex.IsMatch(name, @"^[a-zA-Z]+$");
         }
-        public static bool isValidGender(string gender)
+        public  bool isValidGender(string gender)
         {
             return gender == "Male" || gender == "Female" || gender == "Other";
         }
-        public static bool isValidAddress(string street)
+        public  bool isValidAddress(string street)
         {
             return !string.IsNullOrEmpty(street);
         }
-        public static bool isValidEmail(string email)
+        public  bool isValidEmail(string email)
         {
             return email.EndsWith("@gmail.com") && email.Contains("@");
         }
-        public static bool isValidUsername(string username)
+        public  bool isValidUsername(string username)
         {
             return Regex.IsMatch(username, @"^[a-zA-Z0-9]{5,15}$");
         }
-        public static bool isValidPhoneNumber(TextBox countryCode, Guna2TextBox phoneNumber)
+        public  bool isValidPhoneNumber(TextBox countryCode, Guna2TextBox phoneNumber)
         {
             string fullNumber = countryCode.Text + phoneNumber.Text;
 
@@ -94,33 +94,38 @@ namespace InfoRegSystem.Classes
 
             return Regex.IsMatch(fullNumber, @"^\+\d{1,3}\d{10}$");
         }
-
-        public static bool isValidPassword(string password)
+        public  bool isValidPassword(string password)
         {
             return password.Length >= 8;
         }
 
-        public static void HidePassword(PictureBox show, PictureBox hide, Guna2TextBox password)
+        public  void HidePassword(PictureBox show, PictureBox hide, Guna2TextBox password)
         {
             show.Show();
             hide.Hide();
 
             password.PasswordChar = '\0';
         }
-        public static void ShowPassord(PictureBox show, PictureBox hide, Guna2TextBox password)
+        public  void ShowPassord(PictureBox show, PictureBox hide, Guna2TextBox password)
         {
             show.Hide();
             hide.Show();
 
             password.PasswordChar = '●';
         }
-
-        public static void UpperCase(Guna2TextBox textBox)
+        public  void UpperCase(Guna2TextBox textBox)
         {
             if (textBox.Text.Length > 0)
             {
                 textBox.Text = char.ToUpper(textBox.Text[0]) + textBox.Text.Substring(1);
                 textBox.SelectionStart = textBox.Text.Length; // Keep cursor position
+            }
+        }
+        public  void SetReadOnly(params TextBox[] controls)
+        {
+            foreach (var control in controls)
+            {
+                control.ReadOnly = true;
             }
         }
     }

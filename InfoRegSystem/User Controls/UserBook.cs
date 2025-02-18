@@ -16,7 +16,7 @@ namespace InfoRegSystem.Forms
     public partial class UserBook : UserControl
     {
         private ButtonShadow shadow;
-
+        private Helpers helper = new Helpers();
         public UserBook()
         {
             InitializeComponent();
@@ -30,7 +30,7 @@ namespace InfoRegSystem.Forms
         }
         private void LoadGenresForSearch()
         {
-            Helpers.GenresHelper(cmbGenre);
+            helper.GenresHelper(cmbGenre);
         }
         private void btnSearch_Click(object sender, EventArgs e)
         {

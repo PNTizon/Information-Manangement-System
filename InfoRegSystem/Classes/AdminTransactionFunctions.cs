@@ -7,6 +7,8 @@ namespace InfoRegSystem.Classes
 {
     public class AdminTransactionFunctions
     {
+
+
         public static void PaidButton(DataGridView transactiongrid)
         {
             if (transactiongrid.CurrentRow == null)

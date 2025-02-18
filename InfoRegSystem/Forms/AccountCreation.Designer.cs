@@ -126,7 +126,7 @@
             this.registration_lastname.SelectedText = "";
             this.registration_lastname.Size = new System.Drawing.Size(215, 26);
             this.registration_lastname.TabIndex = 227;
-            this.registration_lastname.Leave += new System.EventHandler(this.registration_lastname_Leave);
+            this.registration_lastname.Leave += new System.EventHandler(this.Registration_lastname_Leave);
             // 
             // registration_firstname
             // 

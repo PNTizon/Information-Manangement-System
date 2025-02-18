@@ -10,14 +10,15 @@ namespace InfoRegSystem.Classes
     public class AccountRegistrationFunctions
     {
         private static FrmRegistration login;
+        private Helpers helper =  new Helpers();    
         
-        public static void Register(string firstname, string lastname, string address, string email, Guna2TextBox phoneNums, TextBox countryNums, string username,
+        public  void Register(string firstname, string lastname, string address, string email, Guna2TextBox phoneNums, TextBox countryNums, string username,
           string password, ComboBox genderbox, TextBox error1, TextBox error3, TextBox error4, TextBox error5, TextBox error6, TextBox error7, TextBox error8, Form currentForm)
         {
             bool hasErrors = false;
 
             #region ErrorMessages
-            if (!Helpers.isValidName(firstname) || !Helpers.isValidName(lastname))
+            if (!helper.isValidName(firstname) || !helper.isValidName(lastname))
             {
                 error1.Text = "First name and last name are required and must contain only letters.";
                 hasErrors = true;
@@ -26,7 +27,7 @@ namespace InfoRegSystem.Classes
             {
                 error1.Text = "";
             }
-            if (!Helpers.isValidGender(genderbox.Text))
+            if (!helper.isValidGender(genderbox.Text))
             {
                 error3.Text = "Gender must be 'Male', 'Female', or 'Other'.";
                 hasErrors = true;
@@ -35,7 +36,7 @@ namespace InfoRegSystem.Classes
             {
                 error3.Text = "";
             }
-            if (!Helpers.isValidAddress(address))
+            if (!helper.isValidAddress(address))
             {
                 error5.Text = "Address is required.";
                 hasErrors = true;
@@ -44,7 +45,7 @@ namespace InfoRegSystem.Classes
             {
                 error5.Text = "";
             }
-            if (!Helpers.isValidEmail(email))
+            if (!helper.isValidEmail(email))
             {
                 error6.Text = "Email must contain @gmail.com.";
                 hasErrors = true;
@@ -53,7 +54,7 @@ namespace InfoRegSystem.Classes
             {
                 error6.Text = "";
             }
-            if (!Helpers.isValidUsername(username))
+            if (!helper.isValidUsername(username))
             {
                 error7.Text = "Username must contain letters (a-z) and numbers.";
                 hasErrors = true;
@@ -62,7 +63,7 @@ namespace InfoRegSystem.Classes
             {
                 error7.Text = "";
             }
-            if (!Helpers.isValidPassword(password))
+            if (!helper.isValidPassword(password))
             {
                 error8.Text = "Password must be at least 8 characters long.";
                 hasErrors = true;
@@ -71,7 +72,7 @@ namespace InfoRegSystem.Classes
             {
                 error8.Text = "";
             }
-            if (!Helpers.isValidPhoneNumber(countryNums, phoneNums))
+            if (!helper.isValidPhoneNumber(countryNums, phoneNums))
             {
                 error4.Text = "Contains 10-digit number with a valid country code.";
                 hasErrors = true;
@@ -127,6 +128,12 @@ namespace InfoRegSystem.Classes
 
             login = new FrmRegistration();
             login.Show();
+            currentForm.Hide();
+        }
+        public void Login(Form currentForm)
+        {
+            FrmRegistration reg = new FrmRegistration();
+            reg.Show();
             currentForm.Hide();
         }
     }

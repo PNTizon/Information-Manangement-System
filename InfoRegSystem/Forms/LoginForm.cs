@@ -10,6 +10,7 @@ namespace InfoRegSystem
     public partial class FrmRegistration : Form
     {
         private ButtonShadow shadow;
+        private Helpers helper = new Helpers();
 
         public FrmRegistration()
         {
@@ -26,11 +27,11 @@ namespace InfoRegSystem
         }
         private void picShow_Click(object sender, EventArgs e)
         {
-            Helpers.ShowPassord(picShow, picPass, login_password);
+            helper.ShowPassord(picShow, picPass, login_password);
         }
         private void picPass_Click(object sender, EventArgs e)
         {
-            Helpers.HidePassword(picShow, picPass, login_password);
+            helper.HidePassword(picShow, picPass, login_password);
         }
         private void SystemButton()
         {
@@ -48,7 +49,7 @@ namespace InfoRegSystem
         }
         private void login_username_Leave_1(object sender, EventArgs e)
         {
-            Helpers.UpperCase(login_username);
+            helper.UpperCase(login_username);
         }
     }
 }

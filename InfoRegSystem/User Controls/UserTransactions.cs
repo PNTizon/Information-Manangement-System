@@ -9,9 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace InfoRegSystem.Forms
+namespace InfoRegSystem.User_Controls
 {
-    public partial class UserTransactions : Form
+    public partial class UserTransactions : UserControl
     {
         public UserTransactions()
         {
@@ -20,8 +20,12 @@ namespace InfoRegSystem.Forms
 
         private void UserTransactions_Load(object sender, EventArgs e)
         {
-            Display.DisplayUserTransaction(transactiongrid);
-            
+            Display.UserTransaction(transactiongrid);
+        }
+
+        private void transactiongrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

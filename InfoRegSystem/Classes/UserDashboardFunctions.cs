@@ -38,7 +38,7 @@ namespace InfoRegSystem.Classes
         public static void UserTransaction(Form currentform,Panel pnlDash)
         {
             UserTransactions transac = new UserTransactions();
-            UserFormManager.openUserDashboard(transac, pnlDash);
+            FormManager.openDashboard(transac, pnlDash);
             transac.Location = currentform.Location;
         }
         public static void DisplayRecords(Label borrowed,Label returned,Label dues)

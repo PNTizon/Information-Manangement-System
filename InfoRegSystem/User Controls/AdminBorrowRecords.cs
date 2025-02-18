@@ -10,6 +10,7 @@ namespace InfoRegSystem.Forms
     {
         private readonly AdminDashboard dashboard = new AdminDashboard();
         private ButtonShadow shadow;
+        private Helpers helper = new Helpers();
 
         public AdminBorrowRecords()
         {
@@ -18,8 +19,7 @@ namespace InfoRegSystem.Forms
         }
         private void btnBorrow_Click(object sender, EventArgs e)
         {
-            AdminBorrowFunctions.BorrowHandler(txtName.Text, txtLastname.Text, txtBook.Text, borrowDate.Value, cmbBorrowDuration,
-                dashboard.BorrowRecords, dashboard.loadbookslist, dataGridViewBorrow);
+            AdminBorrowFunctions.BorrowHandler(txtName.Text, txtLastname.Text, txtBook.Text, borrowDate.Value, cmbBorrowDuration,dashboard.BorrowRecords, dashboard.loadbookslist, dataGridViewBorrow);
             AdminBorrowFunctions.Clear(txtBook, txtLastname, txtName, cmbBorrowDuration);
         }
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -45,7 +45,7 @@ namespace InfoRegSystem.Forms
         private void BorrowForm_Load(object sender, EventArgs e)
         {
             Display.DisplayBorrowRecords(dataGridViewBorrow);
-            Helpers.DurationHelper(cmbBorrowDuration);
+            helper.DurationHelper(cmbBorrowDuration);
         }
         private void btnSearch_Click(object sender, EventArgs e)
         {
@@ -94,11 +94,11 @@ namespace InfoRegSystem.Forms
         }
         private void TxtName_Leave(object sender, EventArgs e)
         {
-            Helpers.UpperCase(txtName);
+            helper.UpperCase(txtName);
         }
         private void TxtLastname_Leave(object sender, EventArgs e)
         {
-            Helpers.UpperCase(txtLastname);
+            helper.UpperCase(txtLastname);
         }
     }
 }

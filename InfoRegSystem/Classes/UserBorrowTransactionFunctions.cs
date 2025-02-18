@@ -14,7 +14,7 @@ namespace InfoRegSystem.Classes
 {
     public class UserBorrowTransactionFunctions
     {
-        public static void Borrowbtn(string Book,DateTime Borrowdate, string durationcmb)
+        public  void Borrowbtn(string Book,DateTime Borrowdate, string durationcmb)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace InfoRegSystem.Classes
                                 return;
                             }
                         }
-                        MessageBox.Show($"StudentId: {GlobalUserInfo.UserId}", "Debug");
+                        
                         using (SqlCommand cmd = new SqlCommand("AddUserBorrowRecord", con))
                         {
                             cmd.CommandType = CommandType.StoredProcedure;
@@ -72,7 +72,7 @@ namespace InfoRegSystem.Classes
                 MessageBox.Show($"SQL Error: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public static void Clear(TextBox book, ComboBox duration)
+        public  void Clear(TextBox book, ComboBox duration)
         {
             book.Clear();
             duration.SelectedIndex = -1;

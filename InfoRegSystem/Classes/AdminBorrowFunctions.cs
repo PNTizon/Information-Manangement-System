@@ -3,6 +3,7 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using static Guna.UI2.Native.WinApi;
 
 namespace InfoRegSystem.Classes
 {
@@ -278,8 +279,7 @@ namespace InfoRegSystem.Classes
             displayBookList();
             Display.DisplayBorrowRecords(records);
         }
-        public static void HandleReturn(DataGridView dataGridViewBorrow, DateTimePicker returnDatePicker,
-            string bookTitle, Action refreshDashboard, Action refreshBookList)
+        public static void HandleReturn(DataGridView dataGridViewBorrow, DateTimePicker returnDatePicker,string bookTitle, Action refreshDashboard, Action refreshBookList)
         {
             try
             {
@@ -410,6 +410,27 @@ namespace InfoRegSystem.Classes
             {
                 con.Open();
 
+                using (SqlCommand checkbookexistance = new SqlCommand("CheckBookExistsAvailability", con))
+                {
+                    checkbookexistance.CommandType = CommandType.StoredProcedure;
+                    checkbookexistance.Parameters.AddWithValue("@Book", book);
+                    checkbookexistance.ExecuteNonQuery();
+
+                    var bookCopiesResult = checkbookexistance.ExecuteScalar();
+                    if (bookCopiesResult == null)
+                    {
+                        MessageBox.Show("The entered book is not registered in the system.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    int availableCopies = Convert.ToInt32(bookCopiesResult);
+                    if (availableCopies <= 0)
+                    {
+                        MessageBox.Show("The book is currently out of stock.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+
                 using (SqlCommand cmd = new SqlCommand("ApproveRequest", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -418,6 +439,7 @@ namespace InfoRegSystem.Classes
 
                     MessageBox.Show("Borrow request approved.");
                 }
+               
                 using (SqlCommand decrementCopiesCmd = new SqlCommand("UpdateBookCopiesForBorrow", con))
                 {
                     decrementCopiesCmd.CommandType = CommandType.StoredProcedure;

@@ -1,5 +1,4 @@
-﻿using Guna.UI2.WinForms;
-using InfoRegSystem.Forms;
+﻿using InfoRegSystem.Forms;
 using System;
 using System.Data;
 using System.Data.SqlClient;
@@ -9,11 +8,8 @@ namespace InfoRegSystem.Classes
 {
     public class UserTransactionFunction
     {
-
         private static string Book { get; set; }
-
-    
-        public  static void RetunTransaction(DataGridView transactiongrid, Action displayBorrow)
+        public static void RetunTransaction(DataGridView transactiongrid, Action displayBorrow)
         {
             try
             {
@@ -41,7 +37,6 @@ namespace InfoRegSystem.Classes
                 }
 
                 string approvalStatus = transactiongrid.CurrentRow.Cells["Status"].Value.ToString();
-
                 if (approvalStatus != "Approved")
                 {
                     string message = approvalStatus == "Declined"
@@ -87,7 +82,7 @@ namespace InfoRegSystem.Classes
                                 using (SqlCommand updateCopiesCmd = new SqlCommand("IncrementBookCopies", sqlConnection))
                                 {
                                     updateCopiesCmd.CommandType = CommandType.StoredProcedure;
-                                    updateCopiesCmd.Parameters.AddWithValue("@OriginalBook", Book); 
+                                    updateCopiesCmd.Parameters.AddWithValue("@OriginalBook", Book);
                                     updateCopiesCmd.ExecuteNonQuery();
                                 }
                                 using (SqlCommand status = new SqlCommand("UpdateStatus", sqlConnection))

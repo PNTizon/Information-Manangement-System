@@ -144,12 +144,6 @@
     <Compile Include="Forms\UserBorrowTransactions.Designer.cs">
       <DependentUpon>UserBorrowTransactions.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserTransactions.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UserTransactions.Designer.cs">
-      <DependentUpon>UserTransactions.cs</DependentUpon>
-    </Compile>
     <Compile Include="User Controls\AccountRegistration.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -219,6 +213,12 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="User Controls\UserTransactions.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User Controls\UserTransactions.Designer.cs">
+      <DependentUpon>UserTransactions.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\AccountCreation.resx">
       <DependentUpon>AccountCreation.cs</DependentUpon>
     </EmbeddedResource>
@@ -227,9 +227,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserBorrowTransactions.resx">
       <DependentUpon>UserBorrowTransactions.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UserTransactions.resx">
-      <DependentUpon>UserTransactions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User Controls\AccountRegistration.resx">
       <DependentUpon>AccountRegistration.cs</DependentUpon>
@@ -273,6 +270,9 @@
     </Compile>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User Controls\UserTransactions.resx">
+      <DependentUpon>UserTransactions.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

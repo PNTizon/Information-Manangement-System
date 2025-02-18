@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Guna.UI2.AnimatorNS;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Transactions;
@@ -109,6 +110,40 @@ namespace InfoRegSystem.Classes
                     sqlConnection.Open();
 
                     using (SqlCommand cmd = new SqlCommand("DisplayUserRecords", sqlConnection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@name", GlobalUserInfo.FirstName);
+                        cmd.Parameters.AddWithValue("@lastname", GlobalUserInfo.Lastname);
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                        {
+                            DataTable dataTable = new DataTable();
+                            adapter.Fill(dataTable);
+                            transactiongrid.DataSource = dataTable;
+
+                            if (transactiongrid.Columns.Contains("Id"))
+                                transactiongrid.Columns["Id"].Visible = false;
+                        }
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show($"Database Error: {sqlEx.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        public static void UserTransaction(DataGridView transactiongrid)
+        {
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(Connection.Database))
+                {
+                    sqlConnection.Open();
+
+                    using (SqlCommand cmd = new SqlCommand("UserTransactions", sqlConnection))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@name", GlobalUserInfo.FirstName);

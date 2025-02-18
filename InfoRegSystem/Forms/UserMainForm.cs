@@ -10,8 +10,6 @@ namespace InfoRegSystem.Forms
 {
     public partial class UserMainForm : Form
     {
-        //public Panel dashboardPanel { get { return userpnlDash; } }
-        //private ButtonShadow shadow;
         public UserMainForm()
         {
             InitializeComponent();
@@ -28,7 +26,6 @@ namespace InfoRegSystem.Forms
         {
             UserDashboardFunctions.UserLogout( this);
         }
-
         private void btnDasboard_Click(object sender, EventArgs e)
         {
             UserDashboardFunctions.UserDashboard( userpnlDash,this);
@@ -37,10 +34,10 @@ namespace InfoRegSystem.Forms
         {
 
         }
-
-        private void button1_Click(object sender, EventArgs e)
+       
+        private void BtnTransaction_Click(object sender, EventArgs e)
         {
-            UserDashboardFunctions.UserTransaction( this, userpnlDash);
+            UserDashboardFunctions.UserTransaction(this, userpnlDash);
         }
     }
 }

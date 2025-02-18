@@ -8,8 +8,9 @@ namespace InfoRegSystem.Forms
 {
     public partial class UserBorrowTransactions : Form
     {
-        private Helpers helper;
+        private Helpers helper = new Helpers();
         private ButtonShadow shadow;
+        private UserBorrowTransactionFunctions function = new UserBorrowTransactionFunctions();
         public UserBorrowTransactions()
         {
             InitializeComponent();
@@ -28,12 +29,12 @@ namespace InfoRegSystem.Forms
         }
         private void UserBorrowTransactions_Load(object sender, EventArgs e)
         {
-            Helpers.DurationHelper(cmbDuration);
+            helper.DurationHelper(cmbDuration);
         }
         private void btnBorrow_Click(object sender, EventArgs e)
         {
-            UserBorrowTransactionFunctions.Borrowbtn(txtBook.Text, borrowDate.Value, cmbDuration.Text);
-            UserBorrowTransactionFunctions.Clear(txtBook,cmbDuration);
+            function.Borrowbtn(txtBook.Text, borrowDate.Value, cmbDuration.Text);
+            function.Clear(txtBook,cmbDuration);
         }
 
         private void label1_Click(object sender, EventArgs e)

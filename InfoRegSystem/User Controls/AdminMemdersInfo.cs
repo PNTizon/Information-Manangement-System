@@ -8,8 +8,10 @@ namespace InfoRegSystem.Forms
 {
     public partial class AdminMemdersInfo : UserControl
     {
-        private AdminDashboard dashboard;
+        private readonly AdminDashboard dashboard;
         private ButtonShadow shadow;
+        private readonly Helpers helper = new Helpers();
+        private readonly MembersFunctions function = new MembersFunctions();
 
         public AdminMemdersInfo()
         {
@@ -23,12 +25,12 @@ namespace InfoRegSystem.Forms
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
-            MembersFunctions.SaveMemberInfo(txtName.Text, txtLastname.Text, genderbox.Text, countyCode, txtNumber.Text, txtAddress.Text, txtEmail.Text,
+            function.SaveMemberInfo(txtName.Text, txtLastname.Text, genderbox.Text, countyCode, txtNumber.Text, txtAddress.Text, txtEmail.Text,
                 membergrid,Clear, dashboard.TotalMembers);
         }
         private void btnUpdate(object sender, EventArgs e)
         {
-            MembersFunctions.UpdateMemberInfo(txtName.Text, txtLastname.Text, genderbox.Text, countyCode, txtNumber.Text, txtAddress.Text, txtEmail.Text,
+            function.UpdateMemberInfo(txtName.Text, txtLastname.Text, genderbox.Text, countyCode, txtNumber.Text, txtAddress.Text, txtEmail.Text,
                 membergrid, Clear, dashboard.TotalMembers);
         }
         private void DisplayMembers()
@@ -52,7 +54,7 @@ namespace InfoRegSystem.Forms
         }
         private void LoadGenders()
         {
-            Helpers.HelperGender(genderbox);
+            helper.HelperGender(genderbox);
         }
         #region Helpers
         public void Clear()
@@ -61,8 +63,8 @@ namespace InfoRegSystem.Forms
         }
         private void txtNumber_TextChanged(object sender, EventArgs e)
         {
-            Helpers.HelperNumberRestriction(txtNumber);
-            Helpers.isValidPhoneNumber(countyCode, txtNumber);
+            helper.HelperNumberRestriction(txtNumber);
+            helper.isValidPhoneNumber(countyCode, txtNumber);
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -76,12 +78,12 @@ namespace InfoRegSystem.Forms
 
         private void txtName_Leave(object sender, EventArgs e)
         {
-            Helpers.UpperCase(txtName);
+            helper.UpperCase(txtName);
         }
 
         private void txtLastname_Leave(object sender, EventArgs e)
         {
-            Helpers.UpperCase(txtLastname);
+            helper.UpperCase(txtLastname);
         }
 
         private void GunaButton()

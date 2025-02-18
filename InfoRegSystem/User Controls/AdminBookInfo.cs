@@ -10,7 +10,7 @@ namespace InfoRegSystem.Forms
     {
         private AdminDashboard _dashboard;
         private ButtonShadow shadow;
-
+        private Helpers helper = new Helpers();
        
         public AdminBookInfo()
         {
@@ -19,11 +19,11 @@ namespace InfoRegSystem.Forms
         }
         private void LoadGenres()
         {
-            Helpers.GenresHelper(cmbGenres);
+            helper.GenresHelper(cmbGenres);
         }
         private void LoadGenresForSearch()
         {
-            Helpers.GenresHelper(cmbGenre);
+            helper.GenresHelper(cmbGenre);
         }
         private void btnSearch_Click(object sender, EventArgs e)
         {
@@ -80,7 +80,7 @@ namespace InfoRegSystem.Forms
 
         private void txtCopies_TextChanged(object sender, EventArgs e)
         {
-            Helpers.Copies(txtCopies);
+            helper.Copies(txtCopies);
         }
     }
 }
