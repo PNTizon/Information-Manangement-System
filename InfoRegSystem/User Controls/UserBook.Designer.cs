@@ -130,7 +130,7 @@
             this.bookgridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.bookgridView.EnableHeadersVisualStyles = false;
             this.bookgridView.GridColor = System.Drawing.Color.Black;
-            this.bookgridView.Location = new System.Drawing.Point(29, 127);
+            this.bookgridView.Location = new System.Drawing.Point(32, 127);
             this.bookgridView.Name = "bookgridView";
             this.bookgridView.ReadOnly = true;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
@@ -138,7 +138,7 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Info;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
             this.bookgridView.RowsDefaultCellStyle = dataGridViewCellStyle3;
-            this.bookgridView.Size = new System.Drawing.Size(1086, 549);
+            this.bookgridView.Size = new System.Drawing.Size(1086, 567);
             this.bookgridView.TabIndex = 62;
             // 
             // label7
@@ -164,7 +164,7 @@
             this.Controls.Add(this.searchbox);
             this.Controls.Add(this.bookgridView);
             this.Name = "UserBook";
-            this.Size = new System.Drawing.Size(1141, 690);
+            this.Size = new System.Drawing.Size(1157, 729);
             this.Load += new System.EventHandler(this.UserBookInfo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bookgridView)).EndInit();
             this.ResumeLayout(false);

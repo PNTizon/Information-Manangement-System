@@ -22,7 +22,7 @@ namespace InfoRegSystem.Forms
         }
         private void Returnbtn_Click(object sender, EventArgs e)
         {
-            UserDashboardFunctions.UserTransaction( this, userpnlDash);
+            UserDashboardFunctions.UserBorrowing( this, userpnlDash);
         }
         private void logoutbtn_Click(object sender, EventArgs e)
         {
@@ -36,6 +36,11 @@ namespace InfoRegSystem.Forms
         private void UserMainForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            UserDashboardFunctions.UserTransaction( this, userpnlDash);
         }
     }
 }

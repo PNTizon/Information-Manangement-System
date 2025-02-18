@@ -144,6 +144,12 @@
     <Compile Include="Forms\UserBorrowTransactions.Designer.cs">
       <DependentUpon>UserBorrowTransactions.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\UserTransactions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UserTransactions.Designer.cs">
+      <DependentUpon>UserTransactions.cs</DependentUpon>
+    </Compile>
     <Compile Include="User Controls\AccountRegistration.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -187,6 +193,12 @@
     <Compile Include="User Controls\UserBook.Designer.cs">
       <DependentUpon>UserBook.cs</DependentUpon>
     </Compile>
+    <Compile Include="User Controls\UserBorrowing.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User Controls\UserBorrowing.Designer.cs">
+      <DependentUpon>UserBorrowing.cs</DependentUpon>
+    </Compile>
     <Compile Include="User Controls\UserDashboard.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -198,12 +210,6 @@
     </Compile>
     <Compile Include="Forms\UserMainForm.Designer.cs">
       <DependentUpon>UserMainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="User Controls\UserTransaction.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="User Controls\UserTransaction.Designer.cs">
-      <DependentUpon>UserTransaction.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -221,6 +227,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserBorrowTransactions.resx">
       <DependentUpon>UserBorrowTransactions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UserTransactions.resx">
+      <DependentUpon>UserTransactions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User Controls\AccountRegistration.resx">
       <DependentUpon>AccountRegistration.cs</DependentUpon>
@@ -243,14 +252,14 @@
     <EmbeddedResource Include="User Controls\UserBook.resx">
       <DependentUpon>UserBook.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="User Controls\UserBorrowing.resx">
+      <DependentUpon>UserBorrowing.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="User Controls\UserDashboard.resx">
       <DependentUpon>UserDashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserMainForm.resx">
       <DependentUpon>UserMainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="User Controls\UserTransaction.resx">
-      <DependentUpon>UserTransaction.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using InfoRegSystem.User_Controls;
 
 namespace InfoRegSystem.Classes
 {
@@ -22,9 +23,9 @@ namespace InfoRegSystem.Classes
             FormManager.openDashboard(bookInfo, pnlDash);
             bookInfo.Location = currentForm.Location;
         }
-        public static void UserTransaction( Form currentForm, Panel pnlDash, UserMainForm Panel = null)
+        public static void UserBorrowing( Form currentForm, Panel pnlDash, UserMainForm Panel = null)
         {
-            UserTransaction transac = new UserTransaction(Panel);
+            UserBorrowing transac = new UserBorrowing(Panel);
             FormManager.openDashboard(transac, pnlDash);
             transac.Location = currentForm.Location;
         }
@@ -33,6 +34,12 @@ namespace InfoRegSystem.Classes
             UserDashboard userDashboard = new UserDashboard();
             FormManager.openDashboard(userDashboard, pnlDash);
             userDashboard.Location = currentForm.Location;
+        }
+        public static void UserTransaction(Form currentform,Panel pnlDash)
+        {
+            UserTransactions transac = new UserTransactions();
+            UserFormManager.openUserDashboard(transac, pnlDash);
+            transac.Location = currentform.Location;
         }
         public static void DisplayRecords(Label borrowed,Label returned,Label dues)
         {
