@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace InfoRegSystem.Forms
 {
@@ -21,6 +22,7 @@ namespace InfoRegSystem.Forms
         {
             InitializeComponent();
             GunaButton();
+            //exisitngPanel = new UserMainForm();
         }
 
         private void UserBookInfo_Load(object sender, EventArgs e)
@@ -51,5 +53,10 @@ namespace InfoRegSystem.Forms
             string search = searchbox.Text;
             UserBookFunction.UserBookSearch(search, cmbGenre, bookgridView);
         }
+
+        //private void BtnBorrow_Click(object sender, EventArgs e)
+        //{
+        //    UserTransactionFunction.BorrowTransaction();
+        //}
     }
 }

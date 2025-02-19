@@ -93,6 +93,17 @@ namespace InfoRegSystem.Classes
                 transacgrid.Rows[rowIndex].Cells["book"].Value.ToString();
 
         }
+        public static void BorrowBookSelection(DataGridView bookgrid, int rowIndex,TextBox title)
+        {
+            if (rowIndex >= 0 && rowIndex < bookgrid.Rows.Count)
+            {
+                title.Text = bookgrid.Rows[rowIndex].Cells["Title"].Value?.ToString() ?? "No title available";
+            }
+            else
+            {
+                title.Text = "Invalid row selected";
+            }
+        }
       
     }
 }

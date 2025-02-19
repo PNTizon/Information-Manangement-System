@@ -146,6 +146,7 @@
             this.transactiongrid.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.transactiongrid.Size = new System.Drawing.Size(1102, 587);
             this.transactiongrid.TabIndex = 84;
+            this.transactiongrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.transactiongrid_CellContentClick);
             // 
             // UserBorrowing
             // 

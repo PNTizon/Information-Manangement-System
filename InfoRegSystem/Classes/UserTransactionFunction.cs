@@ -79,10 +79,11 @@ namespace InfoRegSystem.Classes
 
                             if (rowsAffected > 0)
                             {
-                                using (SqlCommand updateCopiesCmd = new SqlCommand("IncrementBookCopies", sqlConnection))
+                                using (SqlCommand updateCopiesCmd = new SqlCommand("UpdateBookCopiesForBorrow", sqlConnection))
                                 {
                                     updateCopiesCmd.CommandType = CommandType.StoredProcedure;
-                                    updateCopiesCmd.Parameters.AddWithValue("@OriginalBook", Book);
+                                    updateCopiesCmd.Parameters.AddWithValue("@BookTitle", Book);
+                                    updateCopiesCmd.Parameters.AddWithValue("@ActionType", "RETURN");
                                     updateCopiesCmd.ExecuteNonQuery();
                                 }
                                 using (SqlCommand status = new SqlCommand("UpdateStatus", sqlConnection))

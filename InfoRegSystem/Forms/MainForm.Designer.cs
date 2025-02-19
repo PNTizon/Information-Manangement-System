@@ -55,13 +55,13 @@
             this.btnBookInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBookInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBookInfo.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnBookInfo.Location = new System.Drawing.Point(0, 227);
+            this.btnBookInfo.Location = new System.Drawing.Point(0, 262);
             this.btnBookInfo.Name = "btnBookInfo";
             this.btnBookInfo.Padding = new System.Windows.Forms.Padding(35, 0, 35, 0);
             this.btnBookInfo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.btnBookInfo.Size = new System.Drawing.Size(187, 35);
+            this.btnBookInfo.Size = new System.Drawing.Size(187, 45);
             this.btnBookInfo.TabIndex = 2;
-            this.btnBookInfo.Text = "Book Info";
+            this.btnBookInfo.Text = "Book Management";
             this.btnBookInfo.UseVisualStyleBackColor = false;
             this.btnBookInfo.Click += new System.EventHandler(this.BookInfobtn_Click);
             // 
@@ -96,11 +96,11 @@
             this.btnRegister.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRegister.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnRegister.Location = new System.Drawing.Point(0, 192);
+            this.btnRegister.Location = new System.Drawing.Point(0, 216);
             this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(187, 35);
+            this.btnRegister.Size = new System.Drawing.Size(187, 45);
             this.btnRegister.TabIndex = 7;
-            this.btnRegister.Text = "Membership";
+            this.btnRegister.Text = "Member\'s Management";
             this.btnRegister.UseVisualStyleBackColor = false;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
@@ -115,13 +115,13 @@
             this.btnReturnBook.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReturnBook.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReturnBook.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnReturnBook.Location = new System.Drawing.Point(0, 262);
+            this.btnReturnBook.Location = new System.Drawing.Point(0, 308);
             this.btnReturnBook.Name = "btnReturnBook";
             this.btnReturnBook.Padding = new System.Windows.Forms.Padding(35, 0, 35, 0);
             this.btnReturnBook.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.btnReturnBook.Size = new System.Drawing.Size(187, 35);
+            this.btnReturnBook.Size = new System.Drawing.Size(187, 45);
             this.btnReturnBook.TabIndex = 5;
-            this.btnReturnBook.Text = "Borrow/Return";
+            this.btnReturnBook.Text = "Loan Management";
             this.btnReturnBook.UseVisualStyleBackColor = false;
             this.btnReturnBook.Click += new System.EventHandler(this.btnReturnBook_Click);
             // 
@@ -152,13 +152,13 @@
             this.btnTransactions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTransactions.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTransactions.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnTransactions.Location = new System.Drawing.Point(0, 305);
+            this.btnTransactions.Location = new System.Drawing.Point(0, 354);
             this.btnTransactions.Name = "btnTransactions";
             this.btnTransactions.Padding = new System.Windows.Forms.Padding(35, 0, 35, 0);
             this.btnTransactions.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.btnTransactions.Size = new System.Drawing.Size(187, 35);
+            this.btnTransactions.Size = new System.Drawing.Size(187, 45);
             this.btnTransactions.TabIndex = 10;
-            this.btnTransactions.Text = "Transactions";
+            this.btnTransactions.Text = "Transactions History";
             this.btnTransactions.UseVisualStyleBackColor = false;
             this.btnTransactions.Click += new System.EventHandler(this.btnTransactions_Click_1);
             // 
@@ -173,11 +173,11 @@
             this.btnDashboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDashboard.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDashboard.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnDashboard.Location = new System.Drawing.Point(1, 152);
+            this.btnDashboard.Location = new System.Drawing.Point(1, 170);
             this.btnDashboard.Name = "btnDashboard";
             this.btnDashboard.Padding = new System.Windows.Forms.Padding(35, 0, 35, 0);
             this.btnDashboard.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.btnDashboard.Size = new System.Drawing.Size(187, 35);
+            this.btnDashboard.Size = new System.Drawing.Size(187, 45);
             this.btnDashboard.TabIndex = 9;
             this.btnDashboard.Text = "Dashboad";
             this.btnDashboard.UseVisualStyleBackColor = false;

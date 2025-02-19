@@ -28,10 +28,7 @@ namespace InfoRegSystem.User_Controls
                 shadow = new ButtonShadow(gunabtn);
                 shadow.CustomizeGunaButtons();
         }
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
+       
         private void BtnBorrow_Click(object sender, EventArgs e)
         {
             UserTransactionFunction.BorrowTransaction(userpanel);

@@ -30,6 +30,7 @@ namespace InfoRegSystem.Forms
         private void UserBorrowTransactions_Load(object sender, EventArgs e)
         {
             helper.DurationHelper(cmbDuration);
+            Display.DisplayBooks(bookgrid);
         }
         private void btnBorrow_Click(object sender, EventArgs e)
         {
@@ -40,6 +41,11 @@ namespace InfoRegSystem.Forms
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void bookgrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridSelection.BorrowBookSelection(bookgrid, e.RowIndex,txtBook);
         }
     }
 }
